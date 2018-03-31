@@ -19,7 +19,9 @@ Route::get('/home', function () {
 });
 Route::get('/connect', function () {
     if (DB::connection()->getDatabaseName()) {
-        return "Yes! successfully connected to the DB: " . DB::connection()->getDatabaseName();
+    	$sitename = DB::table('beCard_Setting')->first();
+		echo "Site name is : ".$sitename->siteName;
+        return " Yes! successfully connected to the DB: " . DB::connection()->getDatabaseName();
     } else {
         return 'Connection False !!';
     }
