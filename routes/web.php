@@ -10,11 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+use App\Http\Middleware\AuthAdministrator;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', function () {
+Route::get('/index', function () {
     return view('home.index');
 });
 Route::get('/connect', function () {
@@ -25,4 +27,14 @@ Route::get('/connect', function () {
     } else {
         return 'Connection False !!';
     }
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => 'admin', 'middleware' => array('auth','admin'), 'namespace' => 'Admin'], function (){
+		Route::get('/home', function()
+		{
+			return View('admin.dashboard');
+		});
 });
