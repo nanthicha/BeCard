@@ -10,39 +10,9 @@
 @endpush
 
 @section('content')
-	<p></p>
+	<p></p><br><p></p>
     <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-    <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-        <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-        <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-        <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-        <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-    อ
-    อ
-        <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-        <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-
-    อ    <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
-    </div>
-        <div class="jumbotron">
-        <div class="lead">Hello Blade Layout</div>
+        <div class="lead">Hi {{$title}} and you name is {{ Auth::user()->name }}</div>
     </div>
 
 @endsection
