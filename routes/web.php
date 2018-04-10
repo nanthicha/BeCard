@@ -32,3 +32,9 @@ Route::get('/index', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'MyController@index');
 Route::get('/users','UserController@index');
+Route::get('/setting','UserController@setting');
+
+Route::get('image-upload',['as'=>'image.upload','uses'=>'ImageUploadController@imageUpload']);
+Route::post('image-upload',['as'=>'image.upload.post','uses'=>'ImageUploadController@imageUploadPost']);
+
+Route::post('update-profile',['as'=>'update.profile','uses'=>'UserController@updateProfile']);

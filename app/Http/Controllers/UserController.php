@@ -19,4 +19,18 @@ class UserController extends Controller
     	$users = User::all();
     	return $userName;
     }
+    public function setting(){
+    	$userName = Auth::user()->name;
+    	return view('setting', ['name' => $userName]);
+    }
+
+    public function updateProfile(){
+        $name = request()->name;
+        $email = request()->email;
+        DB::table('users')
+                    ->where('email', $email)
+                    ->update(['name' => $name,'updated_at' => date('Y-m-d H:i:s')]);
+        return back()
+            ->with('successProfile','You have successfully update profile.');
+    }
 }

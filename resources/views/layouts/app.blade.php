@@ -15,7 +15,7 @@
     <div class="nav">
       <div class="nav__inner">
         <div class="nav__logo">
-          <a href="/" class="brand__symbol u__inline-block">
+          <a href="/home" class="brand__symbol u__inline-block">
             <img src="/img/becardLogo.png" alt="">
           </a>
         </div>
@@ -35,6 +35,7 @@
                     </a>
 
                     <ul class="dropdown-menu">
+                        <li><a href="setting">Profile Setting</a></li>
                         <li>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -46,6 +47,7 @@
                                 {{ csrf_field() }}
                             </form>
                         </li>
+
                     </ul>
                 </li>
             @endguest
