@@ -31,6 +31,4 @@ Auth::routes();
 Route::get('/index', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'MyController@index');
-Route::get('/my/path',function(){
-	return view('welcome');
-});
+Route::get('/users','UserController@index');
