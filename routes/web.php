@@ -38,3 +38,5 @@ Route::get('image-upload',['as'=>'image.upload','uses'=>'ImageUploadController@i
 Route::post('image-upload',['as'=>'image.upload.post','uses'=>'ImageUploadController@imageUploadPost']);
 
 Route::post('update-profile',['as'=>'update.profile','uses'=>'UserController@updateProfile']);
+
+Route::get('/admin/users','AdminController@users');

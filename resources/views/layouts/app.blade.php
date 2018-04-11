@@ -10,6 +10,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css">
+
     @yield('css')
 </head>
 <body>
@@ -32,11 +33,19 @@
             @else
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle nav__link" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                        {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
 
                     <ul class="dropdown-menu">
-                        <li><a href="setting">Profile Setting</a></li>
+                        <li class="subMenuProfile">
+                            <img src="{{ asset('img/users').'/'.Auth::user()->image }}" class="img-responsive img-circle" ><br>
+                            {{ Auth::user()->name }}
+                        </li>
+                        <li><a href="/home">Dashboard</a></li>
+                        @if (Auth::user()->role == "Admin")
+                        <li><a href="/admin/users">Admin Dashboard</a></li>
+                        @endif
+                        <li><a href="/setting">Profile Setting</a></li>
                         <li>
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
@@ -62,5 +71,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+
+
 </body>
 </html>

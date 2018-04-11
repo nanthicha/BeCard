@@ -1,11 +1,12 @@
 <?php
- 
+
 namespace App\Http\Middleware;
- 
+
 use Closure;
 use Illuminate\Support\Facades\Auth;
- 
-class AuthAdministrator
+
+
+class CheckAdmin
 {
     /**
      * Handle an incoming request.
@@ -14,12 +15,13 @@ class AuthAdministrator
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
-        if ( Auth::check() && Auth::user()->role == "Admin" )
-        {
+        if (Auth::user()->isAdmin()){
             return $next($request);
         }
-        return redirect('/not_permitted_to_execute_this_operation');
+        else{
+            return view('notadmin');
+        }
     }
 }

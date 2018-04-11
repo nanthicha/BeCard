@@ -1,6 +1,7 @@
 <?
 
 $getUser = DB::table('users')->where('name', $name)->first();
+$getUsername = $getUser->username;
 $getEmail = $getUser->email;
 $getImage = $getUser->image;
 $getDate = $getUser->created_at;
@@ -12,13 +13,6 @@ $getDay = date('d', strtotime($getDob));
 $private = $getUser->private_key;
 ?>
 @extends('layouts.app')
-
-@section('css')
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/locales.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.css"></script>
-@endsection
 
 @section('content')
 <div class="container">
@@ -79,14 +73,20 @@ $private = $getUser->private_key;
 						{!! Form::open(array('route' => 'update.profile')) !!}
 						  <table class="table table-hover">
 						    <tbody>
+
 						      <tr>
-						        <td><b>Name</b></td>
-						        <td>{!! Form::text('name', $name , ['class'=>'form-control']) !!}</td>
+						        <td><b>Username</b></td>
+						        <td>{!! Form::text('username', $getUsername , ['class'=>'form-control','readonly']) !!}</td>
 						      </tr>
 						      <tr>
 						        <td><b>E-mail</b></td>
 						        <td>{!! Form::email('email', $getEmail , ['class'=>'form-control','readonly']) !!}</td>
 						      </tr>
+						      <tr>
+						        <td><b>Name</b></td>
+						        <td>{!! Form::text('name', $name , ['class'=>'form-control']) !!}</td>
+						      </tr>
+						      <tr>
 						        <td><b>Sex</b></td>
 						        <td>{!! Form::select('sex', ['Female' => 'Female', 'Male' => 'Male', 'N/A' => 'N/A'], $getSex , ['class' => 'form-control']) !!}</td>
 						      </tr>
@@ -114,6 +114,8 @@ $private = $getUser->private_key;
 						{!! Form::close() !!}
 	                    </div>
                     </div>
+                    <p></p>
+                    <small>* You can't change username or email because the both are method to login. When you want to change this , please contact administrator.</small>
                 </div>
             </div>
         </div>

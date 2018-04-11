@@ -29,4 +29,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public $sortable = [
+        'id',
+        'name',
+        'email',
+    ];
+
 }
