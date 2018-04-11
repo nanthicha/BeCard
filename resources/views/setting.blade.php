@@ -4,12 +4,23 @@ $getUser = DB::table('users')->where('name', $name)->first();
 $getEmail = $getUser->email;
 $getImage = $getUser->image;
 $getDate = $getUser->created_at;
-
+$getSex = $getUser->sex;
+$getDob = $getUser->dob;
+$getYear = date('Y', strtotime($getDob));
+$getMoun = date('m', strtotime($getDob));
+$getDay = date('d', strtotime($getDob));
+$private = $getUser->private_key;
 ?>
 @extends('layouts.app')
 
-@section('content')
+@section('css')
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/locales.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.css"></script>
+@endsection
 
+@section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -76,9 +87,23 @@ $getDate = $getUser->created_at;
 						        <td><b>E-mail</b></td>
 						        <td>{!! Form::email('email', $getEmail , ['class'=>'form-control','readonly']) !!}</td>
 						      </tr>
+						        <td><b>Sex</b></td>
+						        <td>{!! Form::select('sex', ['Female' => 'Female', 'Male' => 'Male', 'N/A' => 'N/A'], $getSex , ['class' => 'form-control']) !!}</td>
+						      </tr>
+						        <td><b>Date of birth</b></td>
+						        @if ($getDob == NULL)
+						        <td>{!! Form::date('dob', $getDob , ['class' => 'form-control', 'required' => true]) !!}</td>
+						        @else
+						        <td>{!! Form::date('dob', \Carbon\Carbon::create($getYear, $getMoun, $getDay), ['class' => 'form-control', 'required' => true]) !!}</td>
+						        @endif
+						      </tr>
 						      <tr>
 						      	<td></td>
 						      	<td><small>Profile created at {{ \Carbon\Carbon::parse($getDate)->format('d M Y')}}</small></td>
+						      </tr>
+						      <tr>
+						      	<td></td>
+						      	<td><small>Private key is <b>{{ $private }}</b></small></td>
 						      </tr>
 						      <tr>
 						      	<td></td>
@@ -94,4 +119,5 @@ $getDate = $getUser->created_at;
         </div>
     </div>
 </div>
+
 @endsection

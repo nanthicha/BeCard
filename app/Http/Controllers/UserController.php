@@ -27,9 +27,11 @@ class UserController extends Controller
     public function updateProfile(){
         $name = request()->name;
         $email = request()->email;
+        $sex = request()->sex;
+        $dob = request()->dob;
         DB::table('users')
                     ->where('email', $email)
-                    ->update(['name' => $name,'updated_at' => date('Y-m-d H:i:s')]);
+                    ->update(['name' => $name,'sex' => $sex,'dob' => $dob,'updated_at' => date('Y-m-d H:i:s')]);
         return back()
             ->with('successProfile','You have successfully update profile.');
     }
