@@ -31,6 +31,10 @@
 	        <td>{{$userEdit->username}}</td>
 	      </tr>
 	      <tr>
+	        <td><b>BePoint</b></td>
+	        <td style="color:#5395CC;"><span class="fab fa-gg-circle"></span> {{$userEdit->bePoint}} BePoint</td>
+	      </tr>
+	      <tr>
 	        <td><b>E-mail</b></td>
 	        <td>{{$userEdit->email}} {!! Form::hidden('email', $userEdit->email , ['class'=>'form-control','readonly']) !!}</td>
 	      </tr>

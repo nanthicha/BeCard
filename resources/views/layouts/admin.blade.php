@@ -11,7 +11,7 @@ if (!function_exists('classActivePath')) {
             }
             $segment++;
         }
-        return ' active';
+        return 'active';
     }
 }
 
@@ -27,8 +27,8 @@ if (!function_exists('classActivePath')) {
 		        <div class="list-group">
 				  <a href="{{ URL::route('admin.dashboard') }}" class="list-group-item {!! classActivePath('admin.dashboard') !!}" >Admin Dashboard</a>
 				  <a href="{{ URL::route('admin.users') }}" class="list-group-item {!! classActivePath('admin.users') !!}" >Users</a>
-				  <a href="{{ URL::route('admin.userslogs') }}" class="list-group-item {!! classActivePath('admin.userslogs') ">Users Logs</a>
-				  <a href="{{ URL::route('admin.systemlogs') }}" class="list-group-item {!! classActivePath('admin.systemlogs') ">System Logs</a>
+				  <a href="{{ URL::route('admin.affiliates') }}" class="list-group-item {!! classActivePath('admin.affiliates') !!}">Affiliates</a>
+				  <a href="{{ URL::route('admin.userslogs') }}" class="list-group-item {!! classActivePath('admin.userslogs') !!}">Users Logs</a>
 				</div>
 	    	</div>
 		</div>
@@ -42,4 +42,8 @@ if (!function_exists('classActivePath')) {
     </div>
 </div>
 
+@endsection
+
+@section('js')
+<script src="{{ asset('js/becard.js') }}"></script>
 @endsection

@@ -24,6 +24,11 @@ class UserController extends Controller
     	return view('setting', ['name' => $userName]);
     }
 
+    public function affiliate(){
+        $userName = Auth::user()->name;
+        return view('affiliate', ['name' => $userName]);
+    }
+
     public function updateProfile(){
         $name = request()->name;
         $email = request()->email;
@@ -32,6 +37,13 @@ class UserController extends Controller
         DB::table('users')
                     ->where('email', $email)
                     ->update(['name' => $name,'sex' => $sex,'dob' => $dob,'updated_at' => date('Y-m-d H:i:s')]);
+        // Logs
+        $owner = \App\User::where('email', $email)->first()->username;
+        DB::table('user_logs')->insert(
+            ['username' => $owner,
+            'msg' => 'Updated profile infomation.',
+            'assigned_to' => '']
+        );
         return back()
             ->with('successProfile','You have successfully update profile.');
     }
@@ -42,6 +54,13 @@ class UserController extends Controller
         DB::table('users')
                     ->where('email', $email)
                     ->update(['role' => $role]);
+        // Logs
+        $assigID = \App\User::where('email', $email)->first()->username;
+        DB::table('user_logs')->insert(
+            ['username' => Auth::user()->username,
+            'msg' => 'Changed role to '.$role,
+            'assigned_to' => $assigID]
+        );
         return back()
             ->with('successProfile','You have successfully update role.');
     }

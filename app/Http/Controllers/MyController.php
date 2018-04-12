@@ -43,4 +43,9 @@ class MyController extends Controller
     {
         echo 'destroy';
     }
+
+    public function regisAffiliate($id){
+        $id = \App\User::where('private_key',$id)->first()->username;
+        return view('auth.registerAffi', ['code' => $id]);
+    }
 }

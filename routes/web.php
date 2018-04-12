@@ -26,7 +26,18 @@ Route::get('/connect', function () {
 });
 
 Auth::routes();
+// Register Affiliate
+Route::get('/register/{id}', [
+	'as' => 'registerAffi',
+	'uses' => 'MyController@regisAffiliate']);
+Route::post('regis-affi', [
+	'as' => 'registerAffi.regis',
+	'uses' => 'auth\RegisterController@createAffi']);
+Route::get('/affiliate', [
+	'as' => 'affiliate',
+	'uses' => 'UserController@affiliate']);
 
+// General Route
 Route::get('/index', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'MyController@index');
@@ -58,14 +69,15 @@ Route::get('/admin/users/edit/{user}', [
 
 Route::get('/admin/userslogs', [
 	'as' => 'admin.userslogs',
-	'uses' => 'AdminController@users']);
+	'uses' => 'AdminController@usersLogs']);
 
-Route::get('/admin/systemlogs', [
-	'as' => 'admin.systemlogs',
-	'uses' => 'AdminController@users']);
+Route::get('/admin/userslogs/{name}', [
+	'as' => 'admin.userslogs.name',
+	'uses' => 'AdminController@usersLogsName']);
 
-
-
+Route::get('/admin/affiliates', [
+	'as' => 'admin.affiliates',
+	'uses' => 'AdminController@affiliates']);
 
 
 

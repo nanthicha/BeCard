@@ -38,8 +38,12 @@
 
                     <ul class="dropdown-menu">
                         <li class="subMenuProfile">
-                           <center> <img src="{{ asset('img/users').'/'.Auth::user()->image }}" class="img-responsive img-circle"><br>
-                            <b>{{ Auth::user()->name }}</b></center>
+                           <center>
+                            <img src="{{ asset('img/users').'/'.Auth::user()->image }}" class="img-responsive img-circle"><br>
+                            <b>{{ Auth::user()->name }}</b>
+                            <p style="color:#5395CC;">
+                            <span class="fab fa-gg-circle"></span> BePoint : <b >{{ Auth::user()->bePoint }}</b></p>
+                        </center>
                         </li>
                         <hr>
                         <li><a href="/home">Dashboard</a></li>
@@ -47,6 +51,7 @@
                         <li><a href="/admin/dashboard">Admin Dashboard</a></li>
                         @endif
                         <hr>
+                        <li><a href="{{ route('affiliate') }}">Affiliate</a></li>
                         <li><a href="/setting">Profile Setting</a></li>
                         <li>
                             <a href="{{ route('logout') }}"
@@ -73,7 +78,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    @yield('js')
 
 
 </body>
