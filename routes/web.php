@@ -11,7 +11,6 @@
 |
  */
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,12 +30,42 @@ Auth::routes();
 Route::get('/index', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard', 'MyController@index');
-Route::get('/users','UserController@index');
-Route::get('/setting','UserController@setting');
+Route::get('/users', 'UserController@index');
+Route::get('/setting', 'UserController@setting');
 
-Route::get('image-upload',['as'=>'image.upload','uses'=>'ImageUploadController@imageUpload']);
-Route::post('image-upload',['as'=>'image.upload.post','uses'=>'ImageUploadController@imageUploadPost']);
+// Image Upload & Update Profile Route -----------
+Route::get('image-upload', ['as' => 'image.upload', 'uses' => 'ImageUploadController@imageUpload']);
+Route::post('image-upload', ['as' => 'image.upload.post', 'uses' => 'ImageUploadController@imageUploadPost']);
+Route::post('update-profile', ['as' => 'update.profile', 'uses' => 'UserController@updateProfile']);
+Route::post('admin-update-profile', ['as' => 'adminupdate.profile', 'uses' => 'UserController@adminUpdateProfile']);
 
-Route::post('update-profile',['as'=>'update.profile','uses'=>'UserController@updateProfile']);
+// Admin Route -----------
+Route::get('/admin', [
+	'as' => 'admin',
+	'uses' => 'AdminController@index']);
 
-Route::get('/admin/users','AdminController@users');
+Route::get('/admin/dashboard', [
+	'as' => 'admin.dashboard',
+	'uses' => 'AdminController@index']);
+
+Route::get('/admin/users', [
+	'as' => 'admin.users',
+	'uses' => 'AdminController@users']);
+
+Route::get('/admin/users/edit/{user}', [
+	'as' => 'admin.user.edit',
+	'uses' => 'AdminController@userEdit']);
+
+Route::get('/admin/userslogs', [
+	'as' => 'admin.userslogs',
+	'uses' => 'AdminController@users']);
+
+Route::get('/admin/systemlogs', [
+	'as' => 'admin.systemlogs',
+	'uses' => 'AdminController@users']);
+
+
+
+
+
+

@@ -35,4 +35,14 @@ class UserController extends Controller
         return back()
             ->with('successProfile','You have successfully update profile.');
     }
+
+    public function adminUpdateProfile(){
+        $email = request()->email;
+        $role = request()->role;
+        DB::table('users')
+                    ->where('email', $email)
+                    ->update(['role' => $role]);
+        return back()
+            ->with('successProfile','You have successfully update role.');
+    }
 }

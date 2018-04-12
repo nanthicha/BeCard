@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
 
     @yield('css')
 </head>
@@ -38,13 +38,15 @@
 
                     <ul class="dropdown-menu">
                         <li class="subMenuProfile">
-                            <img src="{{ asset('img/users').'/'.Auth::user()->image }}" class="img-responsive img-circle" ><br>
-                            {{ Auth::user()->name }}
+                           <center> <img src="{{ asset('img/users').'/'.Auth::user()->image }}" class="img-responsive img-circle"><br>
+                            <b>{{ Auth::user()->name }}</b></center>
                         </li>
+                        <hr>
                         <li><a href="/home">Dashboard</a></li>
                         @if (Auth::user()->role == "Admin")
-                        <li><a href="/admin/users">Admin Dashboard</a></li>
+                        <li><a href="/admin/dashboard">Admin Dashboard</a></li>
                         @endif
+                        <hr>
                         <li><a href="/setting">Profile Setting</a></li>
                         <li>
                             <a href="{{ route('logout') }}"

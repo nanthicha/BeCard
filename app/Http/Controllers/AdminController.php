@@ -18,6 +18,11 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function index()
+    {
+        return view('admin.index');
+    }
+
     public function users(Request $request)
     {
     	$numberOfPaginate = 15;
@@ -29,5 +34,10 @@ class AdminController extends Controller
 			$users = DB::table('users')->orderBy('id', 'asc')->paginate($numberOfPaginate);
 		}
         return view('admin.users', ['users' => $users]);
+    }
+
+    public function userEdit($id){
+        $userEditInfo = DB::table('users')->where('username',$id)->first();
+        return view('admin.edit', ['userEdit' => $userEditInfo]);
     }
 }
