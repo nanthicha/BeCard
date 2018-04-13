@@ -65,4 +65,17 @@ class AdminController extends Controller
         }
         return view('admin.affiliates', ['users' => $affiliates]);
     }
+
+    public function rewards(Request $request)
+    {
+        $numberOfPaginate = 4;
+        $rewards = DB::table('vouchers')->groupBy('status')->paginate($numberOfPaginate);
+        return view('admin.rewards', ['users' => $rewards]);
+    }
+
+    public function rewardsnew()
+    {
+        return view('admin.rewardsnew');
+    }
+    
 }

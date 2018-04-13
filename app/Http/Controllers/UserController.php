@@ -24,6 +24,11 @@ class UserController extends Controller
     	return view('setting', ['name' => $userName]);
     }
 
+    public function reward(){
+        $userName = Auth::user()->name;
+        return view('reward', ['name' => $userName]);
+    }
+
     public function affiliate(){
         $userName = Auth::user()->name;
         return view('affiliate', ['name' => $userName]);

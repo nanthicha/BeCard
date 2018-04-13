@@ -42,45 +42,45 @@ $percent = $count*20;
                     	</div>
                     	<div class="col-lg-8 ">
                     		<h4>Your Affiliate</h4>
-<div class="row">
-	<div class="col-lg-9">
-		<div class="progress">
-		  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
-		  aria-valuenow="{{$percent}}" aria-valuemin="0" aria-valuemax="100" style="width:{{$percent}}%">
-		    {{$count}} of 5 Invitie
-		  </div>
-		</div>
-	</div>
-	<div class="col-lg-3">
-		<p style="color:#5395CC;text-align: center;font-size: 1.2em;"><span class="fab fa-gg-circle"></span> + 250 BePoint</p>
-	</div>
-</div>
-<p></p>
-@if ($count == 0)
-<center><small>You have not invited anyone yet.</small></center>
-@else
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th style="text-align: center;">No</th>
-			<th>Invited</th>
-			<th>Registed at</th>
-			<th>BePoint</th>
-		</tr>
-	</thead>
-	<tbody>
-		@foreach ($invite as $indexKey => $in)
-		<tr>
-			<td style="text-align: center;">{{$indexKey+1}}</td>
-			<td>{{ $in->assigned_to }}</td>
-			<td>{{ \Carbon\Carbon::parse($in->added_on)->format('F j, Y, g:i a') }}</td>
-			<td style="color:#5395CC;text-align: center;"><span class="fab fa-gg-circle"></span> + 50 BePoint</td>
-		</tr>
-		@endforeach
+							<div class="row">
+								<div class="col-lg-9">
+									<div class="progress">
+									  <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
+									  aria-valuenow="{{$percent}}" aria-valuemin="0" aria-valuemax="100" style="width:{{$percent}}%">
+									    {{$count}} of 5 Invitie
+									  </div>
+									</div>
+								</div>
+								<div class="col-lg-3">
+									<p style="color:#5395CC;text-align: center;font-size: 1.2em;"><span class="fab fa-gg-circle"></span> + 250 BePoint</p>
+								</div>
+							</div>
+							<p></p>
+							@if ($count == 0)
+							<center><small>You have not invited anyone yet.</small></center>
+							@else
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th style="text-align: center;">No</th>
+										<th>Invited</th>
+										<th>Registed at</th>
+										<th>BePoint</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach ($invite as $indexKey => $in)
+									<tr>
+										<td style="text-align: center;">{{$indexKey+1}}</td>
+										<td>{{ $in->assigned_to }}</td>
+										<td>{{ \Carbon\Carbon::parse($in->added_on)->format('F j, Y, g:i a') }}</td>
+										<td style="color:#5395CC;text-align: center;"><span class="fab fa-gg-circle"></span> + 50 BePoint</td>
+									</tr>
+									@endforeach
 
-	</tbody>
-</table>
-@endif
+								</tbody>
+							</table>
+							@endif
                     	</div>
                     </div>
                     <small id="p2" style="display: none;">{{ $link }}</small>

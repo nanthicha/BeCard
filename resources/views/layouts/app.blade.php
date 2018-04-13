@@ -47,6 +47,7 @@
                         </li>
                         <hr>
                         <li><a href="/home">Dashboard</a></li>
+                        <li><a href="{{ route('reward' )}}">Reward</a></li>
                         @if (Auth::user()->role == "Admin")
                         <li><a href="/admin/dashboard">Admin Dashboard</a></li>
                         @endif
