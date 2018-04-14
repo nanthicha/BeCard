@@ -41,16 +41,17 @@
                            <center>
                             <img src="{{ asset('img/users').'/'.Auth::user()->image }}" class="img-responsive img-circle"><br>
                             <b>{{ Auth::user()->name }}</b>
-                            <p style="color:#5395CC;">
-                            <span class="fab fa-gg-circle"></span> BePoint : <b >{{ Auth::user()->bePoint }}</b></p>
+                            <a href="{{ route('reward' )}}"><p style="color:#5395CC;">
+                            <span class="fab fa-gg-circle"></span> BePoint : <b >{{ Auth::user()->bePoint }}</b></p></a>
                         </center>
                         </li>
                         <hr>
-                        <li><a href="/home">Dashboard</a></li>
-                        <li><a href="{{ route('reward' )}}">Reward</a></li>
                         @if (Auth::user()->role == "Admin")
                         <li><a href="/admin/dashboard">Admin Dashboard</a></li>
+                        <hr>
                         @endif
+                        <li><a href="/home">Dashboard</a></li>
+                        <li><a href="{{ route('reward' )}}">Reward</a></li>
                         <hr>
                         <li><a href="{{ route('affiliate') }}">Affiliate</a></li>
                         <li><a href="/setting">Profile Setting</a></li>

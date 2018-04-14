@@ -29,6 +29,7 @@ if (!function_exists('classActivePath')) {
 				  <a href="{{ URL::route('admin.users') }}" class="list-group-item {!! classActivePath('admin.users') !!}" >Users</a>
 				  <a href="{{ URL::route('admin.rewards') }}" class="list-group-item {!! classActivePath('admin.rewards') !!}">Rewards</a>
 				  <a href="{{ URL::route('admin.affiliates') }}" class="list-group-item {!! classActivePath('admin.affiliates') !!}">Affiliates</a>
+				  <a href="{{ URL::route('admin.bepoints') }}" class="list-group-item {!! classActivePath('admin.bepoints') !!}">BePoint Logs</a>
 				  <a href="{{ URL::route('admin.userslogs') }}" class="list-group-item {!! classActivePath('admin.userslogs') !!}">Users Logs</a>
 				</div>
 	    	</div>

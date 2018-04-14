@@ -12,29 +12,46 @@
   <li><a href="#">Library</a></li> -->
   <li class="active">Rewards</li>
 </ol>
-
-<center><a href="{{ route('admin.rewards/new') }}"><button type="button" class="btn btn-success">Create New Reward</button></a></center>
-<!-- <table class="table table-hover table-responsive">
-    <thead>
-      <tr>
-      	<th style="text-align: center;">No</th>
-        <th><a href="{{ Request::fullUrlWithQuery(['sort' => 'username']) }}">Invitor <span class="fas fa-caret-down"></span></a></th>
-        <th>Invitie</th>
-        <th><a href="{{ Request::fullUrlWithQuery(['sort' => 'added_on']) }}">Registed at <span class="fas fa-caret-down"></span></a></th>
-      </tr>
-    </thead>
-    <tbody>
-    @foreach ($users as $key => $user)
-
-    <tr>
-    	<td style="text-align: center;">{{ $key+1 }}</td>
-    	<td>{{ $user->username }}</td>
-    	<td>{{ $user->assigned_to }}</td>
-    	<td>{{ \Carbon\Carbon::parse($user->added_on)->format('D d M Y H:i:s') }}</td>
-    </tr>
+@if ($message = Session::get('success'))
+<div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $message }}</strong>
+</div>
+@endif
+<center><a href="{{ route('admin.rewards.new') }}"><button type="button" class="btn btn-success">Create New Reward</button></a></center>
+<hr>
+<div class="row">
+    @foreach ($users as $reward)
+      <div class="col-sm-4 col-md-4 col-lg-4 mt-4">
+        <div class="card">
+            <img class="card-img-top" src="{{ asset('img/rewards').'/'.$reward->image }}">
+            <div class="card-block">
+                <p class="float-right">Use <span class="fab fa-gg-circle"></span> {{ $reward->bePoint }}</p>
+                <h4 class="card-title mt-3">{{ $reward->name }}</h4>
+                <div class="card-text">
+                    @if ($reward->status == 1)
+                    <p>Status : <span class="label label-success">On</span></p>
+                    @else
+                    <p>Status : <span class="label label-danger">Off</span></p>
+                    @endif
+                    <p>Amount : <span class="label label-info">{{ $reward->amount }}</span></p>
+                    <p>Code : <span class="label label-info">{{ $reward->voucherFormat }}</span></p>
+                    <p>Reception : <span class="label label-info">{{ $reward->reception }}</span></p>
+                    <p>Created at : <span class="label label-info">{{ \Carbon\Carbon::parse($reward->created_at)->format('d M Y') }}</span></p>
+                </div>
+            </div>
+            <div class="card-footer">
+                <small>Until {{ \Carbon\Carbon::parse($reward->updated_at)->format('d M Y') }}</small>
+                <a href="{{route('admin.rewards.edit',['code'=>$reward->voucherFormat])}}"><button class="btn btn-primary btn-sm float-right">Edit</button></a>
+            </div>
+        </div>
+      </div>
     @endforeach
-    </tbody>
-</table>
-<center>{{ $users->appends(['sort' => request()->sort])->links() }}</center> -->
+</div>
+
+
+
+
+<center>{{ $users->links() }}</center>
 
 @endsection

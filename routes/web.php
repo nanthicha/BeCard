@@ -86,5 +86,21 @@ Route::get('/admin/rewards', [
 	'uses' => 'AdminController@rewards']);
 
 Route::get('/admin/rewards/new', [
-	'as' => 'admin.rewards/new',
+	'as' => 'admin.rewards.new',
 	'uses' => 'AdminController@rewardsnew']);
+
+Route::post('/admin/rewards/create-new', [
+	'as' => 'admin.rewardsnew.post',
+	'uses' => 'AdminController@rewardsnewPost']);
+
+Route::get('/admin/rewards/edit/{code}', [
+	'as' => 'admin.rewards.edit',
+	'uses' => 'AdminController@rewardsnewEdit']);
+
+Route::post('/admin/rewards/update', [
+	'as' => 'admin.rewards.edit.post',
+	'uses' => 'AdminController@rewardsEdited']);
+
+Route::get('/admin/bepoints', [
+	'as' => 'admin.bepoints',
+	'uses' => 'AdminController@bePoints']);

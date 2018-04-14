@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\LogController;
 
 class RegisterController extends Controller
 {
@@ -84,6 +85,8 @@ class RegisterController extends Controller
         $code = request()->code;
         $private = str_random(40);
 
+        $bePointRecord = new LogController;
+
         // Record to Affiliate Table
         DB::table('affiliates')->insert(
             ['username' => $code,
@@ -95,18 +98,9 @@ class RegisterController extends Controller
         if ($count > 5){
             $msg = "Invited to register , and BePoint not plus because invitie is more than 5. But $username has 100 BePoint on started.";
         }else{
-            DB::table('users')
-                    ->where('username', $code)
-                    ->update(['bePoint' => $bePoint+50]);
+            $bePointRecord->recordBePoint($code,"Invited to $username for register.",50,0);
             $msg = "Invited to register , and BePoint+50 (={{ $bePoint+50 }}) because invitie is {{ $count }}. But $username has 100 BePoint on started.";
         }
-
-        // Logs
-        DB::table('user_logs')->insert(
-            ['username' => $code,
-            'msg' => $msg,
-            'assigned_to' => $username]
-        );
 
         // Create User
         $newbp = 100;
@@ -122,9 +116,14 @@ class RegisterController extends Controller
         ]);
 
         // BePoint
-        DB::table('users')
-                    ->where('username', $username)
-                    ->update(['bePoint' => 100]);
+        $bePointRecord->recordBePoint($username,"Register from $code invite.",100,0);
+
+        // Logs
+        DB::table('user_logs')->insert(
+            ['username' => $code,
+            'msg' => $msg,
+            'assigned_to' => $username]
+        );
         return view('home');
     }
 }

@@ -25,8 +25,10 @@ class UserController extends Controller
     }
 
     public function reward(){
-        $userName = Auth::user()->name;
-        return view('reward', ['name' => $userName]);
+        $numberOfPaginate = 6;
+        $rewards = DB::table('vouchers')->where('status','1')->orderBy('bePoint','desc')->paginate($numberOfPaginate);
+        $bepointlog = DB::table('bepoint_logs')->where('username',Auth::user()->username)->orderBy('id','desc')->get();
+        return view('reward', ['users' => $rewards,'bepointlog'=>$bepointlog]);
     }
 
     public function affiliate(){
@@ -42,13 +44,12 @@ class UserController extends Controller
         DB::table('users')
                     ->where('email', $email)
                     ->update(['name' => $name,'sex' => $sex,'dob' => $dob,'updated_at' => date('Y-m-d H:i:s')]);
+
         // Logs
         $owner = \App\User::where('email', $email)->first()->username;
-        DB::table('user_logs')->insert(
-            ['username' => $owner,
-            'msg' => 'Updated profile infomation.',
-            'assigned_to' => '']
-        );
+        $log = new LogController;
+        $log->record($owner,'Updated profile infomation.','');
+
         return back()
             ->with('successProfile','You have successfully update profile.');
     }
@@ -59,14 +60,16 @@ class UserController extends Controller
         DB::table('users')
                     ->where('email', $email)
                     ->update(['role' => $role]);
+
         // Logs
         $assigID = \App\User::where('email', $email)->first()->username;
-        DB::table('user_logs')->insert(
-            ['username' => Auth::user()->username,
-            'msg' => 'Changed role to '.$role,
-            'assigned_to' => $assigID]
-        );
+        $log = new LogController;
+        $log->record(Auth::user()->username,'Changed role to '.$role,$assigID);
+
         return back()
             ->with('successProfile','You have successfully update role.');
     }
 }
+
+
+

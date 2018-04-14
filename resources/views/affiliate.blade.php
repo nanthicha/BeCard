@@ -74,7 +74,11 @@ $percent = $count*20;
 										<td style="text-align: center;">{{$indexKey+1}}</td>
 										<td>{{ $in->assigned_to }}</td>
 										<td>{{ \Carbon\Carbon::parse($in->added_on)->format('F j, Y, g:i a') }}</td>
+										@if ($indexKey<5)
 										<td style="color:#5395CC;text-align: center;"><span class="fab fa-gg-circle"></span> + 50 BePoint</td>
+										@else
+										<td style="color:#5395CC;text-align: center;"></td>
+										@endif
 									</tr>
 									@endforeach
 
