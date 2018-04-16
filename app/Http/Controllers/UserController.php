@@ -69,6 +69,14 @@ class UserController extends Controller
         return back()
             ->with('successProfile','You have successfully update role.');
     }
+
+    public function entrepreneur(){
+        return view('user.createEntrepreneur');
+    }
+
+    public function saveEntrepreneur(){
+        dd(request()->all());
+    }
 }
 
 

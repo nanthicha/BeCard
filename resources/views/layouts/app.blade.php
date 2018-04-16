@@ -48,8 +48,11 @@
                         <hr>
                         @if (Auth::user()->role == "Admin")
                         <li><a href="/admin/dashboard">Admin Dashboard</a></li>
-                        <hr>
+                        @else
+                        <li><a href="/user/entrepreneur">Entrepreneur</a></li>
                         @endif
+                        
+                        <hr>
                         <li><a href="/home">Dashboard</a></li>
                         <li><a href="{{ route('reward' )}}">Reward</a></li>
                         <hr>

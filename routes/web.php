@@ -104,3 +104,7 @@ Route::post('/admin/rewards/update', [
 Route::get('/admin/bepoints', [
 	'as' => 'admin.bepoints',
 	'uses' => 'AdminController@bePoints']);
+
+Route::post('/user/entrepreneur/save' , 'UserController@saveEntrepreneur');
+
+Route::get('/user/entrepreneur' , 'UserController@Entrepreneur');
