@@ -84,6 +84,7 @@ class RegisterController extends Controller
         $email = request()->email;
         $code = request()->code;
         $private = str_random(40);
+        $remember = str_random(40);
 
         $bePointRecord = new LogController;
 
@@ -111,7 +112,7 @@ class RegisterController extends Controller
             'password' => bcrypt($password),
             'role' => 'User',
             'private_key' => $private,
-            'remember_token' => '9LkejWrYm8qsldEbMLaDXfc1DV2AoNB24kzIFsKa4Pq0DEEjziY1ZabrhVsL',
+            'remember_token' => $remember,
             'bePoint' => $newbp,
         ]);
 
