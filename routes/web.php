@@ -65,6 +65,10 @@ Route::get('/admin/users', [
 	'as' => 'admin.users',
 	'uses' => 'AdminController@users']);
 
+Route::get('/admin/shops', [
+	'as' => 'admin.shops',
+	'uses' => 'AdminController@shops']);
+
 Route::get('/admin/users/edit/{user}', [
 	'as' => 'admin.user.edit',
 	'uses' => 'AdminController@userEdit']);
@@ -108,5 +112,9 @@ Route::get('/admin/bepoints', [
 
 
 //Shop
-Route::get('/shop/create' , 'ShopController@create');
-Route::post('/shop' , 'ShopController@store');
+Route::get('/shop/create', [
+	'as' => 'shop.create',
+	'uses' => 'ShopController@create']);
+Route::post('/shop/create', [
+	'as' => 'shop.create.post',
+	'uses' => 'ShopController@store']);

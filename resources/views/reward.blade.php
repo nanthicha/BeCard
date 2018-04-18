@@ -37,11 +37,11 @@ $now = date("Y-m-d H:i:s");
 					            <img class="card-img-top" src="{{ asset('img/rewards').'/'.$reward->image }}">
 					            <div class="card-block">
 					                <figure class="profile">
-					                    <img src="{{ asset('img/rewards/bybecard.png')}}" class="img-responsive">
+					                    <img src="{{ asset('img/shops/logo').'/'.$reward->logo}}" class="img-responsive">
 					                </figure>
 					                <h4 class="card-title mt-3">{{ $reward->name }}</h4>
 					                <div class="meta">
-					                    <a>Product by BeCard</a>
+					                    <a>Product by {{$reward->shopname}}</a>
 					                </div>
 					                <div class="card-text">
 					                    {{ $reward->description }}

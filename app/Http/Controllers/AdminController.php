@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Shop;
 use Table;
 
 class AdminController extends Controller
@@ -28,7 +29,7 @@ class AdminController extends Controller
 
     public function users(Request $request)
     {
-        $rows = User::sorted()->paginate();;
+        $rows = User::sorted()->paginate();
         $table = Table::create($rows, ['username', 'name','email','role','bePoint']);
         $table->addColumn('created_at', 'Added', function($model) {
             return $model->created_at->diffForHumans();
@@ -42,6 +43,20 @@ class AdminController extends Controller
         });
         return view('admin.users', ['table' => $table]);
     }
+
+    public function shops(Request $request)
+    {
+        $rows = Shop::sorted()->paginate();;
+        $table = Table::create($rows, ['id','name','type','package','status']);
+        $table->addColumn('created_at', 'Added', function($model) {
+            return $model->created_at->diffForHumans();
+        });
+        // $table->addColumn('logo', '', function($model) {
+        //     return "<img src='../img/shops/logo/$model->logo' width='30px'>";
+        // });
+        return view('admin.shops', ['table' => $table]);
+    }
+
     public function usersLogs()
     {
         $log = DB::table('user_logs')->orderBy('id', 'desc')->paginate(15);

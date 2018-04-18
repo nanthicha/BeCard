@@ -83,6 +83,10 @@ $private = $getUser->private_key;
 						        <td>{!! Form::email('email', $getEmail , ['class'=>'form-control','readonly']) !!}</td>
 						      </tr>
 						      <tr>
+						        <td><b>Telephone</b></td>
+						        <td>{!! Form::text('phone', $getUser->phone , ['class'=>'form-control']) !!}</td>
+						      </tr>
+						      <tr>
 						        <td><b>Name</b></td>
 						        <td>{!! Form::text('name', $name , ['class'=>'form-control']) !!}</td>
 						      </tr>

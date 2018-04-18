@@ -1,6 +1,9 @@
+<?php
+
+$count_shops = $shops->count();
+
+?>
 @extends('layouts.app')
-
-
 @section('content')
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -16,38 +19,72 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Create BeCard Shop</div>
-
                     <div class="panel-body">
-                    <!-- <form class="form-horizontal" method="post" action="{{ route('image.upload.post') }}" enctype="multipart/form-data"> -->
-                    <form class="form-horizontal" method="POST" action="/shop" enctype="multipart/form-data" >
+
+@if ($count_shops > 0)
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th></th>
+                    <th>Shop name</th>
+                    <th>Type</th>
+                    <th>Package</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach ($shops as $index => $shop)
+                <tr>
+                    <td>{{ $index+1 }}</td>
+                    <td><img src="{{asset('img/shops/logo/').'/'.$shop->logo}}" width="30px"></td>
+                    <td>{{ $shop->name }}</td>
+                    <td>{{ $shop->type }}</td>
+                    @if ($shop->package == "gold")
+                    <td style="color:#eab909;"><span class="fas fa-trophy"></span> {{$shop->package}}</td>
+                    @else
+                    <td>{{$shop->package}}</td>
+                    @endif
+
+                    @if ($shop->status == "on")
+                    <td><span class="fas fa-toggle-on" style="color:#0089f9;font-size: 1.7em;"></span></td>
+                    @else
+                    <td><span class="fas fa-toggle-on" style="color:#b4d2ea;font-size: 1.7em;"></span></td>
+                    @endif
+                    <td><button class="btn btn-info">Manage</button></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endif
+                        <hr>
+                        <form class="form-horizontal" method="POST" action="{{ route('shop.create.post') }}" enctype="multipart/form-data" >
                         <div class="row">
-	                        <div class="col-lg-4">
+                            <div class="col-lg-4">
                                 <center><img src="{{ asset('img/shops/logo/default.jpg') }}" alt="" width="300px" class="img-responsive"></center>
-     
-                                
-                               
                                 <div class="row">
                                 <div style="margin-top:15px;margin-left:7%;">
                                     <div class="col-lg-11">
                                         {{ csrf_field() }}
                                         <input type="file" name="image" class="form-control" >
                                         <input type="hidden" name="username" value="{{ Auth::user()->username }}"> 
-                                      
                                     </div>
 
-					            </div>
+                                </div>
                                 </div>
                                 <!-- </form> -->
                             </div>
-                       
-                        
-       
                             <div class="col-lg-8">
                                 <!-- <form class="form-horizontal" method="POST" action="/shop" > -->
                                     {{ csrf_field() }}
                                     <table class="table table-hover">
-						            <tbody>
-                                    <tr><center><h1>Shop Info</h1></center></tr>
+                                    <tbody>
+                                    <tr><center><h3>Create new shop</h3></center></tr>
                                     <tr><td>
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Shop Name</label>
@@ -56,7 +93,6 @@
                                         </div>
                                     </div>
                                     </td></tr>
-                                    
                                     <tr><td>
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Shop Description</label>
@@ -89,7 +125,6 @@
                                             <div id="time">
                                                 <div class="col-md-5">
                                                     <input id="timepicker1" width="100%"  name="timeOpen" required> 
-                                                    
                                                 </div>
                                                 <div class="col-md-1">
                                                 <span><b>-</b></span>
@@ -102,14 +137,14 @@
                                     </div>
                                     </td></tr>
 
-                                    <!-- google map -->  
+                                    <!-- google map -->
                                     <tr><td>
                                     <div class="form-group">
                                         <label  class="col-md-4 control-label">Shop Address</label>
                                         <input type="text" id="searchMap">
                                         <div id="mapCanvas"></div>
                                     </div>
-                                    </td></tr>                                  
+                                    </td></tr>
 
                                     <tr><td>
                                     <div class="form-group">
@@ -129,7 +164,7 @@
                     </div>
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
 </div>
 @endsection
