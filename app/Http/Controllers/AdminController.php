@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\User;
+use Table;
 
 class AdminController extends Controller
 {
@@ -26,17 +28,20 @@ class AdminController extends Controller
 
     public function users(Request $request)
     {
-    	$numberOfPaginate = 15;
-		$sort = $request->input('sort', 'asc');
-		if ($sort != "asc"){
-			$users = DB::table('users')->orderBy($sort, 'asc')->paginate($numberOfPaginate);
-		}
-		else{
-			$users = DB::table('users')->orderBy('id', 'asc')->paginate($numberOfPaginate);
-		}
-        return view('admin.users', ['users' => $users]);
+        $rows = User::sorted()->paginate();;
+        $table = Table::create($rows, ['username', 'name','email','role','bePoint']);
+        $table->addColumn('created_at', 'Added', function($model) {
+            return $model->created_at->diffForHumans();
+        });
+        $table->addColumn('id', 'Action', function($model) {
+            return "<div class='btn-group' role='group' aria-label='Button group with nested dropdown'>
+                      <a href='users/edit/$model->username'><button type='button' class='btn btn-primary'>Edit</button></a>
+                      <a href='userslogs/$model->username'><button type='button' class='btn btn-info'>Logs</button></a>
+                    </div>
+                    ";
+        });
+        return view('admin.users', ['table' => $table]);
     }
-
     public function usersLogs()
     {
         $log = DB::table('user_logs')->orderBy('id', 'desc')->paginate(15);

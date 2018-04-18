@@ -12,10 +12,10 @@ class ComposerStaticInit32c54e63e74dd7c82e520f51f277204a
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
     );
 
@@ -80,6 +80,10 @@ class ComposerStaticInit32c54e63e74dd7c82e520f51f277204a
         array (
             'Illuminate\\' => 11,
         ),
+        'G' => 
+        array (
+            'Gbrock\\Table\\' => 13,
+        ),
         'F' => 
         array (
             'Fideloper\\Proxy\\' => 16,
@@ -100,7 +104,6 @@ class ComposerStaticInit32c54e63e74dd7c82e520f51f277204a
         array (
             'Cron\\' => 5,
             'Collective\\Html\\' => 16,
-            'Carbon\\' => 7,
         ),
         'A' => 
         array (
@@ -231,6 +234,10 @@ class ComposerStaticInit32c54e63e74dd7c82e520f51f277204a
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate',
         ),
+        'Gbrock\\Table\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gbrock/laravel-table/src',
+        ),
         'Fideloper\\Proxy\\' => 
         array (
             0 => __DIR__ . '/..' . '/fideloper/proxy/src',
@@ -267,14 +274,14 @@ class ComposerStaticInit32c54e63e74dd7c82e520f51f277204a
         array (
             0 => __DIR__ . '/..' . '/laravelcollective/html/src',
         ),
-        'Carbon\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
-        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
     );
 
     public static $prefixesPsr0 = array (
@@ -905,6 +912,12 @@ class ComposerStaticInit32c54e63e74dd7c82e520f51f277204a
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'Gbrock\\Table\\BlankModel' => __DIR__ . '/..' . '/gbrock/laravel-table/src/BlankModel.php',
+        'Gbrock\\Table\\Column' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Column.php',
+        'Gbrock\\Table\\Facades\\Table' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Facades/Table.php',
+        'Gbrock\\Table\\Providers\\TableServiceProvider' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Providers/TableServiceProvider.php',
+        'Gbrock\\Table\\Table' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Table.php',
+        'Gbrock\\Table\\Traits\\Sortable' => __DIR__ . '/..' . '/gbrock/laravel-table/src/Traits/Sortable.php',
         'Hamcrest\\Arrays\\IsArray' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArray.php',
         'Hamcrest\\Arrays\\IsArrayContaining' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContaining.php',
         'Hamcrest\\Arrays\\IsArrayContainingInAnyOrder' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Arrays/IsArrayContainingInAnyOrder.php',
@@ -1745,6 +1758,7 @@ class ComposerStaticInit32c54e63e74dd7c82e520f51f277204a
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/JakubOnderka/PhpConsoleColor/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/JakubOnderka/PhpConsoleHighlighter/Highlighter.php',
+        'JsonSerializable' => __DIR__ . '/..' . '/nesbot/carbon/src/JsonSerializable.php',
         'Laravel\\Tinker\\ClassAliasAutoloader' => __DIR__ . '/..' . '/laravel/tinker/src/ClassAliasAutoloader.php',
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
@@ -3650,6 +3664,7 @@ class ComposerStaticInit32c54e63e74dd7c82e520f51f277204a
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit32c54e63e74dd7c82e520f51f277204a::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit32c54e63e74dd7c82e520f51f277204a::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit32c54e63e74dd7c82e520f51f277204a::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit32c54e63e74dd7c82e520f51f277204a::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit32c54e63e74dd7c82e520f51f277204a::$classMap;
 

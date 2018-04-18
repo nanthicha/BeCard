@@ -103,10 +103,6 @@ $private = $getUser->private_key;
 						      </tr>
 						      <tr>
 						      	<td></td>
-						      	<td><small>Private key is <b>{{ $private }}</b></small></td>
-						      </tr>
-						      <tr>
-						      	<td></td>
 						      	<td><button type="submit" class="btn btn-primary">Save</button></td>
 						      </tr>
 						    </tbody>
