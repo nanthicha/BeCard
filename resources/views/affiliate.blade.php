@@ -1,6 +1,6 @@
 <?
 
-$getUser = DB::table('users')->where('name', $name)->first();
+$getUser = DB::table('users')->where('username', $name)->first();
 $getUsername = $getUser->username;
 $getEmail = $getUser->email;
 $private = $getUser->private_key;

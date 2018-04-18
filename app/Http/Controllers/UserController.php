@@ -15,12 +15,12 @@ class UserController extends Controller
     }
 
     public function index(){
-    	$userName = Auth::user()->name;
+    	$userName = Auth::user()->username;
     	$users = User::all();
     	return $userName;
     }
     public function setting(){
-    	$userName = Auth::user()->name;
+    	$userName = Auth::user()->username;
     	return view('setting', ['name' => $userName]);
     }
 
@@ -32,7 +32,7 @@ class UserController extends Controller
     }
 
     public function affiliate(){
-        $userName = Auth::user()->name;
+        $userName = Auth::user()->username;
         return view('affiliate', ['name' => $userName]);
     }
 
@@ -70,13 +70,6 @@ class UserController extends Controller
             ->with('successProfile','You have successfully update role.');
     }
 
-    public function entrepreneur(){
-        return view('user.createEntrepreneur');
-    }
-
-    public function saveEntrepreneur(){
-        dd(request()->all());
-    }
 }
 
 

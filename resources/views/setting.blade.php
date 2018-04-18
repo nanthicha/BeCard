@@ -1,6 +1,6 @@
 <?
 
-$getUser = DB::table('users')->where('name', $name)->first();
+$getUser = DB::table('users')->where('username', $name)->first();
 $getUsername = $getUser->username;
 $getEmail = $getUser->email;
 $getImage = $getUser->image;
@@ -55,7 +55,7 @@ $private = $getUser->private_key;
 					        	<div class="col-lg-8">
 					        		{!! Form::file('image', array('class' => 'form-control')) !!}
 					        		{!! Form::hidden('username', $name) !!}
-					        		{!! Form::hidden('type', '0') !!}
+					        		{!! Form::hidden('type', 'user') !!}
 					        	</div>
 					        	<div class="col-lg-4">
 					        		<button type="submit" class="btn btn-success">Upload</button>

@@ -21,14 +21,23 @@ class ImageUploadController extends Controller
         ]);
         $type = request()->type;
         $imageName = time().'.'.request()->image->getClientOriginalExtension();
-
-        if ($type == 0){ // Profile Picture
+     
+        if ($type == "user"){ // Profile Picture
+         
         	$username = request()->username;
         	$imageName = $username."_".time().'.'.request()->image->getClientOriginalExtension();
         	request()->image->move(public_path('img/users'), $imageName);
 			DB::table('users')
 			            ->where('name', $username)
 			            ->update(['image' => $imageName]);
+        }else if($type == "shop"){
+            // dd(request()->all());
+            $file = request()->file('image');
+            $username = request()->username;
+            $imageName = $username."_".time().'.'.request()->image->getClientOriginalExtension();
+            $path = public_path('img/shops');
+            $file->move($path, $imageName);
+
         }else{
         	request()->image->move(public_path('img'), $imageName);
         }
