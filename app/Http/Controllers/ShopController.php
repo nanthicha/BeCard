@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Shop;
 
 class ShopController extends Controller
 {
@@ -47,7 +48,7 @@ class ShopController extends Controller
         $path = public_path('img/shops/logo');
         $file->move($path, $imageName);
 
-        DB::table('shops')->insert(
+        Shop::create(
             ['username' => $username,
             'name' => request()->name,
             'description' => request()->desc,
