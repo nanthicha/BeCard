@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Gbrock\Table\Traits\Sortable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -29,10 +30,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public $sortable = [
-        'id',
-        'name',
-        'email',
-    ];
+    protected $sortable = ['username', 'name','email','role','bePoint','created_at'];
 
 }
