@@ -19,9 +19,8 @@
         <div id="1" class="container_card" onClick="reply_click(this)">
           <div class="card_home card1">
             <div class="front" style="background: url(img/cards/test.png)top center;background-size: cover; z-index: 1">
-                Click to flip
             </div>
-            <div class="back">
+            <div class="back" style="background: url(img/cards/test.png)top center;background-size: cover; z-index: 1">
                 <img src="http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=ffffff&amp;data=google" height="200" width="200">
             </div>
           </div>

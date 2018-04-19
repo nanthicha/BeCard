@@ -109,8 +109,6 @@ Route::get('/admin/bepoints', [
 	'as' => 'admin.bepoints',
 	'uses' => 'AdminController@bePoints']);
 
-
-
 //Shop
 Route::get('/shop/create', [
 	'as' => 'shop.create',
@@ -118,3 +116,8 @@ Route::get('/shop/create', [
 Route::post('/shop/create', [
 	'as' => 'shop.create.post',
 	'uses' => 'ShopController@store']);
+
+//Cashier
+Route::get('/cashier/add', [
+	'as' => 'cashier.add',
+	'uses' => 'CashierController@toAdd']);
