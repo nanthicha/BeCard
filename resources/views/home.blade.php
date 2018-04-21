@@ -46,7 +46,7 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
     border: 1px solid transparent;
     padding: 0 20px;
     display: inline-block;
-    border-radius: 50px;
+    border-radius: 5px;
     font-size: 16px;
     font-weight: 400;
     height: 40px;
@@ -77,8 +77,8 @@ Click to swape <span class="fas fa-angle-double-right"></span>
           <div class="card_home card1">
             <div class="front" style="background: url(img/cards/test.png)top center;background-size: cover; z-index: 1">
             </div>
-            <div class="back" style="background: url(img/cards/memberCover2.png)top center;background-size: cover; z-index: 1">
-                <img src="{{$qrLink}}" height="100" width="100">
+            <div class="back" style="background: url(img/cards/memberCover-1.png)top center;background-size: cover; z-index: 1">
+                <img src="{{$qrLink}}" height="150" width="150">
             </div>
           </div>
         </div>
@@ -96,8 +96,8 @@ Click to swape <span class="fas fa-angle-double-right"></span>
           <div class="card_home card2">
             <div class="front" style="background: url(img/cards/card2.png)top center;background-size: cover; z-index: 1">
             </div>
-            <div class="back" style="background: url(img/cards/memberCover1.png)top center;background-size: cover; z-index: 1">
-                <img src="{{$qrLink}}" height="100" width="100">
+            <div class="back" style="background: url(img/cards/memberCover-2.png)top center;background-size: cover; z-index: 1">
+                <img src="{{$qrLink}}" height="150" width="150">
             </div>
           </div>
         </div>
@@ -105,6 +105,24 @@ Click to swape <span class="fas fa-angle-double-right"></span>
     <div class="col-lg-7">
         <h4>Starbucks Reserve Member Card</h4>
         <img src="{{asset('img/shops/logo/stamp_1524068326.png')}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;">
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-5">
+        <div id="3" class="container_card" onClick="reply_click(this)">
+          <div class="card_home card3">
+            <div class="front" style="background: url(img/cards/defaultCard.png)top center;background-size: cover; z-index: 1">
+            </div>
+            <div class="back" style="background: url(img/cards/memberCover.png),linear-gradient(45deg, #008df2 50%, #5eb9fb 100%) top center;background-size: cover; z-index: 1">
+                <img src="{{$qrLink}}" height="150" width="150">
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-lg-7">
+        <h4>BeCard Member Card 2018</h4>
+        <img src="{{asset('img/shops/logo/stamp_1524067506.png')}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;">
     </div>
 </div>
 <hr>
