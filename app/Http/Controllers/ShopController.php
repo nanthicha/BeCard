@@ -20,7 +20,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        //
+        return view('shops.index');
     }
 
     /**
@@ -28,11 +28,20 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        $user = Auth::user()->username;
-        $listShops = DB::table('shops')->where('username',$user)->get();
-        return view('shops.create',['shops'=>$listShops]);
+    public function create($id)
+    {   
+        $packages = [
+            "sliver" => "Sliver",
+            "gold" => "Gold"
+        ];
+        if($id == "1"){
+            // var_dump('1');
+            return view('shops.create',['package'=> "sliver" , 'packages' => $packages]);
+        }
+        else if($id == "2"){
+            // var_dump('2');
+            return view('shops.create',['package'=> "gold" , 'packages' => $packages]);
+        }
     }
 
     /**
@@ -42,17 +51,22 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        request()->validate([
-
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
-        ]);
-        $type = request()->type;
-        $file = request()->file('image');
+    {   
+        // dd($request->all());
+        $imageName = 'default.jpg';
         $username = request()->username;
-        $imageName = $username."_".time().'.'.request()->image->getClientOriginalExtension();
-        $path = public_path('img/shops/logo');
-        $file->move($path, $imageName);
+        if(request()->image != null){
+            request()->validate([
+
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            ]);
+            $type = request()->type;
+            $file = request()->file('image');
+            $imageName = $username."_".time().'.'.request()->image->getClientOriginalExtension();
+            $path = public_path('img/shops/logo');
+            $file->move($path, $imageName);
+            }
+
 
         Shop::create(
             ['username' => $username,
@@ -63,13 +77,13 @@ class ShopController extends Controller
             'time' => request()->timeOpen.','.request()->timeClose,
             'type' => request()->type,
             'latlng' => request()->lat.','.request()->lng,
-            'package' => "sliver",
+            'package' => request()->package,
         ]);
 
         $log = new LogController;
         $log->record($username,'Create new Shop as '.request()->name,'');
 
-        return redirect(route('shop.create'));
+        return redirect(route('shop.show'));
 
     }
 
@@ -79,9 +93,12 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        // $user = Auth::user()->username;
+        // $listShops = DB::table('shops')->where('username',$user)->get();
+        // return view('shops.create',['shops'=>$listShops]);
+        return view('shops.show');
     }
 
     /**

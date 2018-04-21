@@ -110,6 +110,9 @@ Route::get('/admin/bepoints', [
 	'uses' => 'AdminController@bePoints']);
 
 //Shop
+Route::get('/shop', [
+	'as' => 'shop.show',
+	'uses' => 'ShopController@index']);
 Route::get('/shop/create/{id}', [
 	'as' => 'shop.create',
 	'uses' => 'ShopController@create']);
@@ -127,3 +130,6 @@ Route::get('/cashier/add', [
 Route::post('/api/cashierStep1', [
 	'as' => 'api.cashierStep1',
 	'uses' => 'ApiController@cashierStep1']);
+Route::get('/api/image', [
+	'as' => 'api.image',
+	'uses' => 'ApiController@image']);
