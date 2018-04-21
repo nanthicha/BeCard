@@ -1,6 +1,7 @@
 <?php
 
-$count_shops = $shops->count();
+//$count_shops = $shops->count();
+$count_shops = 0;
 
 ?>
 @extends('layouts.app')
@@ -21,7 +22,7 @@ $count_shops = $shops->count();
                 <div class="panel-heading">Create BeCard Shop</div>
                     <div class="panel-body">
 
-@if ($count_shops > 0)
+<!-- @if ($count_shops > 0)
 <div class="row">
     <div class="col-lg-12">
         <table class="table table-hover">
@@ -61,7 +62,7 @@ $count_shops = $shops->count();
         </table>
     </div>
 </div>
-@endif
+@endif -->
                         <hr>
                         <form class="form-horizontal" method="POST" action="{{ route('shop.create.post') }}" enctype="multipart/form-data" >
                         <div class="row">
@@ -98,6 +99,22 @@ $count_shops = $shops->count();
                                         <label  class="col-md-4 control-label">Shop Description</label>
                                         <div class="col-md-6">
                                         <textarea rows="7" cols="45" name="desc" class="form-control" placeholder="Enter text here..."></textarea>
+                                        </div>
+                                    </div>
+                                    </td></tr>
+
+                                    <tr><td>
+                                    <div class="form-group">
+                                        <label  class="col-md-4 control-label">Shop Package</label>
+                                        <div class="col-md-6" >
+                                        @foreach ($packages as $key => $value)
+                                            @if( $package == $key )
+                                                <input type="radio" name="package" value="{{ $key }}" checked> {{ $value }}<br>
+                                            @else
+                                                <input type="radio" name="package" value="{{ $key }}"> {{ $value }}<br>
+                                            @endif
+                                        @endforeach   
+                                        </select>
                                         </div>
                                     </div>
                                     </td></tr>

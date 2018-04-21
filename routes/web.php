@@ -110,7 +110,7 @@ Route::get('/admin/bepoints', [
 	'uses' => 'AdminController@bePoints']);
 
 //Shop
-Route::get('/shop/create', [
+Route::get('/shop/create/{id}', [
 	'as' => 'shop.create',
 	'uses' => 'ShopController@create']);
 Route::post('/shop/create', [
