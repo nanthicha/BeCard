@@ -97,6 +97,7 @@ input, label {
 @endsection
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -105,7 +106,12 @@ input, label {
                 <div class="panel-body">
 
 
-
+<center>
+  <img src="{{ asset('img/shops/logo/stamp_1524068326.png' )}}" width="100px" class="img-circle img-responsive">
+  <h4>Starbucks Kasetsart University</h4>
+  <p></p>
+  <br>
+</center>
 <div class="stepwizard">
     <div class="stepwizard-row setup-panel">
       <div class="stepwizard-step">
@@ -131,7 +137,7 @@ input, label {
           <hr>
           <div class="form-group">
             <label class="control-label">Phone Number of BeCard</label>
-            <input  maxlength="100" type="text" class="form-control" placeholder="Telephone"  />
+            <input id="telephone" maxlength="100" type="text" class="form-control" placeholder="Telephone"  />
           </div>
           <hr class="hr-text" data-content="OR">
             <div class="form-group">
@@ -144,8 +150,8 @@ input, label {
                 <hr>
             </p>
             <h3>Member Check</h3>
-          <div class="form-group">
-            <input  id="nameBeCard" type="text" class="form-control" placeholder="Name of BeCard" />
+          <div class="form-group" id="statusOut">
+            <input  id="nameBeCard" name="nameBeCard" type="text" class="form-control" placeholder="Name of BeCard" disabled="" />
             <p></p>
           </div>
           <button class="btn btn-success nextBtn btn-lg pull-right" id="btnStep1" type="button" >Next</button>
@@ -193,18 +199,7 @@ input, label {
 <script src="https://dmla.github.io/jsqrcode/src/qr_packed.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
-document.getElementById("btnStep1").disabled = true;
-$("#nameBeCard").on('change', function checkEmpty(){
-    $('#nameBeCard').blur(function()
-    {
-        if( !$(this).val() ) {
-             document.getElementById("btnStep1").disabled = true;
-        }else{
-            document.getElementById("btnStep1").disabled = false;
-        }
-    });
-});
-
+  var outBTN = document.getElementById("btnStep1").disabled = true;
   var navListItems = $('div.setup-panel div a'),
           allWells = $('.setup-content'),
           allNextBtn = $('.nextBtn');
@@ -257,6 +252,34 @@ function openQRCamera(node) {
         alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
       } else {
         node.parentNode.previousElementSibling.value = res;
+        var out = document.getElementById('nameBeCard');
+        var outBTN = document.getElementById("btnStep1");
+        var outForm = document.getElementById("statusOut");
+        $.ajax({
+            url: "/api/cashierStep1",
+            type: "POST",
+            dataType: "json",
+            data: {
+                'message': res,
+                '_token': $('meta[name="csrf-token"]').attr('content'),
+            },
+            success: function(respone)
+            {
+              if (respone.status == "error"){
+                out.value = "";
+                outBTN.disabled = true;
+                outForm.classList.remove('has-success');
+              }else{
+                out.value = respone.msg;
+                outBTN.disabled = false;
+                outForm.classList.add('has-success');
+              }
+            },
+            error: function(error)
+            {
+                console.log(error);
+            }
+        });
       }
     };
     qrcode.decode(reader.result);
@@ -265,19 +288,37 @@ function openQRCamera(node) {
 }
 
 
-// Send Data and respon
-// $.ajax({
-//     url: "main.php",
-//     type: "POST",
-//     dataType: "json",
-//     data: {"action": "loadall", "id": 1},
-//     success: function(data){
-//         console.log(data);
-//     },
-//     error: function(error){
-//          console.log("Error:");
-//          console.log(error);
-//     }
-// });
+
+$("#telephone").on('keyup', function check(){
+  var out = document.getElementById('nameBeCard');
+  var outBTN = document.getElementById("btnStep1");
+  var outForm = document.getElementById("statusOut");
+  $.ajax({
+      url: "/api/cashierStep1",
+      type: "POST",
+      dataType: "json",
+      data: {
+          'message': $('input[id="telephone"]').val(),
+          '_token': $('meta[name="csrf-token"]').attr('content'),
+      },
+      success: function(respone)
+      {
+        if (respone.status == "error"){
+          out.value = "";
+          outBTN.disabled = true;
+          outForm.classList.remove('has-success');
+        }else{
+          out.value = respone.msg;
+          outBTN.disabled = false;
+          outForm.classList.add('has-success');
+        }
+      },
+      error: function(error)
+      {
+          console.log(error);
+      }
+  });
+});
+
 </script>
 @endsection

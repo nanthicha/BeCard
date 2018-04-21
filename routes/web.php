@@ -121,3 +121,9 @@ Route::post('/shop/create', [
 Route::get('/cashier/add', [
 	'as' => 'cashier.add',
 	'uses' => 'CashierController@toAdd']);
+
+
+//API
+Route::post('/api/cashierStep1', [
+	'as' => 'api.cashierStep1',
+	'uses' => 'ApiController@cashierStep1']);
