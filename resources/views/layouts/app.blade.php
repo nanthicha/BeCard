@@ -47,11 +47,9 @@
                         </li>
                         <hr>
                         @if (Auth::user()->role == "Admin")
-                        <hr>
                         <li><a href="/admin/dashboard">Admin Dashboard</a></li>
                         <li><a href="{{ route('shop.show') }}">Shop</a></li>
                         @elseif (Auth::user()->role == "Entrepreneur" )
-                        <hr>
                         <li><a href="{{ route('shop.show') }}">Shop</a></li>
                         @endif
 
