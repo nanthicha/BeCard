@@ -120,6 +120,23 @@ Route::post('/shop/create', [
 	'as' => 'shop.create.post',
 	'uses' => 'ShopController@store']);
 
+//----------ขอมั่วไว้ก่อนนะ---------
+Route::get('/shop/s' , function(){
+	return view('shops.layout');
+});
+Route::get('/shop/show' , function(){
+	return view('shops.show');
+});
+Route::get('/shop/branch' , function(){
+	return view('branch.show');
+});
+Route::get('/shop/cashier' , function(){
+	return view('cashier.show');
+});
+Route::post('/shop/branch' , 'BranchController@store');
+
+//-----------------------------
+
 //Cashier
 Route::get('/cashier/add', [
 	'as' => 'cashier.add',

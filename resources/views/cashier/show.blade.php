@@ -1,18 +1,17 @@
 @extends('shops.layout')
-
 @section('content')
 <div class="container" >
 
   <!-- Nav tabs -->
   <ul class="nav nav-tabs"  style="top: 100px;width:79%;z-index: 0;">
     <li class="nav-item">
-      <a class="nav-link active" href="/shop/show">Shop</a>
+      <a class="nav-link " href="/shop/show">Shop</a>
     </li>
     <li class="nav-item">
       <a class="nav-link"   href="/shop/branch">Branchs</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link"   href="/shop/cashier">Cashiers</a>
+      <a class="nav-link active"   href="/shop/cashier">Cashiers</a>
     </li>
     <li class="nav-item">
       <a class="nav-link"   href="#">Member Card</a>
@@ -26,6 +25,7 @@
 
 
   <!-- Tab panes -->
+  
   <div class="row">
         <div class="col-md-12">
             <div class="panel panel-default">
@@ -37,6 +37,5 @@
             </div>
         </div>
     </div>
-
 </div>
 @endsection

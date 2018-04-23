@@ -3,24 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Branch;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
-use App\User;
-use App\Shop;
 
-
-
-class CashierController extends Controller
+class BranchController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('cashier');
-    }
-    public function toAdd()
-    {
-        return view('cashier.add');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -49,7 +36,14 @@ class CashierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Branch::create(
+            ['username' => Auth::user()->username,
+            'name' => request()->name,
+            'phone' => request()->phone,
+            'latlng' => request()->lat.','.request()->lng,
+        ]);
+
+        return redirect('/shop/branch');
     }
 
     /**
@@ -60,7 +54,7 @@ class CashierController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('branchs.show');
     }
 
     /**
