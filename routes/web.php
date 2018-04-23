@@ -134,6 +134,7 @@ Route::get('/shop/cashier' , function(){
 	return view('cashier.show');
 });
 Route::post('/shop/branch' , 'BranchController@store');
+Route::post('/shop/cashier' , 'CashierController@store');
 
 //-----------------------------
 

@@ -78,12 +78,12 @@
           {{ csrf_field() }}
               <div class="form-group">
                 <label for="exampleInputEmail1">Branch name</label>
-                <input type="input" class="form-control" name="name" placeholder="Enter email" required>
+                <input type="input" class="form-control" name="name" placeholder="Enter name" required>
               </div>
 
               <div class="form-group">
                 <label for="exampleInputEmail1">Phone</label>
-                <input type="input" class="form-control" name="phone" placeholder="Enter email" required>
+                <input type="input" class="form-control" name="phone" placeholder="Enter phone" required>
               </div>
               <div class="form-group">
                 <label >Shop Address</label><br>

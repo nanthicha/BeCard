@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Branch;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BranchController extends Controller
 {
@@ -36,8 +37,13 @@ class BranchController extends Controller
      */
     public function store(Request $request)
     {
+        $username = Auth::user()->username;
+        $shop_id = DB::table('shops')->where('username',"=",$username)->first()->id;
+        // dd($shop_id);
         Branch::create(
-            ['username' => Auth::user()->username,
+            [
+            'shop_id' =>  $shop_id,
+            'username' => $username,
             'name' => request()->name,
             'phone' => request()->phone,
             'latlng' => request()->lat.','.request()->lng,

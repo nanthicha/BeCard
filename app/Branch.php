@@ -8,7 +8,7 @@ class Branch extends Model
 {
     protected $fillable = [
 
-        'username','name', 'phone', 'latlng'
+        'username','name', 'phone', 'latlng', 'shop_id'
  
         ];
 }

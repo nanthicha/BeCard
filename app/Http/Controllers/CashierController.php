@@ -8,15 +8,16 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
 use App\Shop;
+use App\Cashier;
 
 
 
 class CashierController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('cashier');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('cashier');
+    // }
     public function toAdd()
     {
         return view('cashier.add');
@@ -49,7 +50,42 @@ class CashierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usr = Auth::user()->username;
+        $username = request()->username;
+        $name = request()->name;
+        $password = str_random(10);
+        $email = request()->email;
+        $private = str_random(40);
+        $remember = str_random(40);
+        $phone = request()->phone;
+        $shop_id = DB::table('shops')->where('username',"=",$usr)->first()->id;
+        $branch_id = DB::table('branches')->where('shop_id',"=",$shop_id)->first()->id;
+
+        User::create([
+            'username' => $username,
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'role' => 'User',
+            'private_key' => $private,
+            'remember_token' => $remember,
+            'phone' => $phone,
+            'bePoint' => '0'
+        ]);
+
+        Cashier::create([
+            'username' => $username,
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+            'phone' => $phone,
+            'shop_id' => $shop_id,
+            'branch_id' => $branch_id
+        ]);
+
+
+        return redirect('/shop/cashier');
+
     }
 
     /**
