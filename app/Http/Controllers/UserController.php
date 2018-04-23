@@ -37,6 +37,9 @@ class UserController extends Controller
     }
 
     public function updateProfile(){
+        request()->validate([
+            'phone' => 'required|unique:users,phone',
+        ]);
         $name = request()->name;
         $email = request()->email;
         $sex = request()->sex;
