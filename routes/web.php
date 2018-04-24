@@ -133,12 +133,28 @@ Route::get('/shop/branch' , function(){
 Route::get('/shop/cashier' , function(){
 	return view('cashier.show');
 });
+
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',
 	'uses' => 'ShopController@membercard']);
 Route::post('/shop/membercard/create' , [
 	'as' => 'shop.membercard.create',
 	'uses' => 'ShopController@membercardCreate']);
+Route::get('/shop/membercard/{key}/view' , [
+	'as' => 'shop.membercard.view',
+	'uses' => 'ShopController@membercardView']);
+Route::get('/shop/membercard/{key}/edit' , [
+	'as' => 'shop.membercard.edit',
+	'uses' => 'ShopController@membercardEdit']);
+Route::get('/shop/membercard/{key}/print' , [
+	'as' => 'shop.membercard.print',
+	'uses' => 'ShopController@membercardPrint']);
+Route::post('/shop/membercard/update' , [
+	'as' => 'shop.membercard.update',
+	'uses' => 'ShopController@membercardUpdate']);
+Route::get('/join/{key}' , [
+	'as' => 'join',
+	'uses' => 'UserController@joinCard']);
 
 Route::post('/shop/branch' , 'BranchController@store');
 Route::post('/shop/cashier' , 'CashierController@store');

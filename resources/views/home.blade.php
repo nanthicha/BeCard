@@ -61,8 +61,13 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Your Member Cards</div>
-
                 <div class="panel-body">
+                            @if ($message = Session::get('message'))
+                            <div class="alert alert-success alert-block">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                    <strong>{{ $message }}</strong>
+                            </div>
+                            @endif
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}

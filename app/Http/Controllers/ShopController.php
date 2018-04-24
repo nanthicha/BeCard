@@ -146,10 +146,8 @@ class ShopController extends Controller
             'name' => 'required',
             'desc' => 'required',
             'bahtperpoint' => 'required',
-            'imageBG' => 'required|image|max:10000',
-            'color1' => 'required',
-            'color2' => 'required',
         ]);
+        $keycard = str_random(10);
         if (request()->shop_package == "sliver"){
             $imageName = "defaultCard.png";
             $color1 = "#008df2";
@@ -171,9 +169,75 @@ class ShopController extends Controller
             'colorHex1' => $color1,
             'colorHex2' => $color2,
             'bahtperpoint' => request()->bahtperpoint,
+            'keycard' => $keycard,
             'created_at' => Carbon::now(),
         ]);
 
-        return view('shops.membercard');
+        $log = new LogController;
+        $log->record(Auth::user()->username,'Create new member card, as '.request()->name,'');
+
+        $shop = DB::table('shops')->where('username',Auth::user()->username)->first();
+        return view('shops.membercard',['shop'=>$shop]);
+    }
+    public function membercardEdit($key){
+        $card = DB::table('membercards')->where('keycard',$key)->first();
+        $shop = DB::table('shops')->where('username',Auth::user()->username)->first();
+        if (Auth::user()->username === $card->username){
+            return view('shops.membercardEdit',['card'=>$card,'shop'=>$shop]);
+        }
+        return redirect('/not_permitted_to_execute_this_operation');
+    }
+    public function membercardVie($key){
+        $shop = DB::table('shops')->where('username',Auth::user()->username)->first();
+        return view('shops.membercard',['shop'=>$shop]);
+    }
+    public function membercardUpdate(Request $request){
+        request()->validate([
+            'name' => 'required',
+            'desc' => 'required',
+            'bahtperpoint' => 'required',
+        ]);
+        $file = request()->file('imageBG');
+        if ($file == ""){
+            DB::table('membercards')
+                        ->where('keycard',request()->keycard)
+                        ->update(['name'=>request()->name,
+                            'name'=>request()->name,
+                            'description'=>request()->desc,
+                            'colorHex1'=>request()->color1,
+                            'colorHex1'=>request()->color2,
+                            'bahtperpoint'=>request()->bahtperpoint,
+                            'updated_at' => date('Y-m-d H:i:s')]);
+        }else{
+            $imageName = request()->keycard."_".time().'.'.request()->imageBG->getClientOriginalExtension();
+            $path = public_path('img/cards');
+            $file->move($path, $imageName);
+            DB::table('membercards')
+                        ->where('keycard',request()->keycard)
+                        ->update(['name'=>request()->name,
+                            'name'=>request()->name,
+                            'description'=>request()->desc,
+                            'colorHex1'=>request()->color1,
+                            'colorHex1'=>request()->color2,
+                            'imageBG'=>$imageName,
+                            'bahtperpoint'=>request()->bahtperpoint,
+                            'updated_at' => date('Y-m-d H:i:s')]);
+        }
+
+        // Logs
+        $log = new LogController;
+        $log->record(Auth::user()->username,'Updated member card infomation, as '.request()->name,'');
+
+
+        $shop = DB::table('shops')->where('username',Auth::user()->username)->first();
+        return redirect('/shop/membercard');
+    }
+    public function membercardPrint($key){
+        $card = DB::table('membercards')->where('keycard',$key)->first();
+        $shop = DB::table('shops')->where('username',Auth::user()->username)->first();
+        if (Auth::user()->username === $card->username){
+            return view('shops.membercardPrintOut',['card'=>$card,'shop'=>$shop]);
+        }
+        return redirect('/not_permitted_to_execute_this_operation');
     }
 }

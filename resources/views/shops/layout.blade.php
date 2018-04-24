@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-
-
 @section('js')
 <script>
 $(".nav .nav-link").on("click", function(){
@@ -9,6 +7,7 @@ $(".nav .nav-link").on("click", function(){
    $(this).addClass("active");
 });
 </script>
+@yield('js_agian')
 @endsection
 
 @section('css')
