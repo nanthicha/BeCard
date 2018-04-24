@@ -32,7 +32,7 @@ Route::get('/register/{id}', [
 	'uses' => 'MyController@regisAffiliate']);
 Route::post('regis-affi', [
 	'as' => 'registerAffi.regis',
-	'uses' => 'auth\RegisterController@createAffi']);
+	'uses' => 'Auth\RegisterController@createAffi']);
 Route::get('/affiliate', [
 	'as' => 'affiliate',
 	'uses' => 'UserController@affiliate']);
