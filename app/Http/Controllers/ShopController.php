@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Shop;
+use Carbon\Carbon;
 
 class ShopController extends Controller
 {
@@ -29,7 +30,7 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($id)
-    {   
+    {
         $packages = [
             "sliver" => "Sliver",
             "gold" => "Gold"
@@ -133,5 +134,46 @@ class ShopController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function membercard(){
+        $shop = DB::table('shops')->where('username',Auth::user()->username)->first();
+        return view('shops.membercard',['shop'=>$shop]);
+    }
+
+    public function membercardCreate(Request $request){
+        request()->validate([
+            'name' => 'required',
+            'desc' => 'required',
+            'bahtperpoint' => 'required',
+            'imageBG' => 'required|image|max:10000',
+            'color1' => 'required',
+            'color2' => 'required',
+        ]);
+        if (request()->shop_package == "sliver"){
+            $imageName = "defaultCard.png";
+            $color1 = "#008df2";
+            $color2 = "#5eb9fb";
+        }else{
+            $file = request()->file('imageBG');
+            $imageName = request()->shop_id."_".time().'.'.request()->imageBG->getClientOriginalExtension();
+            $path = public_path('img/cards');
+            $file->move($path, $imageName);
+            $color1 = request()->color1;
+            $color2 = request()->color2;
+        }
+        DB::table('membercards')->insert(
+            ['username' => Auth::user()->username,
+            'shop_id' => request()->shop_id,
+            'name' => request()->name,
+            'description' => request()->desc,
+            'imageBG' => $imageName,
+            'colorHex1' => $color1,
+            'colorHex2' => $color2,
+            'bahtperpoint' => request()->bahtperpoint,
+            'created_at' => Carbon::now(),
+        ]);
+
+        return view('shops.membercard');
     }
 }

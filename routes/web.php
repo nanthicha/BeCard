@@ -133,6 +133,13 @@ Route::get('/shop/branch' , function(){
 Route::get('/shop/cashier' , function(){
 	return view('cashier.show');
 });
+Route::get('/shop/membercard' , [
+	'as' => 'shop.membercard',
+	'uses' => 'ShopController@membercard']);
+Route::post('/shop/membercard/create' , [
+	'as' => 'shop.membercard.create',
+	'uses' => 'ShopController@membercardCreate']);
+
 Route::post('/shop/branch' , 'BranchController@store');
 Route::post('/shop/cashier' , 'CashierController@store');
 
