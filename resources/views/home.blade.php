@@ -68,71 +68,39 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
                                     <strong>{{ $message }}</strong>
                             </div>
                             @endif
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                            @if (session('status'))
+                                <div class="alert alert-success">
+                                    {{ session('status') }}
+                                </div>
+                            @endif
 <div class="floating btn btn-static-secondary btn-shadow" id="helperSwape">
 Click to swape <span class="fas fa-angle-double-right"></span>
 </div>
-<div class="row">
-    <div class="col-lg-5">
-        <div id="1" class="container_card" onClick="reply_click(this)">
-          <div class="card_home card1">
-            <div class="front" style="background: url(img/cards/test.png)top center;background-size: cover; z-index: 1">
+@foreach ($membercard as $index => $card)
+    <?php $shop = DB::table('shops')->where('id',$card->shop_id)->first(); ?>
+    <div class="row">
+        <div class="col-lg-5">
+            <div id="{{$index}}" class="container_card" onClick="reply_click(this)">
+              <div class="card_home card{{$index}}">
+                <div class="front" style="background: url({{asset('img/cards'.'/'.$card->imageBG)}} )top center;background-size: cover; z-index: 1">
+                </div>
+                <div class="back" style="background: url(img/cards/memberCover.png),linear-gradient(45deg, {{$card->colorHex1}} 50%, {{$card->colorHex2}} 100%) top center;background-size: cover; z-index: 1">
+                    <img src="{{$qrLink}}" height="150" width="150">
+                </div>
+              </div>
             </div>
-            <div class="back" style="background: url(img/cards/memberCover-1.png)top center;background-size: cover; z-index: 1">
-                <img src="{{$qrLink}}" height="150" width="150">
-            </div>
-          </div>
+        </div>
+        <div class="col-lg-7">
+            <h4><b>{{ $card->name }}</b></h4>
+            <img src="{{asset('img/shops/logo/'.$shop->logo)}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;">
+            <p>{{ $card->description }}</p>
+            <p>Condition : <label class="label label-info">{{ $card->bahtperpoint }} Baht / 1 Point</label></p>
+            <p></p>
+            <br>
         </div>
     </div>
-    <div class="col-lg-7">
-        <h4>Poseidon Member VIP Club</h4>
-        <img src="{{asset('img/shops/logo/bnk48_1524063366.jpg')}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;">
-        <p>dsfs</p>
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-lg-5">
-        <div id="2" class="container_card" onClick="reply_click(this)">
-          <div class="card_home card2">
-            <div class="front" style="background: url(img/cards/card2.png)top center;background-size: cover; z-index: 1">
-            </div>
-            <div class="back" style="background: url(img/cards/memberCover-2.png)top center;background-size: cover; z-index: 1">
-                <img src="{{$qrLink}}" height="150" width="150">
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="col-lg-7">
-        <h4>Starbucks Reserve Member Card</h4>
-        <img src="{{asset('img/shops/logo/stamp_1524068326.png')}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;">
-    </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-lg-5">
-        <div id="3" class="container_card" onClick="reply_click(this)">
-          <div class="card_home card3">
-            <div class="front" style="background: url(img/cards/defaultCard.png)top center;background-size: cover; z-index: 1">
-            </div>
-            <div class="back" style="background: url(img/cards/memberCover.png),linear-gradient(45deg, #008df2 50%, #5eb9fb 100%) top center;background-size: cover; z-index: 1">
-                <img src="{{$qrLink}}" height="150" width="150">
-            </div>
-          </div>
-        </div>
-    </div>
-    <div class="col-lg-7">
-        <h4>BeCard Member Card 2018</h4>
-        <img src="{{asset('img/shops/logo/stamp_1524067506.png')}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;">
-    </div>
-</div>
-<hr>
-
-
+    <hr>
+@endforeach
                 </div>
             </div>
         </div>

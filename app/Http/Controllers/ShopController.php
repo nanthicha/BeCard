@@ -187,10 +187,7 @@ class ShopController extends Controller
         }
         return redirect('/not_permitted_to_execute_this_operation');
     }
-    public function membercardVie($key){
-        $shop = DB::table('shops')->where('username',Auth::user()->username)->first();
-        return view('shops.membercard',['shop'=>$shop]);
-    }
+
     public function membercardUpdate(Request $request){
         request()->validate([
             'name' => 'required',
@@ -239,5 +236,11 @@ class ShopController extends Controller
             return view('shops.membercardPrintOut',['card'=>$card,'shop'=>$shop]);
         }
         return redirect('/not_permitted_to_execute_this_operation');
+    }
+
+    public function membercardView($key){
+        $card = DB::table('membercards')->where('keycard',$key)->first();
+        $memberOfCard = DB::table('user_cards')->where('card_id',$card->id)->orderBy('id','desc')->get();
+        return view('shops.membercardView',['card'=>$card,'memberOfCard'=>$memberOfCard]);
     }
 }
