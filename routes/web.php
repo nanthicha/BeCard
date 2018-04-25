@@ -121,18 +121,28 @@ Route::post('/shop/create', [
 	'uses' => 'ShopController@store']);
 
 //----------ขอมั่วไว้ก่อนนะ---------
-Route::get('/shop/s' , function(){
-	return view('shops.layout');
-});
-Route::get('/shop/show' , function(){
-	return view('shops.show');
-});
-Route::get('/shop/branch' , function(){
-	return view('branch.show');
-});
-Route::get('/shop/cashier' , function(){
-	return view('cashier.show');
-});
+Route::get('/shop' , [
+	'as' => 'shop.index',
+	'uses' => 'ShopController@index'
+]);
+
+Route::get('/shop/show' , [
+	'as' => 'shop.show',
+	'uses' => 'ShopController@show'
+]);
+
+Route::get('/shop/branch' , [
+	'as' => 'shop.branch',
+	'uses' => 'BranchController@show'
+]);
+Route::get('/shop/cashier' , [
+	'as' => 'shop.cashier',
+	'uses' => 'CashierController@show'
+]);
+Route::get('/shop/setting' , [
+	'as' => 'shop.setting',
+	'uses' => 'CashierController@show'
+]);
 
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',

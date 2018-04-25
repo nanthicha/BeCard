@@ -21,6 +21,11 @@ class ShopController extends Controller
      */
     public function index()
     {
+        $shop = DB::table('shops')->where('username', Auth::user()->username )->get();
+        // dd(count($shop));
+        if(count($shop)>0){
+            return redirect('/shop/show');
+        }
         return view('shops.index');
     }
 
@@ -79,6 +84,9 @@ class ShopController extends Controller
             'type' => request()->type,
             'latlng' => request()->lat.','.request()->lng,
             'package' => request()->package,
+            'phone' => $request->phone,
+            'url' => $request->url,
+            'email' => $request->email
         ]);
 
         $log = new LogController;
@@ -96,10 +104,10 @@ class ShopController extends Controller
      */
     public function show()
     {
-        // $user = Auth::user()->username;
-        // $listShops = DB::table('shops')->where('username',$user)->get();
-        // return view('shops.create',['shops'=>$listShops]);
-        return view('shops.show');
+        $user = Auth::user()->username;
+        $shop = DB::table('shops')->where('username',$user)->get()->first();
+        // dd($shop);
+        return view('shops.show' , ['shop' => $shop]);
     }
 
     /**

@@ -105,6 +105,34 @@ $count_shops = 0;
 
                                     <tr><td>
                                     <div class="form-group">
+                                        <label class="col-md-4 control-label">Shop Phone</label>
+                                        <div class="col-md-6">
+                                            <input  type="text" class="form-control" name="phone" placeholder="Enter Phone"required>
+                                        </div>
+                                    </div>
+                                    </td></tr>
+
+                                    <tr><td>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Shop E-mail</label>
+                                        <div class="col-md-6">
+                                            <input  type="text" class="form-control" name="email" placeholder="Enter E-mail"required>
+                                        </div>
+                                    </div>
+                                    </td></tr>
+
+                                    <tr><td>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Shop Url</label>
+                                        <div class="col-md-6">
+                                            <input  type="text" class="form-control" name="url" placeholder="Enter Url"required>
+                                        </div>
+                                    </div>
+                                    </td></tr>
+
+
+                                    <tr><td>
+                                    <div class="form-group">
                                         <label  class="col-md-4 control-label">Shop Package</label>
                                         <div class="col-md-6" >
                                         @foreach ($packages as $key => $value)

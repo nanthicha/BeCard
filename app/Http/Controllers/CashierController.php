@@ -94,9 +94,19 @@ class CashierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $user = Auth::user()->username;
+        $shop_id = DB::table('shops')->where('username',$user)->first()->id;
+        // dd($shop_id);
+        $branches = DB::table('branches')->where('username',$user)->get();
+        $cashiers = DB::table('cashiers')->where('shop_id',$shop_id)->get();
+        $imgCashiers = DB::table('users')->join('cashiers', 'users.username', '=', 'cashiers.username')
+            ->select('users.username', 'users.image')
+            ->get()->pluck('image','username');
+        
+        // dd($imgCashiers);
+        return view('cashier.show' , [  'branches' => $branches , 'cashiers' => $cashiers ,'imgCashiers' => $imgCashiers]);
     }
 
     /**
