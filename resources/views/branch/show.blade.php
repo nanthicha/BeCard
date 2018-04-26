@@ -37,11 +37,11 @@
                     
                         
                     
-                            
+                           
                             @foreach($branches as $index => $branch)
                               
                             <div class="col-md-6 ">
-                            <div class="card " style="padding:15px;display:block;">
+                            <div class="card " style="padding:15px;display:block;margin-bottom:20px;">
                             
                             <div class="card-body">
                                 <h5 class="card-title">Branch Name: {{ $branch->name }} </h5>
