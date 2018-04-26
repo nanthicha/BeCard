@@ -52,6 +52,26 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
     height: 40px;
     line-height: 40px;
 }
+#slideshow { 
+    position: relative; 
+    width: 100%; 
+    height: 250px; 
+    margin-bottom: 60px;
+}
+
+#slideshow > div { 
+    position: absolute; 
+    top: 10px; 
+    left: 10px; 
+    right: 10px; 
+    bottom: 10px; 
+    
+}
+#slideshow img{
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
 </style>
 @endsection
 
@@ -73,6 +93,17 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
                                     {{ session('status') }}
                                 </div>
                             @endif
+<div id="slideshow">
+   <div>
+     <a href="/shop/show/kfc"><img src="{{asset('img/promotions/kfc_promo.png')}}"></a>
+   </div>
+   <div>
+     <a href="/reward"><img src="{{asset('img/promotions/str_promo.png')}}"></a>
+   </div>
+   <div>
+     <a href="/shop/show/bnk48"><img src="{{asset('img/promotions/bnk48.png')}}"></a>
+   </div>
+</div>
 <div class="floating btn btn-static-secondary btn-shadow" id="helperSwape">
 Click to swape <span class="fas fa-angle-double-right"></span>
 </div>
@@ -94,7 +125,7 @@ Click to swape <span class="fas fa-angle-double-right"></span>
             <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><h4><b>{{ $card->name }}</b></h4></a>
             <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><img src="{{asset('img/shops/logo/'.$shop->logo)}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;"></a>
             <p>{{ $card->description }}</p>
-            <p>Condition : <label class="label label-info">{{ $card->bahtperpoint }} Baht / 1 Point</label></p>
+            <p><label class="label label-success">{{ $shop->name }}</label> <label class="label label-info">{{ $card->bahtperpoint }} Baht / 1 Point</label></p>
             <p></p>
             <br>
         </div>
@@ -117,5 +148,15 @@ function reply_click(elem)
     var el = '.card'+id;
     $(el).toggleClass('flipped');
 }
+$("#slideshow > div:gt(0)").hide();
+
+setInterval(function() { 
+  $('#slideshow > div:first')
+    .fadeOut(1000)
+    .next()
+    .fadeIn(1000)
+    .end()
+    .appendTo('#slideshow');
+},  5000);
 </script>
 @endsection
