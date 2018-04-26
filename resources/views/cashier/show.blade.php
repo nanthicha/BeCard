@@ -64,7 +64,7 @@ use Carbon\Carbon;
                                 <td>{{ $cashier->name }}</td>
                                 <td>{{$cashier->email}}</td>
 
-                                <td>{{ $cashier->created_at }}</td>
+                                <td>{{ Carbon::parse($cashier->created_at)->diffForHumans() }}</td>
                             </tr>
                             @endif
                         @endforeach
