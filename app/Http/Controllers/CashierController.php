@@ -97,7 +97,9 @@ class CashierController extends Controller
     public function show()
     {
         $user = Auth::user()->username;
-        $shop_id = DB::table('shops')->where('username',$user)->first()->id;
+        $shops = DB::table('shops')->where('username',$user)->first();
+        $shop_id = $shops->id;
+        $package = $shops->package;
         // dd($shop_id);
         $branches = DB::table('branches')->where('username',$user)->get();
         $cashiers = DB::table('cashiers')->where('shop_id',$shop_id)->get();
@@ -108,7 +110,7 @@ class CashierController extends Controller
         ->select('branch_id' , DB::raw('COUNT(*) as count'))
         ->groupBy('branch_id')->get()->pluck('count','branch_id')->toArray();
 
-        return view('cashier.show' , [  'branches' => $branches , 'cashiers' => $cashiers ,'imgCashiers' => $imgCashiers , 'countCashiers' => $countCashiers]);
+        return view('cashier.show' , [  'branches' => $branches , 'cashiers' => $cashiers ,'imgCashiers' => $imgCashiers , 'countCashiers' => $countCashiers ,'package' => $package]);
     }
 
     /**

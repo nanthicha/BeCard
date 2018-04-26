@@ -104,7 +104,13 @@ use Carbon\Carbon;
             
               <select name="branch" class="form-control" required>
               @foreach ($branches as $index => $branch)
-              <option value="{{$branch->id}}">{{$branch->name}}</option>
+              @if( array_key_exists($branch->id,$countCashiers))
+                @if( ($package == "sliver" and $countCashiers[$branch->id] < 5) or $package == "gold")
+                  <option value="{{$branch->id}}">{{$branch->name}}</option>
+                @endif
+              @else
+                  <option value="{{$branch->id}}">{{$branch->name}}</option>
+              @endif
               @endforeach
               </select>
             </div>
