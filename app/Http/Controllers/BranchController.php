@@ -72,7 +72,7 @@ class BranchController extends Controller
         $user = Auth::user()->username;
         $shop = DB::table('shops')->where('url',"=",$url)->first();
         if($user == $shop->username){
-            $this->show();
+            return $this->show();
         }
         $branches = DB::table('branches')->where('shop_id',$shop->id)->get();
         $package = $shop->package;
