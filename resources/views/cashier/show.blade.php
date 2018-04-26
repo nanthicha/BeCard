@@ -19,6 +19,9 @@ use Carbon\Carbon;
     <li class="nav-item">
       <a class="nav-link"   href="{{ route('shop.membercard') }}">Member Card</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link"   href="{{ route('shop.reward') }}">Reward</a>
+    </li>
     <li class="nav-item pull-right">
       <a class="nav-link"   href="{{ route('shop.setting') }}">Setting</a>
     </li>

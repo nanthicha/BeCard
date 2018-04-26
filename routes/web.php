@@ -168,6 +168,10 @@ Route::post('/shop/membercard/update' , [
 Route::get('/join/{key}' , [
 	'as' => 'join',
 	'uses' => 'UserController@joinCard']);
+Route::get('/shop/reward' , [
+	'as' => 'shop.reward',
+	'uses' => 'ShopController@reward'
+]);
 
 
 Route::get('/shop/show/{name}' , 'ShopController@showName');

@@ -272,4 +272,10 @@ class ShopController extends Controller
         // dd($user);
         return view('shops.showUser' , ['shop' => $shop , 'url' => $url]);
     }
+
+    public function reward(){
+        return view('shops.reward');
+    }
+
+
 }
