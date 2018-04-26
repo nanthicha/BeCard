@@ -47,7 +47,7 @@
                                 
                                 <div class="map" id="{{$index}}-map"></div>
                                 <input type="hidden" id="{{$index}}-sh" value="0">
-                                <a href="#" class="btn btn-info pull-right"><span class="glyphicon glyphicon-cog"></span> Edit</a>
+                            
                             
                             </div>
                             </div>
