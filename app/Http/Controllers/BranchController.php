@@ -62,9 +62,26 @@ class BranchController extends Controller
     {   
         $user = Auth::user()->username;
         $branches = DB::table('branches')->where('username',$user)->get();
+        $package = DB::table('shops')->where('username',$user)->first()->package;
         $count = count($branches);
         // dd(count($branches));
-        return view('branch.show' , [ 'branches' => $branches , 'count' => $count]);
+        return view('branch.show' , [ 'branches' => $branches , 'count' => $count , 'package' => $package]);
+    }
+
+    public function showName($url){
+        $user = Auth::user()->username;
+        $shop = DB::table('shops')->where('url',"=",$url)->first();
+        if($shop == null){
+            return view('errors.pageNotF');
+        }
+        if($user == $shop->username){
+            return $this->show();
+        }
+        $branches = DB::table('branches')->where('shop_id',$shop->id)->get();
+        $package = $shop->package;
+        $count = count($branches);
+        // dd(count($branches));
+        return view('branch.showUser' , [ 'branches' => $branches , 'count' => $count , 'package' => $package , 'url' => $url ]);
     }
 
 
@@ -101,4 +118,6 @@ class BranchController extends Controller
     {
         //
     }
+
+
 }

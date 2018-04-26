@@ -5,20 +5,12 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs"  style="width:100%;z-index: 0;position:relative;">
     <li class="nav-item">
-      <a class="nav-link" href="{{ route('shop.show') }}">Shop</a>
+      <a class="nav-link" href="{{ '/shop/show/'.$url }}">Shop</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active"   href="{{ route('shop.branch') }}">Branchs</a>
+      <a class="nav-link active"   href="{{ '/shop/branch/'.$url }}">Branchs</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link"   href="{{ route('shop.cashier') }}">Cashiers</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link"   href="{{ route('shop.membercard') }}">Member Card</a>
-    </li>
-    <li class="nav-item pull-right">
-      <a class="nav-link"   href="{{ route('shop.setting') }}">Setting</a>
-    </li>
+
   </ul>
 
 
@@ -32,12 +24,15 @@
                 <center><h1>Show Branchs</h1></center>
                 <hr>
                 <input type="hidden" id="count" value="{{ $count }}">
-                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:4.5%" id="add">Add Branch</button>
+                <!-- <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:4.5%" id="add">Add Branch</button> -->
                 <br><br>
                     
                         
                     
+                           @if($count == 0)
+                               <center><p>No Branchs<p></center>
                            
+                           @endif
                             @foreach($branches as $index => $branch)
                               
                             <div class="col-md-6 ">
@@ -52,7 +47,7 @@
                                 
                                 <div class="map" id="{{$index}}-map"></div>
                                 <input type="hidden" id="{{$index}}-sh" value="0">
-                                <a href="#" class="btn btn-info pull-right"><span class="glyphicon glyphicon-cog"></span> Edit</a>
+                            
                             
                             </div>
                             </div>

@@ -39,9 +39,10 @@ use Carbon\Carbon;
                 <div class="row">
                 <div style="width:80%;margin: 0 auto;">
                 @foreach ($branches as $index => $branch)
-                
-                  <h3>{{$branch->name}}</h3>
+                   
+                  <h3>Branch: {{$branch->name}}</h3>
                   <hr>
+                  @if( array_key_exists($branch->id,$countCashiers))
                     <table class="table">
                         <thead>
                             <tr>
@@ -63,12 +64,15 @@ use Carbon\Carbon;
                                 <td>{{ $cashier->name }}</td>
                                 <td>{{$cashier->email}}</td>
 
-                                <td>{{ $cashier->created_at }}</td>
+                                <td>{{ Carbon::parse($cashier->created_at)->diffForHumans() }}</td>
                             </tr>
                             @endif
                         @endforeach
                         </tbody>
                     </table>
+                    @else
+                      <center><p>No Cashier, Please add Cashier.<p></center>
+                    @endif
                     <br>
                     @endforeach
     </div>
@@ -95,6 +99,22 @@ use Carbon\Carbon;
             <!-- content goes here -->
       <form method="POST" action="/shop/cashier" >
           {{ csrf_field() }}
+            <div class="form-group">
+            <label for="exampleInputEmail1">Branch name</label>
+            
+              <select name="branch" class="form-control" required>
+              @foreach ($branches as $index => $branch)
+              @if( array_key_exists($branch->id,$countCashiers))
+                @if( ($package == "sliver" and $countCashiers[$branch->id] < 5) or $package == "gold")
+                  <option value="{{$branch->id}}">{{$branch->name}}</option>
+                @endif
+              @else
+                  <option value="{{$branch->id}}">{{$branch->name}}</option>
+              @endif
+              @endforeach
+              </select>
+            </div>
+
             <div class="form-group">
                 <label for="exampleInputEmail1">Cashier username</label>
                 <input type="input" class="form-control" name="username" placeholder="Enter username" required>

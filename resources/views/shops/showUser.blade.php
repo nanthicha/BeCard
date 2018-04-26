@@ -7,19 +7,10 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs"  style="width:100%;z-index: 0;position:relative;">
     <li class="nav-item">
-      <a class="nav-link active" href="{{ route('shop.show') }}">Shop</a>
+      <a class="nav-link active" href="{{ '/shop/show/'.$url }}">Shop</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link "   href="{{ route('shop.branch') }}">Branchs</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link "   href="{{ route('shop.cashier') }}">Cashiers</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link"   href="{{ route('shop.membercard') }}">Member Card</a>
-    </li>
-    <li class="nav-item pull-right">
-      <a class="nav-link"   href="{{ route('shop.setting') }}">Setting</a>
+      <a class="nav-link "   href="{{ '/shop/branch/'.$url }}">Branchs</a>
     </li>
   </ul>
 
@@ -189,6 +180,7 @@
         });
       }
       
+
       var phone = document.getElementById('inPhone').value;
       if(phone.length > 4){
       var result = phone.slice(0,3) + '-' + phone.slice(3,6) + '-' + phone.slice(6);

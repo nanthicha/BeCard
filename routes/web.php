@@ -119,6 +119,10 @@ Route::get('/shop/create/{id}', [
 Route::post('/shop/create', [
 	'as' => 'shop.create.post',
 	'uses' => 'ShopController@store']);
+//--------ศรัทธา ใส่ register เพิ่ม------------
+Route::get('/shop/register', [
+	'as' => 'shop.register',
+	'uses' => 'ShopController@register']);
 
 //----------ขอมั่วไว้ก่อนนะ---------
 Route::get('/shop' , [
@@ -141,8 +145,7 @@ Route::get('/shop/cashier' , [
 ]);
 Route::get('/shop/setting' , [
 	'as' => 'shop.setting',
-	'uses' => 'CashierController@show'
-]);
+	'uses' => 'ShopController@setting']);
 
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',
@@ -166,8 +169,12 @@ Route::get('/join/{key}' , [
 	'as' => 'join',
 	'uses' => 'UserController@joinCard']);
 
+
+Route::get('/shop/show/{name}' , 'ShopController@showName');
+Route::get('/shop/branch/{name}' , 'BranchController@showName');
 Route::post('/shop/branch' , 'BranchController@store');
 Route::post('/shop/cashier' , 'CashierController@store');
+
 
 //-----------------------------
 

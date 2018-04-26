@@ -57,7 +57,7 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         // dd($request->all());
         $imageName = 'default.jpg';
         $username = request()->username;
@@ -250,5 +250,26 @@ class ShopController extends Controller
         $card = DB::table('membercards')->where('keycard',$key)->first();
         $memberOfCard = DB::table('user_cards')->where('card_id',$card->id)->orderBy('id','desc')->get();
         return view('shops.membercardView',['card'=>$card,'memberOfCard'=>$memberOfCard]);
+    }
+
+    public function setting(){
+        return view('shops.setting');
+    }
+
+    public function register(){
+      return view('shops.register');
+    }
+
+    public function showName($url){
+       
+        $shop = DB::table('shops')->where('url',$url)->get()->first();
+        if($shop == null){
+            return view('errors.pageNotF');
+        }
+        if($shop->username == Auth::user()->username){
+            return $this->show();
+        }
+        // dd($user);
+        return view('shops.showUser' , ['shop' => $shop , 'url' => $url]);
     }
 }
