@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,6 +73,28 @@ class UserController extends Controller
 
         return back()
             ->with('successProfile','You have successfully update role.');
+    }
+
+    public function joinCard($key){
+        $card = DB::table('membercards')->where('keycard',$key)->first();
+        if ($card === null){
+            return redirect('home')->with('message','Dont have this shop,please check you QR code agian.');
+        }
+        $checkcard = DB::table('user_cards')->where('card_id',$card->id)->first();
+        if ($checkcard !== null){
+            return redirect('home')->with('message','You have this card.');
+        }else{
+            DB::table('user_cards')->insert(
+                ['username' => Auth::user()->username,
+                'card_id' => $card->id,
+                'point' => 0,
+                'created_at' => Carbon::now(),
+            ]);
+            $log = new LogController;
+            $log->record(Auth::user()->username,'Register new card :'.$card->name,'');
+            $log->recordBePoint(Auth::user()->username,"Register new card :".$card->name,10,0);
+        }
+        return redirect('home')->with('message','Register new card successfully.');
     }
 
 }

@@ -59,7 +59,7 @@ class CashierController extends Controller
         $remember = str_random(40);
         $phone = request()->phone;
         $shop_id = DB::table('shops')->where('username',"=",$usr)->first()->id;
-        $branch_id = DB::table('branches')->where('shop_id',"=",$shop_id)->first()->id;
+        $branch_id = $request->branch;
 
         User::create([
             'username' => $username,
@@ -94,9 +94,21 @@ class CashierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $user = Auth::user()->username;
+        $shop_id = DB::table('shops')->where('username',$user)->first()->id;
+        // dd($shop_id);
+        $branches = DB::table('branches')->where('username',$user)->get();
+        $cashiers = DB::table('cashiers')->where('shop_id',$shop_id)->get();
+        $imgCashiers = DB::table('users')->where('shop_id',$shop_id)->join('cashiers', 'users.username', '=', 'cashiers.username')
+            ->select('users.username', 'users.image')
+            ->get()->pluck('image','username');
+        $countCashiers = DB::table('cashiers')->where('shop_id',$shop_id)
+        ->select('branch_id' , DB::raw('COUNT(*) as count'))
+        ->groupBy('branch_id')->get()->pluck('count','branch_id')->toArray();
+
+        return view('cashier.show' , [  'branches' => $branches , 'cashiers' => $cashiers ,'imgCashiers' => $imgCashiers , 'countCashiers' => $countCashiers]);
     }
 
     /**

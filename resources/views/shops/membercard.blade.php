@@ -9,24 +9,24 @@ $count_membercard = $membercard->count();
 <div class="container" >
 
   <!-- Nav tabs -->
+  <!-- Nav tabs -->
   <ul class="nav nav-tabs"  style="width:100%;z-index: 0;position:relative;">
     <li class="nav-item">
-      <a class="nav-link" href="/shop/show">Shop</a>
+      <a class="nav-link" href="{{ route('shop.show') }}">Shop</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link "   href="/shop/branch">Branchs</a>
+      <a class="nav-link "   href="{{ route('shop.branch') }}">Branchs</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link"   href="/shop/cashier/">Cashiers</a>
+      <a class="nav-link"   href="{{ route('shop.cashier') }}">Cashiers</a>
     </li>
     <li class="nav-item active">
-      <a class="nav-link">Member Card</a>
+      <a class="nav-link "   href="{{ route('shop.membercard') }}">Member Card</a>
     </li>
     <li class="nav-item pull-right">
-      <a class="nav-link"   href="#">Setting</a>
+      <a class="nav-link"   href="{{ route('shop.setting') }}">Setting</a>
     </li>
   </ul>
-
 
   <!-- Tab panes -->
   <div class="row">
@@ -59,7 +59,7 @@ $count_membercard = $membercard->count();
                 	@foreach ($membercards as $card)
 					<div class="row">
 					    <div class="col-lg-5">
-					        <div id="1" class="container_card" onClick="reply_click(this)">
+					        <div id="1" class="container_card">
 					          <div class="card_home card1">
 					            <div class="front" style="background: url({{asset('img/cards'.'/'.$card->imageBG)}} )top center;background-size: cover; z-index: 1">
 					            </div>
@@ -67,10 +67,18 @@ $count_membercard = $membercard->count();
 					        </div>
 					    </div>
 					    <div class="col-lg-7">
-					        <h4>{{ $card->name }}</h4>
+					        <h4><b>{{ $card->name }}</b></h4>
 					        <p>{{ $card->description }}</p>
+					        <p>Condition : <label class="label label-info">{{ $card->bahtperpoint }} Baht / 1 Point</label></p>
+					        <p>Created at : <label class="label label-info">{{ $card->created_at }}</label></p>
+					        <p></p>
+					        <br>
+					        <a href="/shop/membercard/{{ $card->keycard }}/view"><button class="btn btn-sm btn-primary">View member</button></a>
+							<a href="/shop/membercard/{{ $card->keycard }}/print"><button class="btn btn-sm btn-success">Print Register QR</button></a>
+					        <a href="/shop/membercard/{{ $card->keycard }}/edit"><button class="btn btn-sm btn-warning">Edit</button></a>
 					    </div>
 					</div>
+					<hr>
                 	@endforeach
                 	@if ($shop->package == "gold")
                 		<p></p>
@@ -102,6 +110,7 @@ $count_membercard = $membercard->count();
 							{!! Form::hidden('shop_id', $shop->id) !!}
 							{!! Form::hidden('shop_package', $shop->package) !!}
 							<p></p>
+							@if ($shop->package == "gold")
 							<label>Image <small>(Front of mamber card)</small></label>
 							{!! Form::file('imageBG', array('class' => 'form-control')) !!}
 							{!! Form::hidden('type', 'membercard') !!}
@@ -117,6 +126,7 @@ $count_membercard = $membercard->count();
 								</div>
 							</div>
 							<br>
+							@endif
 							<small>Preview Front of Member Card</small>
 							<img id="blah" src="{{ asset('img/cards/defaultCard.png') }}" class="img-responsive sampleImge" width="400px" height="250px" style="border-radius: 10px;" />
 							<br>

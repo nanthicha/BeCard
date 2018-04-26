@@ -125,24 +125,50 @@ Route::get('/shop/register', [
 	'uses' => 'ShopController@register']);
 
 //----------ขอมั่วไว้ก่อนนะ---------
-Route::get('/shop/s' , function(){
-	return view('shops.layout');
-});
-Route::get('/shop/show' , function(){
-	return view('shops.show');
-});
-Route::get('/shop/branch' , function(){
-	return view('branch.show');
-});
-Route::get('/shop/cashier' , function(){
-	return view('cashier.show');
-});
+Route::get('/shop' , [
+	'as' => 'shop.index',
+	'uses' => 'ShopController@index'
+]);
+
+Route::get('/shop/show' , [
+	'as' => 'shop.show',
+	'uses' => 'ShopController@show'
+]);
+
+Route::get('/shop/branch' , [
+	'as' => 'shop.branch',
+	'uses' => 'BranchController@show'
+]);
+Route::get('/shop/cashier' , [
+	'as' => 'shop.cashier',
+	'uses' => 'CashierController@show'
+]);
+Route::get('/shop/setting' , [
+	'as' => 'shop.setting',
+	'uses' => 'ShopController@setting']);
+
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',
 	'uses' => 'ShopController@membercard']);
 Route::post('/shop/membercard/create' , [
 	'as' => 'shop.membercard.create',
 	'uses' => 'ShopController@membercardCreate']);
+Route::get('/shop/membercard/{key}/view' , [
+	'as' => 'shop.membercard.view',
+	'uses' => 'ShopController@membercardView']);
+Route::get('/shop/membercard/{key}/edit' , [
+	'as' => 'shop.membercard.edit',
+	'uses' => 'ShopController@membercardEdit']);
+Route::get('/shop/membercard/{key}/print' , [
+	'as' => 'shop.membercard.print',
+	'uses' => 'ShopController@membercardPrint']);
+Route::post('/shop/membercard/update' , [
+	'as' => 'shop.membercard.update',
+	'uses' => 'ShopController@membercardUpdate']);
+Route::get('/join/{key}' , [
+	'as' => 'join',
+	'uses' => 'UserController@joinCard']);
+
 
 Route::post('/shop/branch' , 'BranchController@store');
 Route::post('/shop/cashier' , 'CashierController@store');

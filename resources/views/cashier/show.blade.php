@@ -1,3 +1,6 @@
+<?php
+use Carbon\Carbon;
+?>
 @extends('shops.layout')
 @section('content')
 <div class="container" >
@@ -5,19 +8,19 @@
   <!-- Nav tabs -->
   <ul class="nav nav-tabs"  style="width:100%;z-index: 0;position:relative;">
     <li class="nav-item">
-      <a class="nav-link" href="/shop/show">Shop</a>
+      <a class="nav-link" href="{{ route('shop.show') }}">Shop</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link "   href="/shop/branch">Branchs</a>
+      <a class="nav-link "   href="{{ route('shop.branch') }}">Branchs</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active"   href="/shop/cashier/">Cashiers</a>
+      <a class="nav-link active"   href="{{ route('shop.cashier') }}">Cashiers</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link"   href="#">Member Card</a>
+      <a class="nav-link"   href="{{ route('shop.membercard') }}">Member Card</a>
     </li>
     <li class="nav-item pull-right">
-      <a class="nav-link"   href="#">Setting</a>
+      <a class="nav-link"   href="{{ route('shop.setting') }}">Setting</a>
     </li>
   </ul>
 
@@ -31,29 +34,49 @@
                 <div class="panel-body">
                 <center><h1>Show Cashiers</h1></center>
                 <hr>
-                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary">Add Cashier</button>
+                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:10%">Add Cashier</button>
                 <br><br>
-                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card" style="padding:15px;">
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card" style="padding:15px;">
-                            <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="row">
+                <div style="width:80%;margin: 0 auto;">
+                @foreach ($branches as $index => $branch)
+                   
+                  <h3>Branch: {{$branch->name}}</h3>
+                  <hr>
+                  @if( array_key_exists($branch->id,$countCashiers))
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Image</th>
+                                <th>Username</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Added</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($cashiers as $index => $cashier)
+                          @if($branch->id == $cashier->branch_id)
+                            <tr>
+                                <td>{{ $index+1 }}</td>
+                                <td><img src="{{asset('img/users/'.$imgCashiers[$cashier->username])}}" width="30px" height="30px;" style="border-radius: 50%;"></td>
+                                <td>{{ $cashier->username }}</td>
+                                <td>{{ $cashier->name }}</td>
+                                <td>{{$cashier->email}}</td>
+
+                                <td>{{ Carbon::parse($cashier->created_at)->diffForHumans() }}</td>
+                            </tr>
+                            @endif
+                        @endforeach
+                        </tbody>
+                    </table>
+                    @else
+                      <center><p>No Cashier, Please add Cashier.<p></center>
+                    @endif
+                    <br>
+                    @endforeach
+    </div>
+</div>
 
             </div>
         </div>
@@ -77,6 +100,16 @@
       <form method="POST" action="/shop/cashier" >
           {{ csrf_field() }}
             <div class="form-group">
+            <label for="exampleInputEmail1">Branch name</label>
+            
+              <select name="branch" class="form-control" required>
+              @foreach ($branches as $index => $branch)
+              <option value="{{$branch->id}}">{{$branch->name}}</option>
+              @endforeach
+              </select>
+            </div>
+
+            <div class="form-group">
                 <label for="exampleInputEmail1">Cashier username</label>
                 <input type="input" class="form-control" name="username" placeholder="Enter username" required>
               </div>
@@ -87,7 +120,7 @@
 
               <div class="form-group">
                 <label for="exampleInputEmail1">Cashier email</label>
-                <input type="email" class="form-control" name="email" placeholder="Enter email" required>
+                <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Cashier phone</label>

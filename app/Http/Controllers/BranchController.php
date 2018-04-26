@@ -58,10 +58,16 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        return view('branchs.show');
+    public function show()
+    {   
+        $user = Auth::user()->username;
+        $branches = DB::table('branches')->where('username',$user)->get();
+        $package = DB::table('shops')->where('username',$user)->first()->package;
+        $count = count($branches);
+        // dd(count($branches));
+        return view('branch.show' , [ 'branches' => $branches , 'count' => $count , 'package' => $package]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
