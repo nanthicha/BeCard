@@ -84,9 +84,11 @@ $count_membercard = $membercard->count();
                 		<p></p>
                 		<hr>
                 	    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModal">Create new member card</button>
-
+						
                 	@endif
+					
                 @endif
+				<br>
                 </div>
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

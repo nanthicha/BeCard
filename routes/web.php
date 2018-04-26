@@ -170,8 +170,11 @@ Route::get('/join/{key}' , [
 	'uses' => 'UserController@joinCard']);
 
 
+Route::get('/shop/show/{name}' , 'ShopController@showName');
+Route::get('/shop/branch/{name}' , 'BranchController@showName');
 Route::post('/shop/branch' , 'BranchController@store');
 Route::post('/shop/cashier' , 'CashierController@store');
+
 
 //-----------------------------
 

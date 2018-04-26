@@ -259,4 +259,14 @@ class ShopController extends Controller
     public function register(){
       return view('shops.register');
     }
+
+    public function showName($url){
+        
+        $shop = DB::table('shops')->where('url',$url)->get()->first();
+        if($shop->username == Auth::user()->username){
+            $this->show();
+        }
+        // dd($shop);
+        return view('shops.showUser' , ['shop' => $shop , 'url' => $url]);
+    }
 }

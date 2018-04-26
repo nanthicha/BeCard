@@ -68,6 +68,19 @@ class BranchController extends Controller
         return view('branch.show' , [ 'branches' => $branches , 'count' => $count , 'package' => $package]);
     }
 
+    public function showName($url){
+        $user = Auth::user()->username;
+        $shop = DB::table('shops')->where('url',"=",$url)->first();
+        if($user == $shop->username){
+            $this->show();
+        }
+        $branches = DB::table('branches')->where('shop_id',$shop->id)->get();
+        $package = $shop->package;
+        $count = count($branches);
+        // dd(count($branches));
+        return view('branch.showUser' , [ 'branches' => $branches , 'count' => $count , 'package' => $package , 'url' => $url ]);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -102,4 +115,6 @@ class BranchController extends Controller
     {
         //
     }
+
+
 }
