@@ -32,7 +32,7 @@
                 <center><h1>Show Branchs</h1></center>
                 <hr>
                 <input type="hidden" id="count" value="{{ $count }}">
-                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:4.5%">Add Branch</button>
+                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:4.5%" id="add">Add Branch</button>
                 <br><br>
                     
                         
@@ -212,6 +212,12 @@
 
       init();
       initMap();
+      var package = "{{ $package }}";
+      console.log(package);
+      if(document.getElementById('count').value == 5  && package == "sliver"){
+        // console.log('hello');
+        document.getElementById('add').style.display = 'none';
+      }
     });
     
     function sh(id){
@@ -225,6 +231,8 @@
       }
 
     }
+
+
     
     
 

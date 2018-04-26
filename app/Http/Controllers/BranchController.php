@@ -62,9 +62,10 @@ class BranchController extends Controller
     {   
         $user = Auth::user()->username;
         $branches = DB::table('branches')->where('username',$user)->get();
+        $package = DB::table('shops')->where('username',$user)->first()->package;
         $count = count($branches);
         // dd(count($branches));
-        return view('branch.show' , [ 'branches' => $branches , 'count' => $count]);
+        return view('branch.show' , [ 'branches' => $branches , 'count' => $count , 'package' => $package]);
     }
 
 

@@ -101,12 +101,14 @@ class CashierController extends Controller
         // dd($shop_id);
         $branches = DB::table('branches')->where('username',$user)->get();
         $cashiers = DB::table('cashiers')->where('shop_id',$shop_id)->get();
-        $imgCashiers = DB::table('users')->join('cashiers', 'users.username', '=', 'cashiers.username')
+        $imgCashiers = DB::table('users')->where('shop_id',$shop_id)->join('cashiers', 'users.username', '=', 'cashiers.username')
             ->select('users.username', 'users.image')
             ->get()->pluck('image','username');
-        
-        // dd($imgCashiers);
-        return view('cashier.show' , [  'branches' => $branches , 'cashiers' => $cashiers ,'imgCashiers' => $imgCashiers]);
+        $countCashiers = DB::table('cashiers')->where('shop_id',$shop_id)
+        ->select('branch_id' , DB::raw('COUNT(*) as count'))
+        ->groupBy('branch_id')->get()->pluck('count','branch_id')->toArray();
+
+        return view('cashier.show' , [  'branches' => $branches , 'cashiers' => $cashiers ,'imgCashiers' => $imgCashiers , 'countCashiers' => $countCashiers]);
     }
 
     /**

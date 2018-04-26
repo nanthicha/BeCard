@@ -39,9 +39,10 @@ use Carbon\Carbon;
                 <div class="row">
                 <div style="width:80%;margin: 0 auto;">
                 @foreach ($branches as $index => $branch)
-                
+                   
                   <h3>Branch: {{$branch->name}}</h3>
                   <hr>
+                  @if( array_key_exists($branch->id,$countCashiers))
                     <table class="table">
                         <thead>
                             <tr>
@@ -69,6 +70,9 @@ use Carbon\Carbon;
                         @endforeach
                         </tbody>
                     </table>
+                    @else
+                      <center><p>No Cashier, Please add Cashier.<p></center>
+                    @endif
                     <br>
                     @endforeach
     </div>
