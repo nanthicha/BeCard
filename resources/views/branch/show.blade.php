@@ -116,16 +116,16 @@
 @endsection
 
 @section('js')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbR2fPnPAqOeegpN6ml_SNSMSc7wN613k&libraries=places&callback=initMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbR2fPnPAqOeegpN6ml_SNSMSc7wN613k&libraries=places"></script>
 <script>
-    var map,geocoder,marker;
+   
 
     function initMap() {
-        map = new google.maps.Map(document.getElementById('mapCanvas'), {
+      var map = new google.maps.Map(document.getElementById('mapCanvas'), {
           center: {lat: 13.7563, lng: 100.5018},
           zoom: 15
         });
-        marker = new google.maps.Marker( {
+      var marker = new google.maps.Marker( {
           position: {lat: 13.7563, lng: 100.5018},
           map: map,
           draggable: true
@@ -211,6 +211,7 @@
 
 
       init();
+      initMap();
     });
     
     function sh(id){
