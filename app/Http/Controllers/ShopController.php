@@ -263,6 +263,9 @@ class ShopController extends Controller
     public function showName($url){
        
         $shop = DB::table('shops')->where('url',$url)->get()->first();
+        if($shop == null){
+            return view('errors.pageNotF');
+        }
         if($shop->username == Auth::user()->username){
             return $this->show();
         }

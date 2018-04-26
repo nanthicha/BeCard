@@ -71,6 +71,9 @@ class BranchController extends Controller
     public function showName($url){
         $user = Auth::user()->username;
         $shop = DB::table('shops')->where('url',"=",$url)->first();
+        if($shop == null){
+            return view('errors.pageNotF');
+        }
         if($user == $shop->username){
             return $this->show();
         }
