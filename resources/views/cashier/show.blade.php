@@ -34,7 +34,9 @@ use Carbon\Carbon;
                 <div class="panel-body">
                 <center><h1>Show Cashiers</h1></center>
                 <hr>
+                @if( ($package == 'sliver' and  $count < 15) or $package == 'gold')
                 <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:10%">Add Cashier</button>
+                @endif
                 <br><br>
                 <div class="row">
                 <div style="width:80%;margin: 0 auto;">
@@ -105,7 +107,7 @@ use Carbon\Carbon;
               <select name="branch" class="form-control" required>
               @foreach ($branches as $index => $branch)
               @if( array_key_exists($branch->id,$countCashiers))
-                @if( ($package == "sliver" and $countCashiers[$branch->id] < 5) or $package == "gold")
+                @if( ($package == "sliver" and $countCashiers[$branch->id] < 5 ) or $package == 'gold')
                   <option value="{{$branch->id}}">{{$branch->name}}</option>
                 @endif
               @else
@@ -146,6 +148,9 @@ use Carbon\Carbon;
 
 @section('js')
 <script>
+
+
+
     $(document).ready(function() {
       $(window).keydown(function(event){
         if(event.keyCode == 13) {
@@ -154,6 +159,8 @@ use Carbon\Carbon;
           return false;
         }
       });
+
+      
     });
 
 </script>

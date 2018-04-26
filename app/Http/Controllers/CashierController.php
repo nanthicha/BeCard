@@ -109,8 +109,9 @@ class CashierController extends Controller
         $countCashiers = DB::table('cashiers')->where('shop_id',$shop_id)
         ->select('branch_id' , DB::raw('COUNT(*) as count'))
         ->groupBy('branch_id')->get()->pluck('count','branch_id')->toArray();
-
-        return view('cashier.show' , [  'branches' => $branches , 'cashiers' => $cashiers ,'imgCashiers' => $imgCashiers , 'countCashiers' => $countCashiers ,'package' => $package]);
+        $count = DB::table('cashiers')->count();
+       
+        return view('cashier.show' , [  'branches' => $branches , 'cashiers' => $cashiers ,'imgCashiers' => $imgCashiers , 'countCashiers' => $countCashiers ,'package' => $package , 'count' => $count]);
     }
 
     /**
