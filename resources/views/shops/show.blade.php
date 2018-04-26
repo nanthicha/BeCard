@@ -57,15 +57,15 @@
                       <!-- Wrapper for slides -->
                       <div class="carousel-inner">
                         <div class="item active">
-                          <img src="https://images7.alphacoders.com/411/thumb-1920-411820.jpg" >
+                          <img src="{{asset('img/promotions/defaultPromo.png')}}" >
                         </div>
 
                         <div class="item">
-                          <img src="http://ch20webmaster.com/wp-content/uploads/2018/01/Wallpaper-Full-HD-Ch38u.jpg" >
+                          <img src="{{asset('img/promotions/defaultPromo.png')}}" >
                         </div>
-                      
+
                         <div class="item">
-                          <img src="https://hdwallsource.com/img/2014/5/best-hd-wallpapers-8318-8651-hd-wallpapers.jpg" >
+                          <img src="{{asset('img/promotions/defaultPromo.png')}}" >
                         </div>
                       </div>
 
