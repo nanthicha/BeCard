@@ -23,4 +23,41 @@
     </li>
   </ul>
 
+      <div class="row" >
+        <div class="col-md-12">
+            <div class="panel panel-default" >
+            <div style="padding:30px;">
+            <h1 style="margin-bottom: 20px;"><span class="glyphicon glyphicon-cog"></span> Setting</h1>
+            
+            <div class="row" >
+            <div class="col-sm-3">
+                <ul class="nav nav-pills nav-stacked" style="width:100%;z-index: 0;position:relative;margin-left:-15px;">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">Menu 1</a></li>
+                  <li><a href="#">Menu 2</a></li>
+                  <li><a href="#">Menu 3</a></li>
+                </ul>
+
+             
+
+              <div class="card" style="margin-left: -30px;height: 800px;">
+                <div class="card-body" style="padding:20px;">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+
+            
+
+             
+
+              <div class="clearfix visible-lg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+</div>
+
 @endsection

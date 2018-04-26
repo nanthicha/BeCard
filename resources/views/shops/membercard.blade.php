@@ -34,7 +34,7 @@ $count_membercard = $membercard->count();
             <div class="panel panel-default">
 
                 <div class="panel-body">
-                <center><h2>Member Card of {{$shop->name}}</h2></center>
+                <center><h1>Member Card of {{$shop->name}}</h1></center>
                 <hr>
 				@if (count($errors) > 0)
 				    <div class="alert alert-danger">
