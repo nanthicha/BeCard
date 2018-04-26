@@ -20,7 +20,18 @@ class CashierController extends Controller
     // }
     public function toAdd()
     {
-        return view('cashier.add');
+        if (Auth::user()->role != "Cashier"){
+            return redirect('home');
+        }else{
+            $checkCashier = DB::table('cashiers')->where('username',Auth::user()->username)->first();
+            if ($checkCashier == ""){
+                return view('cashier.no');
+            }else{
+                $shop = DB::table('shops')->where('id',$checkCashier->shop_id)->get();
+                $branch = DB::table('branches')->where('id',$checkCashier->branch_id)->first();
+                return view('cashier.add',['shop'=>$shop,'branch'=>$branch]);
+            }
+        }
     }
     /**
      * Display a listing of the resource.
@@ -66,7 +77,7 @@ class CashierController extends Controller
             'name' => $name,
             'email' => $email,
             'password' => bcrypt($password),
-            'role' => 'cashier',
+            'role' => 'Cashier',
             'private_key' => $private,
             'remember_token' => $remember,
             'phone' => $phone,
@@ -146,5 +157,14 @@ class CashierController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function check()
+    {
+        if (Auth::user()->role != "Cashier"){
+            return redirect('home');
+        }else{
+
+        }
     }
 }

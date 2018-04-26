@@ -107,8 +107,9 @@ input, label {
 
 
 <center>
-  <img src="{{ asset('img/shops/logo/stamp_1524068326.png' )}}" width="100px" class="img-circle img-responsive">
-  <h4>Starbucks Kasetsart University</h4>
+  <img src="{{ asset('img/shops/logo/'.$shop[0]->logo )}}" width="100px" class="img-circle img-responsive">
+  <h4>{{$shop[0]->name}}</h4>
+  <label class="label label-info">{{$branch->name}}</label>
   <p></p>
   <br>
 </center>
@@ -149,7 +150,7 @@ input, label {
             <p>
                 <hr>
             </p>
-            <h3>Member Check</h3>
+            <h3>Member Check <p class="fas fa-spinner" id="busy"></p></h3>
           <div class="form-group" id="statusOut">
             <input  id="nameBeCard" name="nameBeCard" type="text" class="form-control" placeholder="Name of BeCard" disabled="" />
             <p></p>
@@ -199,6 +200,7 @@ input, label {
 <script src="https://dmla.github.io/jsqrcode/src/qr_packed.js"></script>
 <script type="text/javascript">
 $(document).ready(function () {
+  $("#busy").hide();
   var outBTN = document.getElementById("btnStep1").disabled = true;
   var navListItems = $('div.setup-panel div a'),
           allWells = $('.setup-content'),
@@ -263,6 +265,9 @@ function openQRCamera(node) {
                 'message': res,
                 '_token': $('meta[name="csrf-token"]').attr('content'),
             },
+            beforeSend  : function() {
+                  $("#busy").show();
+            },
             success: function(respone)
             {
               if (respone.status == "error"){
@@ -274,6 +279,7 @@ function openQRCamera(node) {
                 outBTN.disabled = false;
                 outForm.classList.add('has-success');
               }
+              $("#busy").hide();
             },
             error: function(error)
             {
@@ -301,6 +307,9 @@ $("#telephone").on('keyup', function check(){
           'message': $('input[id="telephone"]').val(),
           '_token': $('meta[name="csrf-token"]').attr('content'),
       },
+      beforeSend  : function() {
+            $("#busy").show();
+      },
       success: function(respone)
       {
         if (respone.status == "error"){
@@ -312,6 +321,7 @@ $("#telephone").on('keyup', function check(){
           outBTN.disabled = false;
           outForm.classList.add('has-success');
         }
+        $("#busy").hide();
       },
       error: function(error)
       {

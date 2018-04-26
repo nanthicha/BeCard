@@ -56,6 +56,7 @@ use Carbon\Carbon;
                                 <th>Username</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Password</th>
                                 <th>Added</th>
                             </tr>
                         </thead>
@@ -68,7 +69,7 @@ use Carbon\Carbon;
                                 <td>{{ $cashier->username }}</td>
                                 <td>{{ $cashier->name }}</td>
                                 <td>{{$cashier->email}}</td>
-
+                                <td>{{$cashier->password}}</td>
                                 <td>{{ Carbon::parse($cashier->created_at)->diffForHumans() }}</td>
                             </tr>
                             @endif

@@ -26,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->role == "Cashier"){
+            return redirect(route('cashier.add'));
+        }
         $membercard = DB::table('membercards')->get();
         $shop_url = DB::table('shops')->get()->pluck('url','id');
         return view('home',['membercard'=>$membercard , 'shop_url' => $shop_url]);
