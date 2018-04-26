@@ -257,10 +257,10 @@
   width: auto;
 }
 
-/* .carousel-control.left,
+.carousel-control.left,
 .carousel-control.right {
   background-image: none;
-} */
+}
 
 .nav-tabs .nav-item.show .nav-link,.nav-tabs .nav-link.active{
     color:#495057;

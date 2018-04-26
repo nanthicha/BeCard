@@ -27,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $membercard = DB::table('membercards')->get();
-        return view('home',['membercard'=>$membercard]);
+        $shop_url = DB::table('shops')->get()->pluck('url','id');
+        return view('home',['membercard'=>$membercard , 'shop_url' => $shop_url]);
     }
 }

@@ -91,8 +91,8 @@ Click to swape <span class="fas fa-angle-double-right"></span>
             </div>
         </div>
         <div class="col-lg-7">
-            <h4><b>{{ $card->name }}</b></h4>
-            <img src="{{asset('img/shops/logo/'.$shop->logo)}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;">
+            <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><h4><b>{{ $card->name }}</b></h4></a>
+            <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><img src="{{asset('img/shops/logo/'.$shop->logo)}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;"></a>
             <p>{{ $card->description }}</p>
             <p>Condition : <label class="label label-info">{{ $card->bahtperpoint }} Baht / 1 Point</label></p>
             <p></p>
