@@ -40,7 +40,7 @@ use Carbon\Carbon;
                 <div style="width:80%;margin: 0 auto;">
                 @foreach ($branches as $index => $branch)
                 
-                  <h3>{{$branch->name}}</h3>
+                  <h3>Branch: {{$branch->name}}</h3>
                   <hr>
                     <table class="table">
                         <thead>
@@ -95,6 +95,16 @@ use Carbon\Carbon;
             <!-- content goes here -->
       <form method="POST" action="/shop/cashier" >
           {{ csrf_field() }}
+            <div class="form-group">
+            <label for="exampleInputEmail1">Branch name</label>
+            
+              <select name="branch" class="form-control" required>
+              @foreach ($branches as $index => $branch)
+              <option value="{{$branch->id}}">{{$branch->name}}</option>
+              @endforeach
+              </select>
+            </div>
+
             <div class="form-group">
                 <label for="exampleInputEmail1">Cashier username</label>
                 <input type="input" class="form-control" name="username" placeholder="Enter username" required>

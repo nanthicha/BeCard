@@ -251,4 +251,8 @@ class ShopController extends Controller
         $memberOfCard = DB::table('user_cards')->where('card_id',$card->id)->orderBy('id','desc')->get();
         return view('shops.membercardView',['card'=>$card,'memberOfCard'=>$memberOfCard]);
     }
+
+    public function setting(){
+        return view('shops.setting');
+    }
 }

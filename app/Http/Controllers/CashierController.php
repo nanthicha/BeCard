@@ -59,7 +59,7 @@ class CashierController extends Controller
         $remember = str_random(40);
         $phone = request()->phone;
         $shop_id = DB::table('shops')->where('username',"=",$usr)->first()->id;
-        $branch_id = DB::table('branches')->where('shop_id',"=",$shop_id)->first()->id;
+        $branch_id = $request->branch;
 
         User::create([
             'username' => $username,

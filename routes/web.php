@@ -141,8 +141,7 @@ Route::get('/shop/cashier' , [
 ]);
 Route::get('/shop/setting' , [
 	'as' => 'shop.setting',
-	'uses' => 'CashierController@show'
-]);
+	'uses' => 'ShopController@setting']);
 
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',
@@ -165,6 +164,7 @@ Route::post('/shop/membercard/update' , [
 Route::get('/join/{key}' , [
 	'as' => 'join',
 	'uses' => 'UserController@joinCard']);
+
 
 Route::post('/shop/branch' , 'BranchController@store');
 Route::post('/shop/cashier' , 'CashierController@store');
