@@ -52,7 +52,7 @@ class ShopController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {
         // dd($request->all());
         $imageName = 'default.jpg';
         $username = request()->username;
@@ -175,5 +175,9 @@ class ShopController extends Controller
         ]);
 
         return view('shops.membercard');
+    }
+
+    public function register(){
+      return view('shops.register');
     }
 }

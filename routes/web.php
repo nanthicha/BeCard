@@ -119,6 +119,10 @@ Route::get('/shop/create/{id}', [
 Route::post('/shop/create', [
 	'as' => 'shop.create.post',
 	'uses' => 'ShopController@store']);
+//--------ศรัทธา ใส่ register เพิ่ม------------
+Route::get('/shop/register', [
+	'as' => 'shop.register',
+	'uses' => 'ShopController@register']);
 
 //----------ขอมั่วไว้ก่อนนะ---------
 Route::get('/shop/s' , function(){
