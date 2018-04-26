@@ -190,10 +190,12 @@
       }
       
       var phone = document.getElementById('inPhone').value;
-
+      if(phone.length > 4){
       var result = phone.slice(0,3) + '-' + phone.slice(3,6) + '-' + phone.slice(6);
-      
       $('#phone').text(result);
+      }else{
+        $('#phone').text(phone);
+      }
         
       var time = document.getElementById('time').value.split(',');
       $('#open').text(time[0]);
