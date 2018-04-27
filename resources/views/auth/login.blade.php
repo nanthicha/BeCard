@@ -1,24 +1,12 @@
 @extends('layouts.app')
 
-@section('content')
-@endsection
-</html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+@section('css')
 <style>
 .register-account{
-        background: url(http://cdn.paper4pc.com/images/grunge-texture-wallpaper-5.jpg) no-repeat center top;
+
         background-color: transparent;
-        background-image: url(http://cdn.paper4pc.com/images/grunge-texture-wallpaper-5.jpg);
+
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center top;
@@ -374,47 +362,51 @@ form#login-form::before {
 }
 
 </style>
-</head>
-<body>
-<body id="myId">
-  <section class="register-account">
-        <div class="signform">
-          <div class="left"><a href="#" style="float:right;margin-right:35px;font-size: 0.9em;" class="bts-a">Don't have an account? Sign up!</a>
-            <div class="bts">
-              <a href="#" class="fblogin social"><i class="fa fa-facebook"></i><span>Sign in with Facebook</span></a>
-               <a href="#" class="twlogin social"><i class="fa fa-twitter"></i><span>Sign in with Twitter</span></a>
-              <a href="#" class="gplogin social"><i class="fa fa-google-plus"></i><span>Sign in with Google</span></a>
-            </div>
-          </div>
-          <div class="right">
-              <div class="headit">
-                <h4>Login To Your Account</h4>
-              </div>
-              <div class="form">
-                <form class="login-form" id="login-form">
-                  <input id="identity" type="identity" class="form-control" name="identity" value="{{ old('identity') }}" required autofocus>
+@endsection
 
-                  @if ($errors->has('identity'))
-                      <span class="help-block">
-                          <strong>{{ $errors->first('identity') }}</strong>
-                      </span>
-                  @endif
-                  <input id="password" type="password" class="form-control" name="password" required>
-
-                  @if ($errors->has('password'))
-                      <span class="help-block">
-                          <strong>{{ $errors->first('password') }}</strong>
-                      </span>
-                  @endif
-                    <input class="subbt" type="submit" value="Sign In" style="border:none;"/>
-                </form>
-
-                <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}><span style="color:#b6b6b6;font-size: 0.9em;"> Remember Me</span><a href="{{ route('password.request') }}">Forgot your password?</a>
-
-              </div>
+@section('content')
+<section class="register-account" style="margin-top:-100px;">
+      <div class="signform">
+        <div class="left"><a href="#" style="float:right;margin-right:35px;font-size: 0.9em;" class="bts-a">Don't have an account? Sign up!</a>
+          <div class="bts">
+            <a href="#" class="fblogin social"><i class="fa fa-facebook"></i><span>Sign in with Facebook</span></a>
+             <a href="#" class="twlogin social"><i class="fa fa-twitter"></i><span>Sign in with Twitter</span></a>
+            <a href="#" class="gplogin social"><i class="fa fa-google-plus"></i><span>Sign in with Google</span></a>
           </div>
         </div>
-  </section>
+        <div class="right">
+            <div class="headit">
+              <h4>Login To Your Account</h4>
+            </div>
+            <div class="form">
+              <form class="login-form" id="login-form"  method="POST" action="{{ route('login') }}" >
+                {{ csrf_field() }}
+                <input id="identity" type="identity" class="form-control" name="identity" value="{{ old('identity') }}" required autofocus>
+
+                @if ($errors->has('identity'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('identity') }}</strong>
+                    </span>
+                @endif
+                <input id="password" type="password" class="form-control" name="password" required>
+
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+                  <input class="subbt" type="submit" value="Sign In" style="border:none;"/>
+              </form>
+
+              <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}><span style="color:#b6b6b6;font-size: 0.9em;"> Remember Me</span><a href="{{ route('password.request') }}">Forgot your password?</a>
+
+            </div>
+        </div>
+      </div>
+</section>
+@endsection
+
+
 <!-- <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -480,5 +472,3 @@ form#login-form::before {
         </div>
     </div>
 </div> -->
-</body>
-</html>
