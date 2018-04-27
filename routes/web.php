@@ -122,10 +122,10 @@ Route::post('/shop/create', [
 //--------ศรัทธา ใส่ register เพิ่ม------------
 Route::get('/shop/register', [
 	'as' => 'shop.register',
-	'uses' => 'ShopController@register']);
+	'uses' => 'EntrepreneurController@register']);
   Route::post('/shop/register', [
   	'as' => 'shop.regiter.post',
-  	'uses' => 'ShopController@sendmail']);
+  	'uses' => 'EntrepreneurController@storeEntrepreneur']);
 
 //----------ขอมั่วไว้ก่อนนะ---------
 Route::get('/shop' , [
@@ -159,7 +159,7 @@ Route::get('/shop/setting/promotion' ,[
 	'as' => 'shop.setting.promotion',
 	'uses' => 'ShopController@settingPT'
 	]);
-	
+
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',
 	'uses' => 'ShopController@membercard']);

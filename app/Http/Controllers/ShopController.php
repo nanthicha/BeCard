@@ -268,13 +268,6 @@ class ShopController extends Controller
         return view('shops.setting', [ 'shop' => $shop , 'type' => $type ]);
     }
 
-    public function register(){
-      return view('shops.register');
-    }
-
-    public function sendmail(){
-      return view('shops.show');
-    }
 
     public function showName($url){
 
@@ -331,11 +324,11 @@ class ShopController extends Controller
             $file->move($path, $imageName);
 
             $shop = DB::table('shops')->where('username' , Auth::user()->username )->update([
-        
-                
+
+
                 'logo' => $imageName
             ]);
-            
+
         }else if($request->type == "cover"){
 
             $file = request()->file('image');
@@ -344,8 +337,8 @@ class ShopController extends Controller
             $file->move($path, $imageName);
 
             $shop = DB::table('shops')->where('username' , Auth::user()->username )->update([
-        
-                
+
+
                 'imgCover' => $imageName
             ]);
         }
@@ -368,13 +361,13 @@ class ShopController extends Controller
         $shop_id = DB::table('shops')->where('username' , Auth::user()->username)->first()->id;
         Promotion::create([
             'shop_id' => $shop_id ,
-            'image' => $imageName , 
+            'image' => $imageName ,
             'url' => "null"
             ]);
 
         return redirect('/shop/setting/promotion');
     }
-    
+
     public function settingPT(){
         $shop = DB::table('shops')->where('username', Auth::user()->username)->first();
         $promotions = DB::table('promotions')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();

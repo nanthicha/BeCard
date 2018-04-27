@@ -8,13 +8,26 @@
                 <div class="panel-heading">Create BeCard Entrepreneur</div>
                     <div class="panel-body">
 
-                        <form class="form-horizontal" method="POST" action="{{ Route('shop.create.entrepreneur') }}"  >
-                        <div class="row">
-                            <!-- <div class="col-lg-8"> -->
-                                    <input type="hidden" name="_token" value="ItfC94DvBVXTzvO2szIZ2aFJUb8feKULNzwxIPIq">
+
+                                <div class="row">
+                                  <form class="form-horizontal" method="POST" action="{{ Route('shop.regiter.post') }}"  >
+                                    {{ csrf_field() }}
+                                      <!-- <div class="col-lg-8"> -->
+
+                                    
                                     <table class="table table-hover">
                                     <tbody>
                                     <tr><center><h3>Create new Entrepreneur</h3></center></tr>
+
+                                    <tr><td>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Userename</label>
+                                        <div class="col-md-6">
+                                            <input id="name" type="text" class="form-control" name="username" placeholder="Enter Username"required>
+                                        </div>
+                                    </div>
+                                    </td></tr>
+
                                     <tr><td>
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Entrepreneur Name</label>
@@ -93,5 +106,5 @@
                         </div>
                     </div>
                 </div>
-            <!-- </div> -->
+            </div>
 @endsection
