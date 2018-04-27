@@ -116,7 +116,7 @@ $count_shops = 0;
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Shop E-mail</label>
                                         <div class="col-md-6">
-                                            <input  type="text" class="form-control" name="email" placeholder="Enter E-mail"required>
+                                            <input  type="email" class="form-control" name="email" placeholder="Enter E-mail"required>
                                         </div>
                                     </div>
                                     </td></tr>

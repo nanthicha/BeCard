@@ -49,15 +49,16 @@
                   <hr>
                   <img src="{{ asset('img/shops/image/cog3.png') }}" class="img-responsive pull-right" width="150" height="150" style="margin-top:-120px;" >
                   <br>
-                  <form class="form-horizontal" method="POST" action="" >
+                  <form class="form-horizontal" method="POST" action="{{ route('shop.update.general') }} " >
                     {{ csrf_field() }}
+                    {{ method_field('PUT') }}
                     <table class="table">
                       <tbody>
                         <tr>
                         <div class="form-group">
                               <label class="col-md-3 control-label">Shop Name</label>
                                   <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" placeholder="Enter name"required>
+                                    <input id="name" type="text" class="form-control" name="name" placeholder="Enter name" value="{{$shop->name}}" required>
                                   </div>
                         </div>
                         
@@ -67,7 +68,7 @@
                         <div class="form-group" style="margin-top:20px;">
                               <label  class="col-md-3 control-label">Shop Description</label>
                               <div class="col-md-6">
-                                <textarea rows="7" cols="45" name="desc" class="form-control" placeholder="Enter text here..."></textarea>
+                                <textarea rows="7" cols="45" name="desc" class="form-control" placeholder="Enter text here...">{{ $shop->description }}</textarea>
                               </div>
                         </div>
                         </tr>
@@ -76,7 +77,7 @@
                         <div class="form-group" style="margin-top:20px;">
                             <label class="col-md-3 control-label">Shop Phone</label>
                             <div class="col-md-6">
-                              <input  type="text" class="form-control" name="phone" placeholder="Enter Phone"required>
+                              <input  type="text" class="form-control" name="phone" placeholder="Enter Phone" value="{{ $shop->phone }}" required>
                             </div>
                         </div>
                         </tr>
@@ -85,7 +86,7 @@
                         <div class="form-group" style="margin-top:20px;">
                             <label class="col-md-3 control-label">Shop E-mail</label>
                             <div class="col-md-6">
-                              <input  type="text" class="form-control" name="email" placeholder="Enter E-mail"required>
+                              <input  type="email" class="form-control" name="email" placeholder="Enter E-mail" value="{{ $shop->email }}" required>
                             </div>
                         </div>
                         </tr>
@@ -94,7 +95,7 @@
                         <div class="form-group" style="margin-top:20px;">
                             <label class="col-md-3 control-label">Shop Url</label>
                             <div class="col-md-6">
-                              <input  type="text" class="form-control" name="url" placeholder="Enter Url"required>
+                              <input  type="text" class="form-control" name="url" placeholder="Enter Url" value="{{ $shop->url }}" required>
                             </div>
                         </div>
                         </tr>
@@ -103,7 +104,7 @@
                         <div class="form-group" style="margin-top:20px;">
                             <label class="col-md-3 control-label">Shop Package</label>
                             <div class="col-md-6">
-                              <input  type="text" class="form-control" name="url" placeholder="Enter Url" value="gold" disabled>
+                              <input  type="text" class="form-control" name="url" placeholder="Enter Url" value="{{ $shop->package }}" disabled>
                             </div>
                         </div>
                         </tr>
@@ -113,12 +114,13 @@
                           <label  class="col-md-3 control-label">Business Type</label>
                             <div class="col-md-6" >
                               <select name="type" class="form-control" required>
-                              <option value="beauty">Beauty</option>
-                              <option value="clothes">Clothes</option>
-                              <option value="drink">Drink</option>
-                              <option value="food">Food</option>
-                              <option value="jewellery">Jewellery</option>
-                              <option value="service">Service</option>
+                              @foreach($type as $key => $value) 
+                              @if($key == $shop->type)
+                              <option value="{{ $key }}" selected>{{ $value }}</option>
+                              @else
+                              <option value="{{ $key }}">{{ $value }}</option>
+                              @endif
+                              @endforeach
                               </select>
                             </div>
                           </div>
@@ -127,9 +129,9 @@
                         <tr>
                         <div class="form-group" style="margin-top:20px;">
                           <label  class="col-md-3 control-label">Business Hours</label>
-                            <div class="col-md-6">
+                            <div class="col-md-8">
                             <div id="time">
-                                <div class="col-md-5">
+                                <div class="col-md-5" style="margin-left:-15px;">
                                   <input id="timepicker1" width="100%"  name="timeOpen" required> 
                                 </div>
                                 <div class="col-md-1">
@@ -154,6 +156,7 @@
                           </div>
                           </tr>
 
+                          <hr>
                           <tr>
                             <div class="form-group" style="margin-top:20px;">
                             <div class="col-md-8 col-md-offset-3">
@@ -193,14 +196,16 @@
 
 <script>
     var map,geocoder,marker;
-
+    var latlng = "{{ $shop->latlng }}".split(',',2);
+    var ltng = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
+    console.log(latlng);
     function initMap() {
         map = new google.maps.Map(document.getElementById('mapCanvas'), {
-          center: {lat: 13.7563, lng: 100.5018},
+          center: {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])},
           zoom: 15
         });
         marker = new google.maps.Marker( {
-          position: {lat: 13.7563, lng: 100.5018},
+          position: {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])},
           map: map,
           draggable: true
         });
@@ -226,7 +231,20 @@
           $('#lat').val(lat);
           $('#lng').val(lng);
       });
-
+      
+      var geocoder = new google.maps.Geocoder;
+        geocoder.geocode({'location': ltng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              console.log(results[0].formatted_address);
+            $('#searchMap').val(results[0].formatted_address);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
 
         
       }
@@ -237,6 +255,10 @@
     $('#timepicker2').timepicker({
         uiLibrary: 'bootstrap'
     });
+
+    var times = "{{ $shop->time }}".split(',', 2);
+    $('#timepicker1').val(times[0]);
+    $('#timepicker2').val(times[1]);
 
     // $(document).keypress(function(e) {
     // if(e.keyCode === 32 && e.target.nodeName=='BODY') {

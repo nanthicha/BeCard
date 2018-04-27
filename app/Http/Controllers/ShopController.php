@@ -252,8 +252,18 @@ class ShopController extends Controller
         return view('shops.membercardView',['card'=>$card,'memberOfCard'=>$memberOfCard]);
     }
 
-    public function setting(){
-        return view('shops.setting');
+    public function settingGen(){
+        $shop = DB::table('shops')->where('username', Auth::user()->username)->first();
+        $type = [
+            "beauty" => 'Beauty',
+            "clothes" => 'Clothes',
+            'drink' => 'Drink',
+            'food' => 'Food',
+            'jewellery' => 'Jewellery',
+            'service' => 'Service'
+        ];
+
+        return view('shops.setting', [ 'shop' => $shop , 'type' => $type ]);
     }
 
     public function register(){
@@ -275,6 +285,10 @@ class ShopController extends Controller
 
     public function reward(){
         return view('shops.reward');
+    }
+
+    public function updateGen(){
+        dd("Hello World");
     }
 
 

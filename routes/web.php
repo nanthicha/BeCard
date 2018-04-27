@@ -145,7 +145,7 @@ Route::get('/shop/cashier' , [
 ]);
 Route::get('/shop/setting' , [
 	'as' => 'shop.setting',
-	'uses' => 'ShopController@setting']);
+	'uses' => 'ShopController@settingGen']);
 
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',
@@ -178,6 +178,10 @@ Route::get('/shop/show/{name}' , 'ShopController@showName');
 Route::get('/shop/branch/{name}' , 'BranchController@showName');
 Route::post('/shop/branch' , 'BranchController@store');
 Route::post('/shop/cashier' , 'CashierController@store');
+Route::put('/shop/update/general' ,[
+	'as' => 'shop.update.general',
+	'uses' => 'ShopController@updateGen'
+]);
 
 
 //-----------------------------
