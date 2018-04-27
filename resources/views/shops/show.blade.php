@@ -37,8 +37,9 @@
                     <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive">
                     <img src="{{ asset('img/shops/logo/'.$shop->logo) }}" class="img-thumbnail center-block" style="width:200px;height:auto;top:-60px;position:relative;">
                     
-                    <div style="margin-top:-40px;">
+                    <div style="margin-top:-62px;">
                     <center>
+                    <p class="card-text"><h2><b>{{$shop->name}}</b></h2></p>
                     <p class="card-text">Description: &nbsp;{{$shop->description}}</p>
                     <p class="card-text"><span class="label label-success"><span class="glyphicon glyphicon-earphone"></span> Phone</span>&nbsp;<span id="phone"></span> &nbsp&nbsp &nbsp&nbsp <span class="label label-primary"><span class="glyphicon glyphicon-envelope" ></span> Email</span> &nbsp;{{$shop->email}}</p>
                     

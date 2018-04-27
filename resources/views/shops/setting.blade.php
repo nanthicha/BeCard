@@ -53,8 +53,9 @@
                       <span style="font-size:25px;"><sup >Off&nbsp</sup></span>
                  
                   <label class="switch" >
-                          <input type="checkbox" id="status" value="{{$shop->status}}" onclick="changeVal()" form="form" name="status" checked>
+                          <input type="checkbox"  id="status1"  onclick="changeVal()"  name="status" checked>
                           <span  class="slider round"></span>
+                          <input type="hidden"  id="status" name="status" value="{{$shop->status}}" form="form">
                   </label>
                   <span style="font-size:25px;"><sup >&nbspOn</sup></span>
                   </div>
@@ -184,8 +185,8 @@
                       
                       </tbody>
                     </table>
-                    <input type="hidden" id="lat" value="13.7563" name="lat">
-                    <input type="hidden" id="lng" value="100.5018" name="lng">
+                    <input type="hidden" id="lat"  name="lat">
+                    <input type="hidden" id="lng"  name="lng">
                   </form>
                 </div>
               </div>
@@ -206,7 +207,7 @@
 <script>
                     var status = "{{ $shop->status }}";
                     if(status == "off"){
-                      document.getElementById("status").checked = false;
+                      document.getElementById("status1").checked = false;
 
                     }
                   </script>
@@ -221,7 +222,7 @@
 <script>
     var status = "{{ $shop->status }}";
       if(status == "off"){
-        document.getElementById("status").checked = false;
+        document.getElementById("status1").checked = false;
 
       }
 
@@ -235,6 +236,8 @@
     }
     var map,geocoder,marker;
     var latlng = "{{ $shop->latlng }}".split(',',2);
+    $('#lat').val(latlng[0]);
+    $('#lng').val(latlng[1]);
     var ltng = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
     console.log(latlng);
     function initMap() {
@@ -301,7 +304,15 @@
     $('#timepicker2').val(times[1]);
 
  
-
+ $(document).ready(function() {
+      $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+      });
+        });
     // $(document).keypress(function(e) {
     // if(e.keyCode === 32 && e.target.nodeName=='BODY') {
     //     event.preventDefault(); //prevent default if it is body

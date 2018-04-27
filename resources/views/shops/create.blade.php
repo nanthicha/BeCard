@@ -267,6 +267,16 @@ $count_shops = 0;
         uiLibrary: 'bootstrap'
     });
 
+        $(document).ready(function() {
+      $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+      });
+        });
+
     // $(document).keypress(function(e) {
     // if(e.keyCode === 32 && e.target.nodeName=='BODY') {
     //     event.preventDefault(); //prevent default if it is body
