@@ -1,5 +1,6 @@
 @extends('shops.layout')
 @section('content')
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,19 +13,6 @@
     <link href="http://127.0.0.1:8000/css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="http://127.0.0.1:8000/css/header.css">
 
-
-<style type="text/css">
-     #mapCanvas {
-        width: 450px;
-        height: 300px;
-      }
-      #searchMap{
-          width:450px;
-      }
-      .time , #timepicker1 , #timepicker2{
-    display: inline-block;
-}
-</style>
 
 </head>
 <body>
@@ -84,18 +72,16 @@
     </div>
     <div id="app">
         <div class="spaceHeader"></div>
-        <div class="container">
-    <div class="row">
+        <!-- <div class="container"> -->
+    <div class="container">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">Create BeCard Entrepreneur</div>
                     <div class="panel-body">
 
-<!--  -->
-                        <form class="form-horizontal" method="POST" action="http://127.0.0.1:8000/shop/create" enctype="multipart/form-data" >
+                        <form class="form-horizontal" method="POST" action="http://127.0.0.1:8000/shop/register" enctype="multipart/form-data" >
                         <div class="row">
-                            <div class="col-lg-8">
-                                <!-- <form class="form-horizontal" method="POST" action="/shop" > -->
+                            <!-- <div class="col-lg-8"> -->
                                     <input type="hidden" name="_token" value="ItfC94DvBVXTzvO2szIZ2aFJUb8feKULNzwxIPIq">
                                     <table class="table table-hover">
                                     <tbody>
@@ -161,7 +147,9 @@
                                     <tr><td>
                                     <div class="form-group">
                                         <div class="col-md-8 col-md-offset-4">
+                                          <div class="col-lg-8 col-md-offset-2">
                                             <button id="myInput" type="submit" class="btn btn-primary">Submit</button>
+                                          </div>
                                         </div>
                                     </div>
                                     </td></tr>
@@ -173,7 +161,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            <!-- </div> -->
         </div>
     </div>
 </div>

@@ -212,6 +212,15 @@ Route::get('/shop/promotion/{id}' , 'ShopController@deletePT');
 Route::get('/cashier/add', [
 	'as' => 'cashier.add',
 	'uses' => 'CashierController@toAdd']);
+Route::get('/cashier/yes', [
+	'as' => 'cashier.yes',
+	'uses' => 'CashierController@yes']);
+Route::post('/cashier/add/store', [
+	'as' => 'cashier.add.store',
+	'uses' => 'CashierController@addData']);
+Route::get('/cashier/history', [
+	'as' => 'cashier.history',
+	'uses' => 'CashierController@history']);
 
 
 //API

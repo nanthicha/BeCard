@@ -14,7 +14,7 @@
     @yield('css')
 </head>
 <body>
-    
+
     <div class="nav">
       <div class="nav__inner">
         <div class="nav__logo">
@@ -46,14 +46,16 @@
                             <span class="fab fa-gg-circle"></span> BePoint : <b >{{ Auth::user()->bePoint }}</b></p></a>
                         </center>
                         </li>
-                        
+
                         @if (Auth::user()->role == "Admin")
                         <hr>
                         <li><a href="/admin/dashboard">Admin Dashboard</a></li>
                         <li><a href="{{ route('shop.index') }}">Shop</a></li>
                         @elseif (Auth::user()->role == "Entrepreneur" )
-                        <hr>                        
+                        <hr>
                         <li><a href="{{ route('shop.index') }}">Shop</a></li>
+                        @elseif (Auth::user()->role == "User")
+                        <li><a href="{{ route('shop.register') }}">Create Enterpreneur</a></li>
                         @endif
 
                         <hr>
