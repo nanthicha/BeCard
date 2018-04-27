@@ -125,9 +125,6 @@
               text-decoration: none;
             }
 
-            /*
-             * Dummy devices (replace them with your own or something else entirely!)
-             */
 
             .product-device {
               position: absolute;
@@ -161,19 +158,13 @@
               background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
               background-color: #e5e5e5;
 
-                       }
-
-
-            /*
-             * Extra utilities
-             */
+              }
 
             .border-top { border-top: 1px solid #e5e5e5; }
             .border-bottom { border-bottom: 1px solid #e5e5e5; }
 
             .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-            /*  background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
-*/
+          
              }
 
             .flex-equal > * {
