@@ -20,6 +20,20 @@
                 height: 100vh;
                 margin: 0;
             }
+            .bnk {background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
+            }
+
+
+            .starbuck {background-image: url("http://127.0.0.1:8000/img/cards/6_1524574747.png");
+            }
+            .kfc {background-image: url("http://127.0.0.1:8000/img/cards/8_1524662081.png");
+            }
+
+
+            .rcorners {
+              border-radius: 15px 50px 30px;
+              background: #73AD21;
+              }
 
             .full-height {
                 height: 100vh;
@@ -146,7 +160,8 @@
               left: 5%;
               background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
               background-color: #e5e5e5;
-            }
+
+                       }
 
 
             /*
@@ -156,7 +171,10 @@
             .border-top { border-top: 1px solid #e5e5e5; }
             .border-bottom { border-bottom: 1px solid #e5e5e5; }
 
-            .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+            .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+            /*  background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
+*/
+             }
 
             .flex-equal > * {
               -ms-flex: 1;
@@ -171,7 +189,9 @@
               }
             }
 
-            .overflow-hidden { overflow: hidden; }
+            .overflow-hidden {
+              overflow: hidden;
+            }
         </style>
     </head>
     <body>
@@ -208,48 +228,49 @@
         </div>
 
         <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-          <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+          <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white rcorners overflow-hidden ">
             <div class="my-3 py-3">
               <h2 class="display-5">Another headline</h2>
               <p class="lead">And an even wittier subheading.</p>
+
             </div>
-            <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+            <div class="bg-light box-shadow mx-auto bnk" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
-          <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+          <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center rcorners overflow-hidden">
             <div class="my-3 p-3">
               <h2 class="display-5">Another headline</h2>
               <p class="lead">And an even wittier subheading.</p>
             </div>
-            <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+            <div class="bg-light box-shadow mx-auto starbuck" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
         </div>
 
         <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-          <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+          <div class="bg-danger mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center rcorners overflow-hidden">
             <div class="my-3 p-3">
               <h2 class="display-5">Another headline</h2>
               <p class="lead">And an even wittier subheading.</p>
             </div>
-            <div class="bg-dark box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+            <div class="bg-light box-shadow mx-auto " style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
-          <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+          <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white rcorners overflow-hidden">
             <div class="my-3 py-3">
               <h2 class="display-5">Another headline</h2>
               <p class="lead">And an even wittier subheading.</p>
             </div>
-            <div class="bg-light box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+            <div class="bg-light box-shadow mx-auto kfc" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
         </div>
 
         <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-          <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+          <div class="bg-warning mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center rcorners overflow-hidden">
             <div class="my-3 p-3">
               <h2 class="display-5">Another headline</h2>
               <p class="lead">And an even wittier subheading.</p>
             </div>
             <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
-          <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+          <div class="bg-secondary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center rcorners overflow-hidden">
             <div class="my-3 py-3">
               <h2 class="display-5">Another headline</h2>
               <p class="lead">And an even wittier subheading.</p>
@@ -258,22 +279,86 @@
           </div>
         </div>
 
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-          <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-            <div class="my-3 p-3">
-              <h2 class="display-5">Another headline</h2>
-              <p class="lead">And an even wittier subheading.</p>
+        <div class="flex-center position-ref full-height">
+            <div class="content" >
+                <div class="title m-b-md">
+                    Laravel
+                </div>
+                <div class="links">
+                    <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
             </div>
-            <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-          </div>
-          <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-            <div class="my-3 py-3">
-              <h2 class="display-5">Another headline</h2>
-              <p class="lead">And an even wittier subheading.</p>
+        </div>
+        <div class="flex-center position-ref full-height">
+          <div class="container">
+            <div class="card-deck mb-3 text-center font-weight-bold">
+              <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-bold">1111</h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">111 <small class="text-muted">111</small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>111</li>
+                    <li>1111</li>
+                    <li>1111</li>
+                    <li>1111</li>
+                  </ul>
+                  <button type="button" class="btn btn-lg btn-block btn-primary font-weight-bold">1111</button>
+                </div>
+              </div>
+              <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-bold">2222</h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">222 <small class="text-muted">222</small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>2222</li>
+                    <li>22222</li>
+                    <li>222</li>
+                    <li>2222</li>
+                  </ul>
+                  <button type="button" class="btn btn-lg btn-block btn-primary font-weight-bold">Get started</button>
+                </div>
+              </div>
+              <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-bold">3333</h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">3333 <small class="text-muted">333</small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>333</li>
+                    <li>3333</li>
+                    <li>3333</li>
+                    <li>3333</li>
+                  </ul>
+                  <button type="button" class="btn btn-lg btn-block btn-primary font-weight-bold">3333</button>
+                </div>
+              </div>
             </div>
-            <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
         </div>
+        <div class="flex-center position-ref full-height">
+            <div class="content">
+                <div class="title m-b-md">
+                    Laravel
+                </div>
+                <div class="links">
+                    <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="https://laravel-news.com">News</a>
+                    <a href="https://forge.laravel.com">Forge</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                </div>
+            </div>
+        </div>
+
 
         <footer class="container py-5">
           <div class="row">
@@ -322,84 +407,5 @@
           </div>
         </footer>
 
-        <!-- <div class="flex-center position-ref full-height">
-            <div class="content" >
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-        <div class="flex-center position-ref full-height">
-          <div class="container">
-            <div class="card-deck mb-3 text-center font-weight-bold">
-              <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                  <h4 class="my-0 font-weight-bold">Free</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">$0 <small class="text-muted">/ mo</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>10 users included</li>
-                    <li>2 GB of storage</li>
-                    <li>Email support</li>
-                    <li>Help center access</li>
-                  </ul>
-                  <button type="button" class="btn btn-lg btn-block btn-outline-primary font-weight-bold">Sign up for free</button>
-                </div>
-              </div>
-              <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                  <h4 class="my-0 font-weight-bold">Pro</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>20 users included</li>
-                    <li>10 GB of storage</li>
-                    <li>Priority email support</li>
-                    <li>Help center access</li>
-                  </ul>
-                  <button type="button" class="btn btn-lg btn-block btn-primary font-weight-bold">Get started</button>
-                </div>
-              </div>
-              <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                  <h4 class="my-0 font-weight-bold">Enterprise</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>30 users included</li>
-                    <li>15 GB of storage</li>
-                    <li>Phone and email support</li>
-                    <li>Help center access</li>
-                  </ul>
-                  <button type="button" class="btn btn-lg btn-block btn-primary font-weight-bold">Contact us</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div> -->
     </body>
 </html>
