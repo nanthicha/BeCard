@@ -199,7 +199,9 @@ Route::put('/shop/update/timeline' ,[
 Route::get('/cashier/add', [
 	'as' => 'cashier.add',
 	'uses' => 'CashierController@toAdd']);
-
+Route::post('/cashier/add/store', [
+	'as' => 'cashier.add.store',
+	'uses' => 'CashierController@addData']);
 
 //API
 Route::post('/api/cashierStep1', [

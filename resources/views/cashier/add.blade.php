@@ -130,7 +130,9 @@ input, label {
     </div>
   </div>
 
-  <form role="form" action="" method="post">
+  <form role="form" action="{{route('cashier.add.store')}}" method="post">
+    {{ csrf_field() }}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="row setup-content" id="step-1">
       <div class="col-xs-12">
         <div class="col-md-12">
@@ -152,7 +154,8 @@ input, label {
             </p>
             <h3>Member Check <p class="fas fa-spinner" id="busy"></p></h3>
           <div class="form-group" id="statusOut">
-            <input  id="nameBeCard" name="nameBeCard" type="text" class="form-control" placeholder="Name of BeCard" disabled="" />
+            <input  id="nameBeCard2" name="nameBeCard" type="hidden" class="form-control" placeholder="Name of BeCard" />
+            <input  id="nameBeCard" type="text" class="form-control" placeholder="Name of BeCard" disabled="" />
             <p></p>
           </div>
           <button class="btn btn-success nextBtn btn-lg pull-right" id="btnStep1" type="button" >Next</button>
@@ -163,15 +166,9 @@ input, label {
       <div class="col-xs-12">
         <div class="col-md-12">
           <h3> Step 2</h3>
-          <div class="form-group">
-            <label class="control-label">Company Name</label>
-            <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Name" />
-          </div>
-          <div class="form-group">
-            <label class="control-label">Company Address</label>
-            <input maxlength="200" type="text" required="required" class="form-control" placeholder="Enter Company Address"  />
-          </div>
-          <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" >Next</button>
+          <hr>
+          <p id="countofMemberCard"></p>
+          <button class="btn btn-success nextBtn btn-lg pull-right" id="btnStep2" type="button" >Next</button>
         </div>
       </div>
     </div>
@@ -179,6 +176,15 @@ input, label {
       <div class="col-xs-12">
         <div class="col-md-12">
           <h3> Step 3</h3>
+          <hr>
+          <div class="form-group">
+            <label class="control-label">Price (Baht)</label>
+            <input id="price" name="price" type="text" class="form-control" placeholder="Price"  />
+          </div>
+          <div class="form-group">
+            <label class="control-label">Referance</label>
+            <input id="referance" name="referance" type="text" class="form-control" placeholder="Referance"  />
+          </div>
           <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
         </div>
       </div>
@@ -202,6 +208,7 @@ input, label {
 $(document).ready(function () {
   $("#busy").hide();
   var outBTN = document.getElementById("btnStep1").disabled = true;
+  var outBTN2 = document.getElementById("btnStep2").disabled = true;
   var navListItems = $('div.setup-panel div a'),
           allWells = $('.setup-content'),
           allNextBtn = $('.nextBtn');
@@ -255,6 +262,7 @@ function openQRCamera(node) {
       } else {
         node.parentNode.previousElementSibling.value = res;
         var out = document.getElementById('nameBeCard');
+        var out2 = document.getElementById('nameBeCard2');
         var outBTN = document.getElementById("btnStep1");
         var outForm = document.getElementById("statusOut");
         $.ajax({
@@ -270,14 +278,18 @@ function openQRCamera(node) {
             },
             success: function(respone)
             {
+              console.log(respone);
               if (respone.status == "error"){
                 out.value = "";
+                out2.value = "";
                 outBTN.disabled = true;
                 outForm.classList.remove('has-success');
               }else{
                 out.value = respone.msg;
+                out2.value = respone.msg;
                 outBTN.disabled = false;
                 outForm.classList.add('has-success');
+                step2(respone.card);
               }
               $("#busy").hide();
             },
@@ -295,8 +307,9 @@ function openQRCamera(node) {
 
 
 
-$("#telephone").on('keyup', function check(){
+$("#telephone").on('change', function check(){
   var out = document.getElementById('nameBeCard');
+  var out2 = document.getElementById('nameBeCard2');
   var outBTN = document.getElementById("btnStep1");
   var outForm = document.getElementById("statusOut");
   $.ajax({
@@ -314,12 +327,15 @@ $("#telephone").on('keyup', function check(){
       {
         if (respone.status == "error"){
           out.value = "";
+          out2.value = "";
           outBTN.disabled = true;
           outForm.classList.remove('has-success');
         }else{
           out.value = respone.msg;
+          out2.value = respone.msg;
           outBTN.disabled = false;
           outForm.classList.add('has-success');
+          step2(respone.card);
         }
         $("#busy").hide();
       },
@@ -329,6 +345,23 @@ $("#telephone").on('keyup', function check(){
       }
   });
 });
-
+function step2(card){
+  var outBTN2 = document.getElementById("btnStep2");
+  if (card.length > 0){
+    $("#countofMemberCard").html('<p></p><div class="alert alert-success" role="alert"> This customer has '+card.length+' MemberCard please select one card to redeem.</div><hr>');
+    for (var i = 0; i < card.length; i++) {
+        // $("#countofMemberCard").append(JSON.stringify(card[i])+'<p>');
+        if (i==0){
+          $("#countofMemberCard").append('<input type="radio" name="cardSelect" value="'+card[i]['card_id']+'" checked="checked"> <label class="label label-success">'+card[i]['name']+'</label><br> <img src="../img/cards/'+card[i]['imageBG']+'" width="100%" class="img-responsive"><p></p>');
+        }else{
+          $("#countofMemberCard").append('<input type="radio" name="cardSelect" value="'+card[i]['card_id']+'"> <label class="label label-success">'+card[i]['name']+'</label><br> <img src="../img/cards/'+card[i]['imageBG']+'" width="100%" class="img-responsive"><p></p>');
+        }
+    }
+    outBTN2.disabled = false;
+  }else{
+    $("#countofMemberCard").html('<p></p><div class="alert alert-danger" role="alert"> This customer has no any Member Card, Please tell customer for register by QR Code.</div>');
+    outBTN2.disabled = true;
+  }
+}
 </script>
 @endsection

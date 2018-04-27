@@ -167,4 +167,8 @@ class CashierController extends Controller
 
         }
     }
+
+    public function addData(Request $request){
+        return $request;
+    }
 }
