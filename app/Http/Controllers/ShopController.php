@@ -287,8 +287,19 @@ class ShopController extends Controller
         return view('shops.reward');
     }
 
-    public function updateGen(){
-        dd("Hello World");
+    public function updateGen(Request $request){
+        dd($request->all());
+        $shop = DB::table('shops')->where('username' , Auth::user()->username )->fisrt();
+        $shop->name = $request->name;
+        $shop->description = $request->description;
+        $shop->phone = $request->phone;
+        $shop->email = $request->email;
+        $shop->type = $request->type;
+        $shop->latlng = request()->lat.','.request()->lng;
+        $shop->status = $request->status;
+        $shop->url = $request->url;
+        $shop->time = request()->timeOpen.','.request()->timeClose;
+        $shop->save();
     }
 
 
