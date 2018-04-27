@@ -305,5 +305,19 @@ class ShopController extends Controller
         return redirect('/shop/show');
     }
 
+    public function settingTL(Request $request){
+        $shop = DB::table('shops')->where('username', Auth::user()->username)->first();
+        $type = [
+            "beauty" => 'Beauty',
+            "clothes" => 'Clothes',
+            'drink' => 'Drink',
+            'food' => 'Food',
+            'jewellery' => 'Jewellery',
+            'service' => 'Service'
+        ];
+
+        return view('shops.settingTL', [ 'shop' => $shop , 'type' => $type ]);
+    }
+
 
 }

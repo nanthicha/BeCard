@@ -172,6 +172,10 @@ Route::get('/shop/reward' , [
 	'as' => 'shop.reward',
 	'uses' => 'ShopController@reward'
 ]);
+Route::get('/shop/setting/timeline' , [
+	'as' => 'shop.setting.timeline',
+	'uses' => 'ShopController@settingTL'
+]);
 
 
 Route::get('/shop/show/{name}' , 'ShopController@showName');
@@ -182,6 +186,7 @@ Route::put('/shop/update/general' ,[
 	'as' => 'shop.update.general',
 	'uses' => 'ShopController@updateGen'
 ]);
+
 
 
 //-----------------------------

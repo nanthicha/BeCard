@@ -35,8 +35,8 @@
             <div class="row" >
             <div class="col-sm-3">
                 <ul class="nav nav-pills nav-stacked" style="width:100%;z-index: 0;position:relative;margin-left:-15px;">
-                  <li class="active"><a href="#">&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-home"></span> &nbsp;General</a></li>
-                  <li><a href="#">&nbsp&nbsp&nbsp&nbsp<span class="	glyphicon glyphicon-list"></span> &nbspTimeline</a></li>
+                  <li ><a href="{{ Route('shop.setting') }}">&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-home"></span> &nbsp;General</a></li>
+                  <li class="active"><a href="{{ Route('shop.setting.timeline') }}">&nbsp&nbsp&nbsp&nbsp<span class="	glyphicon glyphicon-list"></span> &nbspTimeline</a></li>
                 </ul>
               </div>
 
@@ -45,18 +45,18 @@
               <div class="card" style="margin-left: -30px;">
                 
                 <div class="card-body" style="padding:20px;">
-                  <h1>&nbsp&nbsp&nbsp&nbspGeneral</h1>
+                  <h1>&nbsp&nbsp&nbsp&nbspTimeline</h1>
                   <hr>
-                  <img src="{{ asset('img/shops/image/cog3.png') }}" class="img-responsive pull-right" width="150" height="150" style="margin-top:-120px;" >
+                  <img src="{{ asset('img/shops/image/cog2.png') }}" class="img-responsive pull-right" width="150" height="150" style="margin-top:-120px;" >
                   <br>
-                  <form class="form-horizontal" method="POST" action="{{ route('shop.update.general') }} " >
+                  <form class="form-horizontal" method="POST" action="{{ route('shop.update.timeline') }} " enctype="multipart/form-data" >
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <table class="table">
                       <tbody>
                         <tr>
                         <div class="form-group">
-                              <label class="col-md-3 control-label">Shop Name</label>
+                              <label class="col-md-3 control-label">Shop Logo</label>
                                   <div class="col-md-6">
                                     <input id="name" type="text" class="form-control" name="name" placeholder="Enter name" value="{{$shop->name}}" required>
                                   </div>
