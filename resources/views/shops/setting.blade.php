@@ -204,9 +204,11 @@
           center: {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])},
           zoom: 15
         });
+        var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
         marker = new google.maps.Marker( {
           position: {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])},
           map: map,
+          // icon: "{{ asset('img/shops/image/marker2.png') }}",
           draggable: true
         });
 
