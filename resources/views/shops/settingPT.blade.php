@@ -155,7 +155,7 @@
                             
                               <p style="margin-top:-15px;">{{ Carbon\Carbon::parse($promotion->created_at)->diffForHumans() }}</p>
                               <br>
-                              <a href="/shop/promotion/{{$index+1}}"><button class="btn btn-danger" style="width:100px;margin-top:7px;"><span class="glyphicon glyphicon-trash"></span> &nbsp;Delete</button></a>
+                              <a href="/shop/promotion/{{$promotion->id}}"><button class="btn btn-danger" style="width:100px;margin-top:7px;"><span class="glyphicon glyphicon-trash"></span> &nbsp;Delete</button></a>
 
                               </center>
                               
