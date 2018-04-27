@@ -51,26 +51,43 @@
                     <div class="card" style="padding:7px;">
                         <div class="card-body">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                      <!-- Indicators -->
-                      <ol class="carousel-indicators">
+                    @if(count($promotions) > 0)
+                    <ol class="carousel-indicators">
+                    @foreach( $promotions as $index => $promotion)
+                      @if($index == 0)
+                      <li data-target="#myCarousel" data-slide-to="{{$index}}" class="active"></li>
+                      @else
+                      <li data-target="#myCarousel" data-slide-to="{{$index}}" ></li>
+                      @endif
+                    @endforeach
+                    </ol>
+                    @else
+                    <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
                       </ol>
+                    @endif
 
                       <!-- Wrapper for slides -->
+                     
                       <div class="carousel-inner">
-                        <div class="item active">
+                      @if(count($promotions) > 0)
+                      @foreach( $promotions as $index => $promotion)
+                      @if($index == 0)
+                      <div class="item active">
+                          <img src="{{asset('img/promotions/'.$promotion->image)}}" >
+                        </div>
+                      @else
+                      <div class="item">
+                          <img src="{{asset('img/promotions/'.$promotion->image)}}" >
+                        </div>
+                      @endif
+                    @endforeach
+                      @else
+                      <div class="item active">
                           <img src="{{asset('img/promotions/defaultPromo.png')}}" >
                         </div>
-
-                        <div class="item">
-                          <img src="{{asset('img/promotions/defaultPromo.png')}}" >
-                        </div>
-
-                        <div class="item">
-                          <img src="{{asset('img/promotions/defaultPromo.png')}}" >
-                        </div>
+                      @endif
+                       
                       </div>
 
                       <!-- Left and right controls -->

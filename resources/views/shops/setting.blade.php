@@ -36,7 +36,8 @@
             <div class="col-sm-3">
                 <ul class="nav nav-pills nav-stacked" style="width:100%;z-index: 0;position:relative;margin-left:-15px;">
                   <li class="active"><a href="{{ Route('shop.setting') }}">&nbsp&nbsp&nbsp&nbsp<span class="glyphicon glyphicon-home"></span> &nbsp;General</a></li>
-                  <li><a href="/shop/setting/timeline">&nbsp&nbsp&nbsp&nbsp<span class="	glyphicon glyphicon-list"></span> &nbspTimeline</a></li>
+                  <li><a href="{{ Route('shop.setting.timeline') }}">&nbsp&nbsp&nbsp&nbsp<span class="	glyphicon glyphicon-list"></span> &nbspTimeline</a></li>
+                  <li ><a href="{{ Route('shop.setting.promotion') }}">&nbsp&nbsp&nbsp&nbsp<span class="	glyphicon glyphicon-tags"></span> &nbspPromotion</a></li>
                 </ul>
               </div>
 
@@ -175,7 +176,7 @@
                           <tr>
                             <div class="form-group" style="margin-top:20px;">
                             <div class="col-md-8 col-md-offset-3">
-                                <button id="myInput" type="submit" class="btn btn-primary" >&nbsp&nbspUpdate&nbsp&nbsp</button>
+                                <button id="myInput" type="submit" class="btn btn-success" >&nbsp&nbspUpdate&nbsp&nbsp</button>
                             </div>
                             </div>
                           </tr>

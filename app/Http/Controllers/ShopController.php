@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Shop;
+use App\Promotion;
 use Carbon\Carbon;
 
 class ShopController extends Controller
@@ -106,8 +107,9 @@ class ShopController extends Controller
     {
         $user = Auth::user()->username;
         $shop = DB::table('shops')->where('username',$user)->get()->first();
+        $promotions = DB::table('promotions')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
         // dd($shop);
-        return view('shops.show' , ['shop' => $shop]);
+        return view('shops.show' , ['shop' => $shop , 'promotions' => $promotions]);
     }
 
     /**
@@ -277,6 +279,7 @@ class ShopController extends Controller
     public function showName($url){
 
         $shop = DB::table('shops')->where('url',$url)->get()->first();
+        $promotions = DB::table('promotions')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
         if($shop == null){
             return view('errors.pageNotF');
         }
@@ -284,7 +287,7 @@ class ShopController extends Controller
             return $this->show();
         }
         // dd($user);
-        return view('shops.showUser' , ['shop' => $shop , 'url' => $url]);
+        return view('shops.showUser' , ['shop' => $shop , 'url' => $url , 'promotions' => $promotions] );
     }
 
     public function reward(){
@@ -306,25 +309,82 @@ class ShopController extends Controller
             'email' => $request->email
         ]);
 
-        return redirect('/shop/show');
+        return redirect('/shop/setting');
     }
 
     public function settingTL(){
         $shop = DB::table('shops')->where('username', Auth::user()->username)->first();
-        $type = [
-            "beauty" => 'Beauty',
-            "clothes" => 'Clothes',
-            'drink' => 'Drink',
-            'food' => 'Food',
-            'jewellery' => 'Jewellery',
-            'service' => 'Service'
-        ];
 
-        return view('shops.settingTL', [ 'shop' => $shop , 'type' => $type ]);
+        return view('shops.settingTL', [ 'shop' => $shop  ]);
     }
 
-    public function updateTL(){
-        dd("hello");
+    public function updateTL(Request $request){
+        request()->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+        ]);
+        $username = Auth::user()->username;
+        if($request->type == "logo"){
+            $file = request()->file('image');
+            $imageName = $username."_".time().'.'.request()->image->getClientOriginalExtension();
+            $path = public_path('img/shops/logo');
+            $file->move($path, $imageName);
+
+            $shop = DB::table('shops')->where('username' , Auth::user()->username )->update([
+        
+                
+                'logo' => $imageName
+            ]);
+            
+        }else if($request->type == "cover"){
+
+            $file = request()->file('image');
+            $imageName = $username."_".time().'.'.request()->image->getClientOriginalExtension();
+            $path = public_path('img/shops/cover');
+            $file->move($path, $imageName);
+
+            $shop = DB::table('shops')->where('username' , Auth::user()->username )->update([
+        
+                
+                'imgCover' => $imageName
+            ]);
+        }
+
+        return redirect('/shop/setting/timeline');
+    }
+
+
+
+    public function updatePT(Request $request){
+        request()->validate([
+
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+        ]);
+        $username = Auth::user()->username;
+        $file = request()->file('image');
+        $imageName = $username."_".time().'.'.request()->image->getClientOriginalExtension();
+        $path = public_path('img/promotions/');
+        $file->move($path, $imageName);
+        $shop_id = DB::table('shops')->where('username' , Auth::user()->username)->first()->id;
+        Promotion::create([
+            'shop_id' => $shop_id ,
+            'image' => $imageName , 
+            'url' => "null"
+            ]);
+
+        return redirect('/shop/setting/promotion');
+    }
+    
+    public function settingPT(){
+        $shop = DB::table('shops')->where('username', Auth::user()->username)->first();
+        $promotions = DB::table('promotions')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
+        return view('shops.settingPT' , [ 'shop' => $shop , 'promotions' => $promotions ]);
+    }
+
+    public function deletePT($id){
+        $promotion = Promotion::find($id);
+        $promotion->delete();
+        return redirect('/shop/setting/promotion');
     }
 
 

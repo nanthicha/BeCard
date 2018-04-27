@@ -80,7 +80,7 @@ class UserController extends Controller
         if ($card === null){
             return redirect('home')->with('message','Dont have this shop,please check you QR code agian.');
         }
-        $checkcard = DB::table('user_cards')->where('card_id',$card->id)->first();
+        $checkcard = DB::table('user_cards')->where('card_id',$card->id)->where('username',Auth::user()->username)->first();
         if ($checkcard !== null){
             return redirect('home')->with('message','You have this card.');
         }else{
@@ -98,6 +98,3 @@ class UserController extends Controller
     }
 
 }
-
-
-

@@ -36,7 +36,7 @@
                 <hr>
                 <input type="hidden" id="count" value="{{ $count }}">
                 @if( $package == 'gold' or ( $package == 'sliver' and $count < 5 ))
-                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:4.5%" id="add">Add Branch</button>
+                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-success" style="margin-left:4.5%" id="add"><span class="glyphicon glyphicon-plus"></span> &nbspAdd Branch</button>
                 @endif
                 <br><br>
                     
