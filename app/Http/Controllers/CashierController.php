@@ -167,8 +167,59 @@ class CashierController extends Controller
 
         }
     }
-
+    public function yes(){
+        return view('cashier.yes');
+    }
     public function addData(Request $request){
-        return $request;
+        if (Auth::user()->role != "Cashier"){
+            return redirect('home');
+        }else{
+            $validatedData = $request->validate([
+                'nameBeCard' => 'required',
+                'cardSelect' => 'required',
+                'price' => 'required',
+            ]);
+            $cardid = $request->cardSelect;
+            $user = DB::table('user_cards')
+                ->where('username', $request->nameBeCard)
+                ->where('card_id', $request->cardSelect)
+                ->get();
+            $card = DB::table('membercards')
+                ->where('id', $request->cardSelect)
+                ->get();
+            $point = $user[0]->point;
+            $baht = $card[0]->bahtperpoint;
+            $addpoint = intval($request->price / $baht);
+            $newpoint = $point + $addpoint;
+            // update point in user_card
+            $updateUserCard = DB::table('user_cards')
+                ->where('username', $request->nameBeCard)
+                ->where('card_id', $request->cardSelect)
+                ->update(['point'=>$newpoint]);
+
+            // Reddem Logs
+            DB::table('redeems')->insert(
+                ['username'=>$request->nameBeCard,
+                'card_id'=>$request->cardSelect,
+                'price'=>$request->price,
+                'referance'=>$request->referance,
+                'point'=>$addpoint,
+                'cashier'=>Auth::user()->username,
+            ]);
+            // Log
+            $log = new LogController;
+            $log->record(Auth::user()->username,"Redeem $addpoint to card $cardid",$request->nameBeCard);
+            $log->recordBePoint($request->nameBeCard,"Redeem on card",1,0);
+            return view('cashier.yes');
+
+        }
+    }
+
+    public function history(){
+        $history = DB::table('redeems')
+                ->where('cashier', Auth::user()->username)
+                ->orderBy('id','desc')
+                ->get();
+        return view('cashier.history',['history'=>$history]);
     }
 }

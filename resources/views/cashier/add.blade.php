@@ -102,7 +102,8 @@ input, label {
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Cashier {{ Auth::user()->username }}</div>
+                <div class="panel-heading">Cashier {{ Auth::user()->username }}
+                  <a href="{{ route('cashier.history') }}"><button class="btn btn-sm btn-info pull-right">History</button></a></div>
                 <div class="panel-body">
 
 
@@ -111,6 +112,16 @@ input, label {
   <h4>{{$shop[0]->name}}</h4>
   <label class="label label-info">{{$branch->name}}</label>
   <p></p>
+  @if (count($errors) > 0)
+      <div class="alert alert-danger">
+          <strong>Whoops!</strong> There were some problems with your input.
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <p>{{ $error }}</p>
+              @endforeach
+          </ul>
+      </div>
+  @endif
   <br>
 </center>
 <div class="stepwizard">
