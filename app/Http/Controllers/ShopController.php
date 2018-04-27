@@ -288,18 +288,21 @@ class ShopController extends Controller
     }
 
     public function updateGen(Request $request){
-        dd($request->all());
-        $shop = DB::table('shops')->where('username' , Auth::user()->username )->fisrt();
-        $shop->name = $request->name;
-        $shop->description = $request->description;
-        $shop->phone = $request->phone;
-        $shop->email = $request->email;
-        $shop->type = $request->type;
-        $shop->latlng = request()->lat.','.request()->lng;
-        $shop->status = $request->status;
-        $shop->url = $request->url;
-        $shop->time = request()->timeOpen.','.request()->timeClose;
-        $shop->save();
+        // dd($request->all());
+        $shop = DB::table('shops')->where('username' , Auth::user()->username )->update([
+        
+            'name' => request()->name,
+            'description' => request()->desc,
+            'time' => request()->timeOpen.','.request()->timeClose,
+            'type' => request()->type,
+            'latlng' => request()->lat.','.request()->lng,
+            'status' => request()->status,
+            'phone' => $request->phone,
+            'url' => $request->url,
+            'email' => $request->email
+        ]);
+
+        return redirect('/shop/show');
     }
 
 

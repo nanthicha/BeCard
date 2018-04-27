@@ -51,18 +51,18 @@
                   <div style="float:right;margin-top: -47px;display:inline-block;margin-right:15px;">
                   <!-- <span style="font-size:25px;"><sup >Public Shop: &nbsp&nbsp</sup></span> -->
                       <span style="font-size:25px;"><sup >Off&nbsp</sup></span>
-                  
+                 
                   <label class="switch" >
-                          <input type="checkbox" checked>
-                          <span class="slider round"></span>
+                          <input type="checkbox" id="status" value="{{$shop->status}}" onclick="changeVal()" form="form" name="status" checked>
+                          <span  class="slider round"></span>
                   </label>
                   <span style="font-size:25px;"><sup >&nbspOn</sup></span>
                   </div>
-                  
+  
                   <hr>
                   
                   <br>
-                  <form class="form-horizontal" method="POST" action="{{ route('shop.update.general') }} " >
+                  <form class="form-horizontal" method="POST" action="{{ route('shop.update.general') }} " id="form" >
                     {{ csrf_field() }}
                     {{ method_field('PUT') }}
                     <table class="table">
@@ -201,7 +201,15 @@
       </div>
       </div>
 </div>
+@endsection
+@section('jsBefore')
+<script>
+                    var status = "{{ $shop->status }}";
+                    if(status == "off"){
+                      document.getElementById("status").checked = false;
 
+                    }
+                  </script>
 @endsection
 
 @section('js')
@@ -211,6 +219,20 @@
 <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.6/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
 <script>
+    var status = "{{ $shop->status }}";
+      if(status == "off"){
+        document.getElementById("status").checked = false;
+
+      }
+
+    function changeVal(){
+      
+      if( document.getElementById("status").value == 'on' ){
+        document.getElementById("status").value = 'off';
+      }else{
+        document.getElementById("status").value = 'on';
+      }
+    }
     var map,geocoder,marker;
     var latlng = "{{ $shop->latlng }}".split(',',2);
     var ltng = {lat: parseFloat(latlng[0]), lng: parseFloat(latlng[1])};
@@ -277,6 +299,8 @@
     var times = "{{ $shop->time }}".split(',', 2);
     $('#timepicker1').val(times[0]);
     $('#timepicker2').val(times[1]);
+
+ 
 
     // $(document).keypress(function(e) {
     // if(e.keyCode === 32 && e.target.nodeName=='BODY') {
