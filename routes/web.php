@@ -147,6 +147,8 @@ Route::get('/shop/setting' , [
 	'as' => 'shop.setting',
 	'uses' => 'ShopController@settingGen']);
 
+Route::get('/shop/setting/timeline' ,'ShopController@settingTL');
+
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',
 	'uses' => 'ShopController@membercard']);
@@ -172,10 +174,7 @@ Route::get('/shop/reward' , [
 	'as' => 'shop.reward',
 	'uses' => 'ShopController@reward'
 ]);
-Route::get('/shop/setting/timeline' , [
-	'as' => 'shop.setting.timeline',
-	'uses' => 'ShopController@settingTL'
-]);
+
 
 
 Route::get('/shop/show/{name}' , 'ShopController@showName');
@@ -186,6 +185,11 @@ Route::put('/shop/update/general' ,[
 	'as' => 'shop.update.general',
 	'uses' => 'ShopController@updateGen'
 ]);
+Route::put('/shop/update/timeline' ,[
+	'as' => 'shop.update.timeline',
+	'uses' => 'ShopController@updateTL'
+]);
+
 
 
 

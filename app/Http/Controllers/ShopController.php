@@ -305,7 +305,7 @@ class ShopController extends Controller
         return redirect('/shop/show');
     }
 
-    public function settingTL(Request $request){
+    public function settingTL(){
         $shop = DB::table('shops')->where('username', Auth::user()->username)->first();
         $type = [
             "beauty" => 'Beauty',
@@ -317,6 +317,10 @@ class ShopController extends Controller
         ];
 
         return view('shops.settingTL', [ 'shop' => $shop , 'type' => $type ]);
+    }
+
+    public function updateTL(){
+        dd("hello");
     }
 
 
