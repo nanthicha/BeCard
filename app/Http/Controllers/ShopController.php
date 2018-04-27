@@ -270,8 +270,12 @@ class ShopController extends Controller
       return view('shops.register');
     }
 
+    public function sendmail(){
+      return view('shops.show');
+    }
+
     public function showName($url){
-       
+
         $shop = DB::table('shops')->where('url',$url)->get()->first();
         if($shop == null){
             return view('errors.pageNotF');
@@ -290,7 +294,7 @@ class ShopController extends Controller
     public function updateGen(Request $request){
         // dd($request->all());
         $shop = DB::table('shops')->where('username' , Auth::user()->username )->update([
-        
+
             'name' => request()->name,
             'description' => request()->desc,
             'time' => request()->timeOpen.','.request()->timeClose,

@@ -33,7 +33,7 @@
                 <button type="submit" class="btn btn-primary">Register</button></a>
             @else
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle nav__link" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                    <a href="#" class="dropdown-toggle nav__link" style="font-size: 25px;" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                         {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
 
@@ -55,6 +55,7 @@
                         <hr>
                         <li><a href="{{ route('shop.index') }}">Shop</a></li>
                         @elseif (Auth::user()->role == "User")
+                        <hr>
                         <li><a href="{{ route('shop.register') }}">Create Enterpreneur</a></li>
                         @endif
 

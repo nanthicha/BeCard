@@ -52,20 +52,20 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
     height: 40px;
     line-height: 40px;
 }
-#slideshow { 
-    position: relative; 
-    width: 100%; 
-    height: 250px; 
+#slideshow {
+    position: relative;
+    width: 100%;
+    height: 250px;
     margin-bottom: 60px;
 }
 
-#slideshow > div { 
-    position: absolute; 
-    top: 10px; 
-    left: 10px; 
-    right: 10px; 
-    bottom: 10px; 
-    
+#slideshow > div {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+
 }
 #slideshow img{
     width: 100%;
@@ -150,7 +150,7 @@ function reply_click(elem)
 }
 $("#slideshow > div:gt(0)").hide();
 
-setInterval(function() { 
+setInterval(function() {
   $('#slideshow > div:first')
     .fadeOut(1000)
     .next()
@@ -159,4 +159,5 @@ setInterval(function() {
     .appendTo('#slideshow');
 },  5000);
 </script>
+
 @endsection

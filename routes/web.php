@@ -123,6 +123,9 @@ Route::post('/shop/create', [
 Route::get('/shop/register', [
 	'as' => 'shop.register',
 	'uses' => 'ShopController@register']);
+  Route::post('/shop/register', [
+  	'as' => 'shop.regiter.post',
+  	'uses' => 'ShopController@sendmail']);
 
 //----------ขอมั่วไว้ก่อนนะ---------
 Route::get('/shop' , [
