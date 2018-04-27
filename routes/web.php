@@ -147,8 +147,16 @@ Route::get('/shop/setting' , [
 	'as' => 'shop.setting',
 	'uses' => 'ShopController@settingGen']);
 
-Route::get('/shop/setting/timeline' ,'ShopController@settingTL');
+Route::get('/shop/setting/timeline' ,[
+	'as' => 'shop.setting.timeline',
+	'uses' => 'ShopController@settingTL'
+	]);
 
+Route::get('/shop/setting/promotion' ,[
+	'as' => 'shop.setting.promotion',
+	'uses' => 'ShopController@settingPT'
+	]);
+	
 Route::get('/shop/membercard' , [
 	'as' => 'shop.membercard',
 	'uses' => 'ShopController@membercard']);
@@ -189,6 +197,11 @@ Route::put('/shop/update/timeline' ,[
 	'as' => 'shop.update.timeline',
 	'uses' => 'ShopController@updateTL'
 ]);
+Route::put('/shop/update/promotion' ,[
+	'as' => 'shop.update.promotion',
+	'uses' => 'ShopController@updatePT'
+]);
+Route::get('/shop/promotion/{id}' , 'ShopController@deletePT');
 
 
 

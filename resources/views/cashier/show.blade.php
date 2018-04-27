@@ -38,7 +38,7 @@ use Carbon\Carbon;
                 <center><h1>Show Cashiers</h1></center>
                 <hr>
                 @if( ($package == 'sliver' and  $count < 15) or $package == 'gold')
-                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:10%">Add Cashier</button>
+                <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-success" style="margin-left:10%"><span class="glyphicon glyphicon-plus"></span> &nbspAdd Cashier</button>
                 @endif
                 <br><br>
                 <div class="row">
