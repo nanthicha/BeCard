@@ -94,24 +94,61 @@
                           <hr>
                           <p class="card-text"><span class="glyphicon glyphicon-equalizer"></span> &nbsp;{{$shop->type}}</p>
                           <p class="card-text"><span class="glyphicon glyphicon-time"></span> <span class="label label-success" id="tell">Open</span> &nbsp;<span id="open"></span> - <span id="close"></span></p>
-                          <p class="card-text"><span class="glyphicon glyphicon-map-marker"></span> &nbsp;<a href="#" data-toggle="modal" data-target="#squarespaceModal"><span id="ll"></span> &nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></p>
+                          <p class="card-text"><span class="glyphicon glyphicon-map-marker"></span> &nbsp;<a   href="javascript:void(0)" data-toggle="modal" data-target="#squarespaceModal"><span id="ll"></span> &nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></p>
                         </div>
                       </div>
                     </div>
                     </div>
                     
                     
-                    <!-- <div class="col-md-3">
-                      <div class="card" style="padding:15px;">
-                        <div class="card-body">
-                          <div class="card-title">{{}}
-                        </div>
-                      </div>
-                    </div> -->
+           
                      
-              
-                
-                
+                  {{-- Reward --}}
+                 <div style="clear:both"></div>
+                 
+                 <br>
+                 <div  style="width:80%;margin:0 auto;">
+                 <hr>
+                  <h3>Reward</h3>
+                  <br>
+                  <hr>
+                  </div>
+                  
+                  <div  style="width:80%;margin:0 auto;">
+                  <br>
+                 <h3> Show Branches</h3>
+                <hr>
+                <input type="hidden" id="count" value="{{ $count }}">
+                <!-- <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:4.5%" id="add">Add Branch</button> -->
+                <br><br>
+                    
+                        
+                    
+                           @if($count == 0)
+                               <center><p>No Branchs<p></center>
+                           
+                           @endif
+                            @foreach($branches as $index => $branch)
+                              
+                            <div class="col-md-6 ">
+                            <div class="card " style="padding:15px;display:block;margin-bottom:20px;">
+                            
+                            <div class="card-body">
+                                <h5 class="card-title">Branch Name: {{ $branch->name }} </h5>
+                                <hr>
+                                <input type="hidden" id="{{$index}}-latlng" value="{{$branch->latlng}}">
+                                <p class="card-text"><span ><span class="glyphicon glyphicon-earphone"></span> Phone: </span>&nbsp;  <span id="{{$index.'-ph'}}">{{$branch->phone}}</span>  </p>
+                                <p class="card-text"><span class="glyphicon glyphicon-map-marker"></span> Location: &nbsp;<a  href="javascript:void(0)" onclick="return sh({{$index}});"> <span id="{{$index.'-address'}}"></span> &nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></p>
+                                
+                                <div class="map" id="{{$index}}-map"></div>
+                                <input type="hidden" id="{{$index}}-sh" value="0">
+                            
+                            
+                            </div>
+                            </div>
+                            </div>
+                        @endforeach
+                      </div>
 
 
 
@@ -143,12 +180,13 @@
   </div>
   
 </div>
+
 @endsection
 
 
 @section('js')
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbR2fPnPAqOeegpN6ml_SNSMSc7wN613k&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbR2fPnPAqOeegpN6ml_SNSMSc7wN613k">
     </script>
     <script>
       function initMap() {
@@ -217,6 +255,86 @@
 
         
       }
+
+
+
+      function createMap(id,latlng){
+        var input = latlng;
+        var latlngStr = input.split(',', 2);
+        // console.log(latlngStr);
+        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        var infowindow = new google.maps.InfoWindow;
+        var map = new google.maps.Map(document.getElementById(id+'-map'), {
+          center: {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])},
+          zoom: 15
+        });
+        var marker = new google.maps.Marker({
+                position: latlng,
+                map: map
+              });
+        var geocoder = new google.maps.Geocoder;
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              // console.log(id);
+            $('#'+id+'-address').text(results[0].formatted_address);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+    }
+
+    
+
+
+    function init(){
+      var count = document.getElementById('count').value;
+      for (var i = 0; i < count; i++) {
+
+        createMap(i,document.getElementById(i+"-latlng").value)
+        $("#"+i+"-map").hide();
+        var phone = document.getElementById(i+'-ph').textContent;
+        console.log(phone);
+        var result = phone.slice(0,3) + '-' + phone.slice(3,6) + '-' + phone.slice(6);
+        $('#'+i+'-ph').text(result);
+      }
+      // console.log("hello");
+    }
+
+    $(document).ready(function() {
+      $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          event.stopPropagation();
+          return false;
+        }
+      });
+
+      initMap();
+      init();
+      
+      var package = "{{ $package }}";
+      console.log(package);
+      if(document.getElementById('count').value == 5  && package == "sliver"){
+        // console.log('hello');
+        document.getElementById('add').style.display = 'none';
+      }
+    });
+    
+    function sh(id){
+      console.log(id);
+      if(document.getElementById(id+'-sh').value == "0"){
+        $("#"+id+"-map").show(500);
+        $('#'+id+'-sh').val(1);
+      }else{
+        $("#"+id+"-map").hide(500);
+        $('#'+id+'-sh').val(0);
+      }
+
+    }
       
 
           
@@ -230,6 +348,10 @@
 #map {
   width: 567px;
   height: 480px;
+}
+.map{
+  width: 440px;
+  height: 300px;
 }
 .modal-dialog {
   min-height: calc(100vh - 60px);

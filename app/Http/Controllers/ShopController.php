@@ -280,7 +280,14 @@ class ShopController extends Controller
             return $this->show();
         }
         // dd($user);
-        return view('shops.showUser' , ['shop' => $shop , 'url' => $url , 'promotions' => $promotions] );
+        
+        $branches = DB::table('branches')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
+        $package = $shop->package;
+        $count = count($branches);
+        // dd(count($branches));
+
+        //
+        return view('shops.showUser' , ['shop' => $shop , 'url' => $url , 'promotions' => $promotions , 'branches' => $branches , 'count' => $count , 'package' => $package] );
     }
 
     public function reward(){

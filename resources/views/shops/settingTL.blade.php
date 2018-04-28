@@ -57,7 +57,7 @@
                               <label >&nbsp&nbsp&nbsp&nbsp&nbsp&nbspShop Cover Image</label>
                               
                               {{ csrf_field() }}
-                    {{ method_field('PUT') }}
+                              {{ method_field('PUT') }}
                               <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" id="cover" class="img-responsive" style="padding: 0 15px;height:140px;" >
                                 <br>
                                 <br>

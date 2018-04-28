@@ -43,7 +43,7 @@
                         
                     
                            @if($count == 0)
-                               <center><p>No Branchs<p></center>
+                               <center><p>No Branches<p></center>
                            
                            @endif
                             @foreach($branches as $index => $branch)
@@ -56,7 +56,7 @@
                                 <hr>
                                 <input type="hidden" id="{{$index}}-latlng" value="{{$branch->latlng}}">
                                 <p class="card-text"><span ><span class="glyphicon glyphicon-earphone"></span> Phone: </span>&nbsp;  <span id="{{$index.'-ph'}}">{{$branch->phone}}</span>  </p>
-                                <p class="card-text"><span class="glyphicon glyphicon-map-marker"></span> Location: &nbsp;<a href="#" onclick="return sh({{$index}});"> <span id="{{$index.'-address'}}"></span> &nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></p>
+                                <p class="card-text"><span class="glyphicon glyphicon-map-marker"></span> Location: &nbsp;<a href="javascript:void(0)" onclick="return sh({{$index}});"> <span id="{{$index.'-address'}}"></span> &nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></p>
                                 
                                 <div class="map" id="{{$index}}-map"></div>
                                 <input type="hidden" id="{{$index}}-sh" value="0">
