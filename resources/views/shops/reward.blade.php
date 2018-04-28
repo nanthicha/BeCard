@@ -79,7 +79,7 @@ $count_vouchers = $vouchers->count();
                     </div>
                     <div class="card-footer">
                         <small>Until {{ \Carbon\Carbon::parse($reward->updated_at)->format('d M Y') }}</small>
-                        <button class="btn btn-success float-right btn-sm">View</button>
+                        <a href="{{route('shop.reward.view',['code'=>$reward->voucherFormat])}}"><button class="btn btn-success float-right btn-sm">View</button></a>
                     </div>
                 </div>
               </div>

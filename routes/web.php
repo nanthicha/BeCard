@@ -184,6 +184,9 @@ Route::get('/join/{key}' , [
 Route::get('/shop/reward' , [
 	'as' => 'shop.reward',
 	'uses' => 'ShopController@reward']);
+Route::get('/shop/reward/{code}/view' , [
+	'as' => 'shop.reward.view',
+	'uses' => 'ShopController@rewardView']);
 Route::post('/shop/reward/create' , [
 	'as' => 'shop.reward.create',
 	'uses' => 'ShopController@rewardCreate']);

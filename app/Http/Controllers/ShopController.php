@@ -460,5 +460,11 @@ class ShopController extends Controller
         }
         return redirect('user/voucher/'.$voucher_code);
     }
+    public function rewardView($code){
+        $voucher = DB::table('vouchers')->where('voucherFormat',$code)->first();
+        $vouchers = DB::table('userVoucher')->where('voucher_id',$voucher->id)->get();
+        return view('shops.vouchers',['vouchers'=>$vouchers]);
+    }
+
 
 }
