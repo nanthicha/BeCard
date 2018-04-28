@@ -374,8 +374,8 @@ class ShopController extends Controller
         return view('shops.settingPT' , [ 'shop' => $shop , 'promotions' => $promotions ]);
     }
 
-    public function deletePT($id){
-        $promotion = Promotion::find($id);
+    public function deletePT(Request $request){
+        $promotion = Promotion::find($request->id);
         $promotion->delete();
         return redirect('/shop/setting/promotion');
     }

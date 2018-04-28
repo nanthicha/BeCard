@@ -205,7 +205,7 @@ Route::put('/shop/update/promotion' ,[
 	'as' => 'shop.update.promotion',
 	'uses' => 'ShopController@updatePT'
 ]);
-Route::get('/shop/promotion/{id}' , 'ShopController@deletePT');
+Route::delete('/shop/promotion/delete' , 'ShopController@deletePT');
 Route::put('/shop/branch/update' , 'BranchController@update');
 Route::delete('/shop/branch/delete' , 'BranchController@destroy');
 Route::delete('/shop/cashier/delete' , 'CashierController@destroy');
