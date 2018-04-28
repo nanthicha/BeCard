@@ -15,8 +15,17 @@
 
 @section('js')
 <script>
+var user = "{{Auth::user()->username}}";
 setTimeout(function() {
-    window.location.href = "/"}, 1500);
+    if(user != null){
+    window.location.href = "/home";
+    }
+    else{
+        window.location.href = "/";
+    }
+    
+    
+    }, 1500);
 
 </script>
 @endsection
