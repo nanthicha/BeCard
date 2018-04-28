@@ -58,7 +58,7 @@
                               
                               {{ csrf_field() }}
                     {{ method_field('PUT') }}
-                              <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" id="cover" class="img-responsive" style="padding: 0 15px;" >
+                              <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" id="cover" class="img-responsive" style="padding: 0 15px;height:140px;" >
                                 <br>
                                 <br>
                                 <input type="file" name="image" onchange="readURL(this,'cover');" class="form-control" style="width:300px;display:inline-block;margin-left:35%;" required>
