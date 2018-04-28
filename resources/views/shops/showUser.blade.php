@@ -1,32 +1,24 @@
 @extends('shops.layout')
 
 @section('content')
-<div class="container" >
 
-  <!-- Nav tabs -->
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs"  style="width:100%;z-index: 0;position:relative;">
-    <li class="nav-item">
-      <a class="nav-link active" href="{{ '/shop/show/'.$url }}">Shop</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link "   href="{{ '/shop/branch/'.$url }}">Branchs</a>
-    </li>
-  </ul>
 
 <input id="inPhone" type="hidden" value="{{ $shop->phone }}">
   <!-- Tab panes -->
-  <div class="row" id="tabcontent" style="display:block;">
-        <div class="col-md-12">
-            <div class="panel panel-default">
+
               <input type="hidden" value="{{ $shop->latlng }}" id="latlng">
               <input type="hidden" value="{{ $shop->time }}" id="time">
-                <div class="panel-body">
-                    <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive">
-                    <img src="{{ asset('img/shops/logo/'.$shop->logo) }}" class="img-thumbnail center-block" style="width:200px;height:auto;top:-60px;position:relative;">
+                    @if($shop->imgCover == 'defaultCover.png')
+                    <img src="{{ asset('img/shops/cover/defaultCoverUser.png') }}" class="img-responsive" style="height:300px;">
+                    @else
+                    <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive" style="height:300px;">
+                    @endif
+                    <img src="{{ asset('img/shops/logo/'.$shop->logo) }}" class="img-thumbnail center-block" style="width:390px;height:auto;top:-150px;position:relative;">
                     
-                    <div style="margin-top:-40px;">
+                    <div style="margin-top:-135px;">
                     <center>
+                    <p class="card-text"><h1><b>{{$shop->name}}</b></h1></p>
+                   
                     <p class="card-text">Description: &nbsp;{{$shop->description}}</p>
                     <p class="card-text"><span class="label label-success"><span class="glyphicon glyphicon-earphone"></span> Phone</span>&nbsp;<span id="phone"></span> &nbsp&nbsp &nbsp&nbsp <span class="label label-primary"><span class="glyphicon glyphicon-envelope" ></span> Email</span> &nbsp;{{$shop->email}}</p>
                     
@@ -34,30 +26,48 @@
                     </div>
                     <hr>
 
+                    <div style="width:85%;margin:0 auto;">
                     <div class="col-md-9">
                     <div class="card" style="padding:7px;">
                         <div class="card-body">
                     <div id="myCarousel" class="carousel slide" data-ride="carousel">
-                      <!-- Indicators -->
-                      <ol class="carousel-indicators">
+                    @if(count($promotions) > 0)
+                    <ol class="carousel-indicators">
+                    @foreach( $promotions as $index => $promotion)
+                      @if($index == 0)
+                      <li data-target="#myCarousel" data-slide-to="{{$index}}" class="active"></li>
+                      @else
+                      <li data-target="#myCarousel" data-slide-to="{{$index}}" ></li>
+                      @endif
+                    @endforeach
+                    </ol>
+                    @else
+                    <ol class="carousel-indicators">
                         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
                       </ol>
+                    @endif
 
                       <!-- Wrapper for slides -->
+                     
                       <div class="carousel-inner">
-                        <div class="item active">
+                      @if(count($promotions) > 0)
+                      @foreach( $promotions as $index => $promotion)
+                      @if($index == 0)
+                      <div class="item active">
+                          <img src="{{asset('img/promotions/'.$promotion->image)}}" >
+                        </div>
+                      @else
+                      <div class="item">
+                          <img src="{{asset('img/promotions/'.$promotion->image)}}" >
+                        </div>
+                      @endif
+                    @endforeach
+                      @else
+                      <div class="item active">
                           <img src="{{asset('img/promotions/defaultPromo.png')}}" >
                         </div>
-
-                        <div class="item">
-                          <img src="{{asset('img/promotions/defaultPromo.png')}}" >
-                        </div>
-
-                        <div class="item">
-                          <img src="{{asset('img/promotions/defaultPromo.png')}}" >
-                        </div>
+                      @endif
+                       
                       </div>
 
                       <!-- Left and right controls -->
@@ -88,6 +98,7 @@
                         </div>
                       </div>
                     </div>
+                    </div>
                     
                     
                     <!-- <div class="col-md-3">
@@ -98,21 +109,17 @@
                       </div>
                     </div> -->
                      
-                </div>
+              
                 
                 
 
 
 
 
-            </div>
+           
 
 
 
-        </div>
-    </div>
-
-</div>
 
 <!-- line modal -->
 <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -180,7 +187,6 @@
         });
       }
       
-
       var phone = document.getElementById('inPhone').value;
       if(phone.length > 4){
       var result = phone.slice(0,3) + '-' + phone.slice(3,6) + '-' + phone.slice(6);
@@ -267,9 +273,9 @@
 }
 
 
-@keyframes fadeEffect {
+/* @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
-}
+} */
 </style>
 @endsection
