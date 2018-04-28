@@ -62,6 +62,7 @@
                         <hr>
                         <li><a href="/home">Dashboard</a></li>
                         <li><a href="{{ route('reward' )}}">Reward</a></li>
+                        <li><a href="{{ route('voucher') }}">Voucher</a></li>
                         <hr>
                         <li><a href="{{ route('affiliate') }}">Affiliate</a></li>
                         <li><a href="/setting">Profile Setting</a></li>

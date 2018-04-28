@@ -387,6 +387,78 @@ class ShopController extends Controller
         $promotion->delete();
         return redirect('/shop/setting/promotion');
     }
+    public function rewardCreate(Request $request){
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'amount' => 'required',
+            'bePoint' => 'required',
+            'voucherFormat' => 'required|exists:vouchers,voucherFormat',
+            'image' => 'required|image',
+        ]);
+        $file = request()->file('image');
+        $imageName = request()->shop."_".time().'.'.request()->image->getClientOriginalExtension();
+        $path = public_path('img/rewards');
+        $file->move($path, $imageName);
 
+        //
+        DB::table('vouchers')->insert(
+            ['owner' => Auth::user()->username,
+            'status' => 0,
+            'name' => request()->name,
+            'description' => request()->description,
+            'image' => $imageName,
+            'amount' => request()->amount,
+            'bePoint' => request()->bePoint,
+            'voucherFormat' => strtoupper(request()->voucherFormat),
+            'reception' => 2,
+            'shop_id' => request()->shop_id,
+            'created_at' => Carbon::now(),
+        ]);
+
+        $log = new LogController;
+        $log->record(Auth::user()->username,'Create new reward, as '.request()->name,'');
+        return redirect('shops.reward');
+    }
+
+    public function iwant($code){
+        $vouchers = DB::table('vouchers')->where('voucherFormat', $code)->get();
+        $shop_id = $vouchers[0]->shop_id;
+        $membercards = DB::table('membercards')->where('shop_id', $shop_id)->get();
+        $card_id = $membercards[0]->id;
+        $checkCardUser = DB::table('user_cards')->where('username', Auth::user()->username)->where('card_id',$card_id)->get();
+        if ($checkCardUser == "[]"){
+            // ไม่มี card
+            return redirect('home');
+        }else{
+            if($checkCardUser[0]->point < $vouchers[0]->bePoint){
+                // แต้มไม่พอ
+                return view('user.novoucher');
+            }else{
+                // Voucher
+                $voucher_code = $code.date("Ymd").rand(0001, 9999);
+                DB::table('userVoucher')->insert(
+                    ['voucher_id' => $vouchers[0]->id,
+                    'shop_id' => $shop_id,
+                    'status' => 0,
+                    'username' => Auth::user()->username,
+                    'voucher_code' => $voucher_code,
+                    'created_at' => Carbon::now(),
+                    'use_card_id' => $checkCardUser[0]->id,
+                ]);
+
+                //หักแต้มใน card
+                $newpoint = ($checkCardUser[0]->point - $vouchers[0]->bePoint);
+                $increase = DB::table('user_cards')->where('id' , $checkCardUser[0]->id)->update([
+                    'point' => $newpoint,
+                ]);
+
+                // Log
+                $log = new LogController;
+                $log->record(Auth::user()->username,'Get reward '.$vouchers[0]->name.' , voucher code is '.$voucher_code,'');
+            }
+        }
+        return redirect('user/voucher/'.$voucher_code);
+    }
 
 }
