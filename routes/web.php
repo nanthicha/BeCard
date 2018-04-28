@@ -186,6 +186,7 @@ Route::get('/shop/reward' , [
 	'uses' => 'ShopController@reward'
 ]);
 
+Route::get('/shop/branch/edit','BranchController@edit');
 
 
 Route::get('/shop/show/{name}' , 'ShopController@showName');
@@ -205,8 +206,8 @@ Route::put('/shop/update/promotion' ,[
 	'uses' => 'ShopController@updatePT'
 ]);
 Route::get('/shop/promotion/{id}' , 'ShopController@deletePT');
-
-
+Route::put('/shop/branch/update' , 'BranchController@update');
+Route::delete('/shop/branch/delete' , 'BranchController@destroy');
 
 
 //-----------------------------

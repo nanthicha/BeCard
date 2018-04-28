@@ -61,7 +61,7 @@ class BranchController extends Controller
     public function show()
     {   
         $user = Auth::user()->username;
-        $branches = DB::table('branches')->where('username',$user)->get();
+        $branches = DB::table('branches')->where([ ['username',$user], ['deleted_at', null] ])->get();
         $package = DB::table('shops')->where('username',$user)->first()->package;
         $count = count($branches);
         // dd(count($branches));
@@ -77,7 +77,7 @@ class BranchController extends Controller
         if($user == $shop->username){
             return $this->show();
         }
-        $branches = DB::table('branches')->where('shop_id',$shop->id)->get();
+        $branches = DB::table('branches')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
         $package = $shop->package;
         $count = count($branches);
         // dd(count($branches));
@@ -91,9 +91,17 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        // return "sunny";
+        $branch = Branch::find($request->id);
+        $response = [
+            'name' => $branch->name,
+            'phone' => $branch->phone,
+            'latlng' => $branch->latlng
+        ];
+        return response()->json($response, 200);
+
     }
 
     /**
@@ -103,9 +111,15 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $branch = Branch::find($request->id);
+        $branch->name = $request->name;
+        $branch->phone = $request->phone;
+        $branch->latlng = request()->lat.','.request()->lng;
+        $branch->save();
+
+        return redirect('/shop/branch');
     }
 
     /**
@@ -114,9 +128,12 @@ class BranchController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $branch = Branch::find($request->id);
+        
+        $branch->delete();
+        return redirect('/shop/branch');
     }
 
 

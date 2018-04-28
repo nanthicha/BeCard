@@ -61,6 +61,7 @@ class CashierController extends Controller
      */
     public function store(Request $request)
     {
+        
         $usr = Auth::user()->username;
         $username = request()->username;
         $name = request()->name;
