@@ -284,7 +284,8 @@ class ShopController extends Controller
     }
 
     public function reward(){
-        return view('shops.reward');
+        $shop = DB::table('shops')->where('username',Auth::user()->username)->first();
+        return view('shops.reward',['shop'=>$shop]);
     }
 
     public function updateGen(Request $request){

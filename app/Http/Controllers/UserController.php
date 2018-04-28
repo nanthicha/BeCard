@@ -82,7 +82,7 @@ class UserController extends Controller
         }
         $checkcard = DB::table('user_cards')->where('card_id',$card->id)->where('username',Auth::user()->username)->first();
         if ($checkcard !== null){
-            return redirect('home')->with('message','You have this card.');
+            return redirect('home')->with('message','You have this card already.');
         }else{
             DB::table('user_cards')->insert(
                 ['username' => Auth::user()->username,
@@ -94,7 +94,7 @@ class UserController extends Controller
             $log->record(Auth::user()->username,'Register new card :'.$card->name,'');
             $log->recordBePoint(Auth::user()->username,"Register new card :".$card->name,10,0);
         }
-        return redirect('home')->with('message','Register new card successfully.');
+        return view('user.cardyes',['cardname'=>$card->name]);
     }
 
 }
