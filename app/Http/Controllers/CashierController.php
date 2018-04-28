@@ -113,9 +113,9 @@ class CashierController extends Controller
         $shop_id = $shops->id;
         $package = $shops->package;
         // dd($shop_id);
-        $branches = DB::table('branches')->where('username',$user)->get();
-        $cashiers = DB::table('cashiers')->where('shop_id',$shop_id)->get();
-        $imgCashiers = DB::table('users')->where('shop_id',$shop_id)->join('cashiers', 'users.username', '=', 'cashiers.username')
+        $branches = DB::table('branches')->where([ ['username',$user], ['deleted_at', null] ])->get();
+        $cashiers = DB::table('cashiers')->where([ ['shop_id',$shop_id], ['deleted_at', null] ])->get();
+        $imgCashiers = DB::table('users')->where([ ['shop_id',$shop_id], ['deleted_at', null] ])->join('cashiers', 'users.username', '=', 'cashiers.username')
             ->select('users.username', 'users.image')
             ->get()->pluck('image','username');
         $countCashiers = DB::table('cashiers')->where('shop_id',$shop_id)
@@ -155,9 +155,12 @@ class CashierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $cashier = Cashier::find($request->id);
+        // dd($cashier);
+        $cashier->delete();
+        return redirect('/shop/cashier');
     }
 
     public function check()

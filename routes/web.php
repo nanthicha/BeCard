@@ -208,7 +208,7 @@ Route::put('/shop/update/promotion' ,[
 Route::get('/shop/promotion/{id}' , 'ShopController@deletePT');
 Route::put('/shop/branch/update' , 'BranchController@update');
 Route::delete('/shop/branch/delete' , 'BranchController@destroy');
-
+Route::delete('/shop/cashier/delete' , 'CashierController@destroy');
 
 //-----------------------------
 
