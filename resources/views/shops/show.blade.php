@@ -34,7 +34,7 @@
               <input type="hidden" value="{{ $shop->latlng }}" id="latlng">
               <input type="hidden" value="{{ $shop->time }}" id="time">
                 <div class="panel-body">
-                    <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive"  >
+                    <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive"  style="width:100%">
                     <img src="{{ asset('img/shops/logo/'.$shop->logo) }}" class="img-thumbnail center-block" style="width:200px;height:auto;top:-60px;position:relative;">
                     
                     <div style="margin-top:-62px;">

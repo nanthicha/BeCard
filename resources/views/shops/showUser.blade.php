@@ -9,11 +9,11 @@
               <input type="hidden" value="{{ $shop->latlng }}" id="latlng">
               <input type="hidden" value="{{ $shop->time }}" id="time">
                     @if($shop->imgCover == 'defaultCover.png')
-                    <img src="{{ asset('img/shops/cover/defaultCoverUser.png') }}" class="img-responsive" >
+                    <img src="{{ asset('img/shops/cover/defaultCoverUser.png') }}" class="img-responsive" style="width:100%">
                     @else
-                    <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive" >
+                    <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive" style="width:100%">
                     @endif
-                    <img src="{{ asset('img/shops/logo/'.$shop->logo) }}" class="img-thumbnail center-block" style="width:390px;height:auto;top:-150px;position:relative;">
+                    <img src="{{ asset('img/shops/logo/'.$shop->logo) }}" class="img-thumbnail center-block" style="width:350px;height:auto;top:-150px;position:relative;">
                     
                     <div style="margin-top:-135px;">
                     <center>
