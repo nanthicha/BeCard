@@ -272,7 +272,7 @@ class ShopController extends Controller
     public function showName($url){
 
         $shop = DB::table('shops')->where('url',$url)->get()->first();
-        $promotions = DB::table('promotions')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
+        
         if($shop == null){
             return view('errors.pageNotF');
         }
@@ -280,7 +280,7 @@ class ShopController extends Controller
             return $this->show();
         }
         // dd($user);
-        
+        $promotions = DB::table('promotions')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
         $branches = DB::table('branches')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
         $package = $shop->package;
         $count = count($branches);
