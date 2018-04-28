@@ -350,8 +350,8 @@
   height: 480px;
 }
 .map{
-  width: 440px;
-  height: 300px;
+  width: 515px;
+  height: 400px;
 }
 .modal-dialog {
   min-height: calc(100vh - 60px);
