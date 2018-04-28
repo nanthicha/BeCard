@@ -31,7 +31,7 @@
             <div class="panel panel-default" >
             <div style="padding:30px;">
             <h1 style="margin-bottom: 20px;"><span class="glyphicon glyphicon-cog"></span> Setting</h1>
-            
+
             <div class="row" >
             <div class="col-sm-3">
                 <ul class="nav nav-pills nav-stacked" style="width:100%;z-index: 0;position:relative;margin-left:-15px;">
@@ -41,15 +41,15 @@
                 </ul>
               </div>
 
-             
+
 
               <div class="card" style="margin-left: -30px;">
-                
+
                 <div class="card-body" style="padding:20px;">
                   <h1>&nbsp&nbsp&nbsp&nbspPromotion</h1>
                   <hr>
                   <img src="{{ asset('img/shops/image/cog2.png') }}" class="img-responsive pull-right" width="150" height="150" style="margin-top:-120px;" >
-                  
+
                   <p>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspPreview</p>
 
                   <div class="col-md-9">
@@ -73,7 +73,7 @@
                     @endif
 
                       <!-- Wrapper for slides -->
-                     
+
                       <div class="carousel-inner">
                       @if(count($promotions) > 0)
                       @foreach( $promotions as $index => $promotion)
@@ -92,7 +92,7 @@
                           <img src="{{asset('img/promotions/defaultPromo.png')}}" >
                         </div>
                       @endif
-                       
+
                       </div>
 
                       <!-- Left and right controls -->
@@ -131,13 +131,13 @@
                     @endif
                 <div class="row">
                 <div style="width:80%;margin: 0 auto;">
-               
-                   
+
+
                   <h3>Promotion</h3>
                   <hr>
-                 
-                    @if(count($promotions) > 0)  
-                     
+
+                    @if(count($promotions) > 0)
+
                     <table class="table table-hover">
                         <tbody>
                         @foreach( $promotions as $index => $promotion)
@@ -149,16 +149,16 @@
 
                               <div style="width:29%;float:right;padding:5px;" >
                               <center>
-                              
+
                               <h4 style="margin-top:50px;"><b>Promotion Added</b></h4>
                               <hr style="margin-top:-5px;">
-                            
+
                               <p style="margin-top:-15px;">{{ Carbon\Carbon::parse($promotion->created_at)->diffForHumans() }}</p>
                               <br>
                               <button data-toggle="modal" data-target="#delete" class="btn btn-danger" onclick="deleteC({{$promotion->id}})"><span class="glyphicon glyphicon-trash"></span> &nbspDelete</button>
 
                               </center>
-                              
+
                               </div>
 
 
@@ -167,15 +167,15 @@
                           </tr>
                           @endforeach
 
-                          
-                            
+
+
                         </tbody>
                     </table>
                     @else
                     <center><p>No Promotions<p></center>
                     @endif
-                  
-                    
+
+
                     </div>
                 </div>
                 </div>
@@ -183,7 +183,7 @@
 
 
 
-             
+
 
               <div class="clearfix visible-lg"></div>
             </div>
@@ -203,7 +203,7 @@
       <center><h3 class="modal-title" id="lineModalLabel">Add Promotion</h3></center>
 		</div>
 		<div class="modal-body">
-			
+
             <!-- content goes here -->
       <form method="POST" action="{{ route('shop.update.promotion') }}" enctype="multipart/form-data" >
           {{ csrf_field() }}
@@ -212,8 +212,9 @@
             <br>
             <center><input type="file" name="image"  onchange="readURL(this);" class="form-control" style="width:500px;display:inline-block" required>
             <button type="submit" class="btn btn-success">Upload</button></center>
+            <center style="color:#ff4d4d">* Please upload a picture smaller than 4 MB.</center>
       </form>
-              
+
 
 		</div>
 
@@ -229,27 +230,27 @@
 			<div class="modal-header">
 				<div class="icon-box">
 					<i class="material-icons">&#xE5CD;</i>
-				</div>				
-				<h4 class="modal-title">Are you sure?</h4>	
+				</div>
+				<h4 class="modal-title">Are you sure?</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			</div>
 			<div class="modal-body">
 				<p>Do you really want to delete these records? This process cannot be undone.</p>
 			</div>
 			<div class="modal-footer">
-      
+
 				<button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-danger" form="formD">Delete</button>
         <form method="POST" action="/shop/promotion/delete"  id="formD">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
-				
+
         <input id="deleteId" name="id" type="hidden">
         </form>
 			</div>
 		</div>
 	</div>
-</div>     
+</div>
 @endsection
 
 @section('css')
@@ -286,7 +287,7 @@
   background-image: none;
 }
 
-.modal-confirm {		
+.modal-confirm {
 		color: #636363;
 		width: 400px;
 	}
@@ -298,7 +299,7 @@
 		font-size: 14px;
 	}
 	.modal-confirm .modal-header {
-		border-bottom: none;   
+		border-bottom: none;
         position: relative;
 	}
 	.modal-confirm h4 {
@@ -316,14 +317,14 @@
 	}
 	.modal-confirm .modal-footer {
 		border: none;
-		text-align: center;		
+		text-align: center;
 		border-radius: 5px;
 		font-size: 13px;
 		padding: 10px 15px 25px;
 	}
 	.modal-confirm .modal-footer a {
 		color: #999;
-	}		
+	}
 	.modal-confirm .icon-box {
 		width: 80px;
 		height: 80px;

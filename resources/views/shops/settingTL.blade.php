@@ -31,7 +31,7 @@
             <div class="panel panel-default" >
             <div style="padding:30px;">
             <h1 style="margin-bottom: 20px;"><span class="glyphicon glyphicon-cog"></span> Setting</h1>
-            
+
             <div class="row" >
             <div class="col-sm-3">
                 <ul class="nav nav-pills nav-stacked" style="width:100%;z-index: 0;position:relative;margin-left:-15px;">
@@ -41,21 +41,21 @@
                 </ul>
               </div>
 
-             
+
 
               <div class="card" style="margin-left: -30px;">
-                
+
                 <div class="card-body" style="padding:20px;">
                   <h1>&nbsp&nbsp&nbsp&nbspTimeline</h1>
                   <hr>
                   <img src="{{ asset('img/shops/image/cog2.png') }}" class="img-responsive pull-right" width="150" height="150" style="margin-top:-120px;" >
                   <br>
-                 
-                   
+
+
                   <form class="form-horizontal" method="POST" action="{{ route('shop.update.timeline') }} " enctype="multipart/form-data" >
                         <div class="form-group">
                               <label >&nbsp&nbsp&nbsp&nbsp&nbsp&nbspShop Cover Image</label>
-                              
+
                               {{ csrf_field() }}
                               {{ method_field('PUT') }}
                               <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" id="cover" class="img-responsive" style="padding: 0 15px;width:100%">
@@ -63,17 +63,18 @@
                                 <br>
                                 <input type="file" name="image" onchange="readURL(this,'cover');" class="form-control" style="width:300px;display:inline-block;margin-left:35%;" required>
                                 <button type="submit" class="btn btn-success">Upload</button>
+                                <center style="color:#ff4d4d">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp* Please upload a picture smaller than 4 MB.</center>
                                 <input type="hidden" name="type" value="cover">
-       
+
                                 </form>
-                           
+
                         </div>
                         <hr>
-                      
+
                         <form class="form-horizontal" method="POST" action="{{ route('shop.update.timeline') }} " enctype="multipart/form-data" >
                         <div class="form-group">
                               <label class="col-md-4 control-label">Shop Logo</label>
-                              
+
                               {{ csrf_field() }}
                                {{ method_field('PUT') }}
                                 <img src="{{ asset('img/shops/logo/'.$shop->logo) }}" id="logo" alt="" width="300px"  class="img-thumbnail " style="margin-left:10px;">
@@ -81,30 +82,19 @@
                                 <br>
                                 <input type="file" onchange="readURL(this,'logo');" name="image" class="form-control" style="width:300px;display:inline-block;margin-left:35%;" required>
                                 <button type="submit" class="btn btn-success">Upload</button>
+                                <center style="color:#ff4d4d">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp* Please upload a picture smaller than 4 MB.</center>
                                 <input type="hidden" name="type" value="logo">
-       
-                             
-                           
+
+
+
                         </div>
                         </form>
-                        
-
-
-
-                
-                    
-
-
-                        
-                      
-          
-                  
                 </div>
               </div>
 
 
 
-             
+
 
               <div class="clearfix visible-lg"></div>
             </div>
