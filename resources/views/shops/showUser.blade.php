@@ -9,9 +9,9 @@
               <input type="hidden" value="{{ $shop->latlng }}" id="latlng">
               <input type="hidden" value="{{ $shop->time }}" id="time">
                     @if($shop->imgCover == 'defaultCover.png')
-                    <img src="{{ asset('img/shops/cover/defaultCoverUser.png') }}" class="img-responsive" style="height:300px;">
+                    <img src="{{ asset('img/shops/cover/defaultCoverUser.png') }}" class="img-responsive" >
                     @else
-                    <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive" style="height:300px;">
+                    <img src="{{ asset('img/shops/cover/'.$shop->imgCover) }}" class="img-responsive" >
                     @endif
                     <img src="{{ asset('img/shops/logo/'.$shop->logo) }}" class="img-thumbnail center-block" style="width:390px;height:auto;top:-150px;position:relative;">
                     
