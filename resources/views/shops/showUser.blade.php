@@ -189,13 +189,11 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
                 	@foreach ($membercards as $index => $card)
                  
                   <div class="col-md-6 " style="margin-top:20px;">
-                      <div id="{{$index}}" class="container_card" onClick="reply_click(this)" >
+                      <div id="{{$index}}" class="container_card"  >
                         <div class="card_home card{{$index}}">
                           <div class="front" style="background: url({{asset('img/cards'.'/'.$card->imageBG)}} )top center;background-size: cover; z-index: 1">
                           </div>
-                          <div class="back" style="background: linear-gradient(45deg, {{$card->colorHex1}} 50%, {{$card->colorHex2}} 100%) top center;background-size: cover; z-index: 1">
-                             <img src="{{$qrLink}}" height="150" width="150">
-                          </div>
+                    
                         </div>
                       </div>
                   </div>
@@ -393,13 +391,8 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
 
     }
       
-    function reply_click(elem)
-{
-    var id = $(elem).attr("id");
-    var el = '.card'+id;
-    $(el).toggleClass('flipped');
-}
-$("#slideshow > div:gt(0)").hide();
+
+
           
        
     </script>
