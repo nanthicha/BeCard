@@ -428,16 +428,15 @@ class ShopController extends Controller
         $membercards = DB::table('membercards')->where('shop_id', $shop_id)->get();
         $card_id = $membercards[0]->id;
         $checkCardUser = DB::table('user_cards')->where('username', Auth::user()->username)->where('card_id',$card_id)->get();
-        if ($checkCardUser == "[]"){
-            // ไม่มี card
-            return redirect('home');
-        }else{
-            if($checkCardUser[0]->point < $vouchers[0]->bePoint){
+        if ($shop_id == 5){
+            if(Auth::user()->bePoint < $vouchers[0]->bePoint){
                 // แต้มไม่พอ
                 return view('user.novoucher');
             }else{
-                // Voucher
                 $voucher_code = $code.date("Ymd").rand(0001, 9999);
+                $log = new LogController;
+                $log->record(Auth::user()->username,'Get reward '.$vouchers[0]->name.' , voucher code is '.$voucher_code,'');
+                $log->recordBePoint(Auth::user()->username,'Get reward '.$vouchers[0]->name.' , voucher code is '.$voucher_code,$vouchers[0]->bePoint,1);
                 DB::table('userVoucher')->insert(
                     ['voucher_id' => $vouchers[0]->id,
                     'shop_id' => $shop_id,
@@ -445,18 +444,40 @@ class ShopController extends Controller
                     'username' => Auth::user()->username,
                     'voucher_code' => $voucher_code,
                     'created_at' => Carbon::now(),
-                    'use_card_id' => $checkCardUser[0]->id,
+                    'use_card_id' => 0,
                 ]);
+            }
+        }else{
+            if ($checkCardUser == "[]"){
+                // ไม่มี card
+                return redirect('home');
+            }else{
+                if($checkCardUser[0]->point < $vouchers[0]->bePoint){
+                    // แต้มไม่พอ
+                    return view('user.novoucher');
+                }else{
+                    // Voucher
+                    $voucher_code = $code.date("Ymd").rand(0001, 9999);
+                    DB::table('userVoucher')->insert(
+                        ['voucher_id' => $vouchers[0]->id,
+                        'shop_id' => $shop_id,
+                        'status' => 0,
+                        'username' => Auth::user()->username,
+                        'voucher_code' => $voucher_code,
+                        'created_at' => Carbon::now(),
+                        'use_card_id' => $checkCardUser[0]->id,
+                    ]);
 
-                //หักแต้มใน card
-                $newpoint = ($checkCardUser[0]->point - $vouchers[0]->bePoint);
-                $increase = DB::table('user_cards')->where('id' , $checkCardUser[0]->id)->update([
-                    'point' => $newpoint,
-                ]);
+                    //หักแต้มใน card
+                    $newpoint = ($checkCardUser[0]->point - $vouchers[0]->bePoint);
+                    $increase = DB::table('user_cards')->where('id' , $checkCardUser[0]->id)->update([
+                        'point' => $newpoint,
+                    ]);
 
-                // Log
-                $log = new LogController;
-                $log->record(Auth::user()->username,'Get reward '.$vouchers[0]->name.' , voucher code is '.$voucher_code,'');
+                    // Log
+                    $log = new LogController;
+                    $log->record(Auth::user()->username,'Get reward '.$vouchers[0]->name.' , voucher code is '.$voucher_code,'');
+                }
             }
         }
         return redirect('user/voucher/'.$voucher_code);
