@@ -1,6 +1,15 @@
 <?php 
 $membercards = DB::table('membercards')->where('shop_id',$shop->id)->get(); 
 $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=ffffff&amp;data=".Auth::user()->private_key;
+
+
+// Reward Check
+$allmembercard = DB::table('membercards')
+  ->where('shop_id',$shop->id)
+  ->where('user_cards.username',Auth::user()->username)
+  ->join('user_cards', 'user_cards.card_id', '=', 'membercards.id')
+  ->select('membercards.*','user_cards.*')
+  ->get();
 ?>
 @extends('shops.layout')
 
@@ -114,10 +123,90 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
                  <div  style="width:80%;margin:0 auto;">
                  <hr>
                   <h3>Reward</h3>
-                  <br>
+                  @if ($allmembercard == "[]")
+                  <small>You no have any member card of {{$shop->name}} , Please register to get a reward.</small>
+                  @else
+                  <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#exampleModal">Click to see a member card</button>
+                  <p>You card : <label class="label label-success">{{$allmembercard[0]->name}}</label></p>
+                  <p>Point Now : <label class="label label-primary">{{$allmembercard[0]->point}} Point</label></p>
+                  <small>You can redeem points for rewards.The reward is enough points. You can press the button to redeem.</small>
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">{{$allmembercard[0]->name}}</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <center>
+                          <div id="99" class="container_card" onClick="reply_click(this)">
+                            <div class="card_home card99">
+                              <div class="front" style="background: url({{asset('img/cards'.'/'.$allmembercard[0]->imageBG)}} )top center;background-size: cover; z-index: 1">
+                              </div>
+                              <div class="back" style="background: url(../../img/cards/memberCover.png),linear-gradient(45deg, {{$allmembercard[0]->colorHex1}} 50%, {{$allmembercard[0]->colorHex2}} 100%) top center;background-size: cover; z-index: 1">
+                                  <img src="{{$qrLink}}" height="150" width="150">
+                              </div>
+                            </div>
+                          </div>
+                        </div></center>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  @endif
+                  <hr>
+                  @if ($rewards->count() == 0)
+                  <center>This shop is no have reward.</center>
+                  @else
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <th width="200px">Image</th>
+                        <th>Description</th>
+                        <th></th>
+                      </thead>
+                      <tbody>
+                        @foreach ($rewards as $reward)
+                          <tr>
+                            <td><img src="{{asset('img/rewards/'.$reward->image)}}" width="200px"></td>
+                            <td>
+                              <b>{{$reward->name}}</b><br>
+                              <small>{{$reward->description}}</small>
+                            </td>
+                            @if ($allmembercard == "[]")
+                            <td>
+                              <button class="btn btn-info btn-lg" disabled>
+                                <b>Redeem</b><br>
+                                <small>{{$reward->bePoint}} Point</small>
+                              </button>
+                            </td>
+                            @else
+                            <td>
+                              @if ($reward->bePoint <= $allmembercard[0]->point)
+                              <a href="{{route('shop.reward.iwant',['code'=>$reward->voucherFormat])}}"><button class="btn btn-success btn-lg">
+                                <b>Redeem</b><br>
+                                <small>{{$reward->bePoint}} Point</small>
+                              </button></a>
+                              @else
+                              <button class="btn btn-info btn-lg" disabled>
+                                <b>Redeem</b><br>
+                                <small>{{$reward->bePoint}} Point</small>
+                              </button>
+                              @endif
+                            </td>
+                            @endif
+                          </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                  @endif
                   <hr>
                   </div>
-                  
                   <div  style="width:80%;margin:0 auto;">
                   <br>
                  <h3> Show Branches</h3>
@@ -125,9 +214,6 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
                 <input type="hidden" id="count" value="{{ $count }}">
                 <!-- <button data-toggle="modal" data-target="#squarespaceModal" class="btn btn-primary" style="margin-left:4.5%" id="add">Add Branch</button> -->
                 <br><br>
-                    
-                        
-                    
                            @if($count == 0)
                                <center><p>No Branchs<p></center>
                           @elseif(count($branches) == 1)
@@ -189,7 +275,7 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
                 	@foreach ($membercards as $index => $card)
                  
                   <div class="col-md-6 " style="margin-top:20px;">
-                      <div id="{{$index}}" class="container_card" onClick="reply_click(this)" >
+                      <div id="{{$index}}" class="container_card">
                         <div class="card_home card{{$index}}">
                           <div class="front" style="background: url({{asset('img/cards'.'/'.$card->imageBG)}} )top center;background-size: cover; z-index: 1">
                           </div>

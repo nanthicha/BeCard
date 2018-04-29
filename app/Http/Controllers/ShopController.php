@@ -282,12 +282,13 @@ class ShopController extends Controller
         // dd($user);
         $promotions = DB::table('promotions')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
         $branches = DB::table('branches')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
+        $rewards = DB::table('vouchers')->where([ ['shop_id',$shop->id], ['status', 1] ])->get();
         $package = $shop->package;
         $count = count($branches);
         // dd(count($branches));
 
         //
-        return view('shops.showUser' , ['shop' => $shop , 'url' => $url , 'promotions' => $promotions , 'branches' => $branches , 'count' => $count , 'package' => $package] );
+        return view('shops.showUser' , ['shop' => $shop , 'url' => $url , 'promotions' => $promotions , 'branches' => $branches , 'count' => $count , 'package' => $package, 'rewards' => $rewards] );
     }
 
     public function reward(){
@@ -393,7 +394,7 @@ class ShopController extends Controller
             'description' => 'required',
             'amount' => 'required',
             'bePoint' => 'required',
-            'voucherFormat' => 'required|exists:vouchers,voucherFormat',
+            'voucherFormat' => 'required|uniqe:vouchers,voucherFormat',
             'image' => 'required|image',
         ]);
         $file = request()->file('image');
@@ -418,7 +419,7 @@ class ShopController extends Controller
 
         $log = new LogController;
         $log->record(Auth::user()->username,'Create new reward, as '.request()->name,'');
-        return redirect('shops.reward');
+        return redirect('shop/reward');
     }
 
     public function iwant($code){
