@@ -85,8 +85,14 @@ class UserController extends Controller
             return redirect('home')->with('message','Dont have this shop,please check you QR code agian.');
         }
         $checkcard = DB::table('user_cards')->where('card_id',$card->id)->where('username',Auth::user()->username)->first();
-        if ($checkcard !== null){
-            return redirect('home')->with('message','You have this card already.');
+        $allmembercard = DB::table('membercards')
+        ->where('shop_id',$card->shop_id)
+        ->where('user_cards.username',Auth::user()->username)
+        ->join('user_cards', 'user_cards.card_id', '=', 'membercards.id')
+        ->select('membercards.id','user_cards.card_id')
+        ->get();
+        if ($checkcard !== null or $allmembercard != "[]"){
+            return view('user.cardalready');
         }else{
             DB::table('user_cards')->insert(
                 ['username' => Auth::user()->username,
