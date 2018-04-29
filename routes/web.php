@@ -187,6 +187,12 @@ Route::get('/shop/reward' , [
 Route::get('/shop/reward/{code}/view' , [
 	'as' => 'shop.reward.view',
 	'uses' => 'ShopController@rewardView']);
+Route::get('/shop/reward/{code}/edit' , [
+	'as' => 'shop.reward.edit',
+	'uses' => 'ShopController@rewardEdit']);
+Route::post('/shop/reward/update' , [
+	'as' => 'shop.reward.update',
+	'uses' => 'ShopController@rewardUpdate']);
 Route::post('/shop/reward/create' , [
 	'as' => 'shop.reward.create',
 	'uses' => 'ShopController@rewardCreate']);

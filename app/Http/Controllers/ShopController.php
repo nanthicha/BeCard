@@ -394,7 +394,7 @@ class ShopController extends Controller
             'description' => 'required',
             'amount' => 'required',
             'bePoint' => 'required',
-            'voucherFormat' => 'required|uniqe:vouchers,voucherFormat',
+            'voucherFormat' => 'required|unique:vouchers,voucherFormat',
             'image' => 'required|image',
         ]);
         $file = request()->file('image');
@@ -519,6 +519,30 @@ class ShopController extends Controller
         }
         return view('user.yesCode');
     }
+    public function rewardEdit($code){
+        $reward = DB::table('vouchers')->where('voucherFormat',$code)->first();
+        if (Auth::user()->username === $reward->owner){
+            return view('shops.rewardEdit',['reward'=>$reward]);
+        }
+        return redirect('/not_permitted_to_execute_this_operation');
+    }
+    public function rewardUpdate(Request $request){
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+            DB::table('vouchers')
+                ->where('voucherFormat',request()->voucherFormat)
+                ->update(['name'=>request()->name,
+                    'status'=>request()->status,
+                    'description'=>request()->description,
+                    'amount'=>request()->amount,
+                    'bePoint'=>request()->bePoint,
+                    'updated_at' => date('Y-m-d H:i:s')]);
+        // Logs
+        $log = new LogController;
+        $log->record(Auth::user()->username,'Updated reward, as '.request()->name,'');
 
-
+        return redirect('shop/reward');
+    }
 }
