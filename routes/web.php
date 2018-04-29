@@ -196,6 +196,9 @@ Route::get('/shop/reward/iwant/{code}' , [
 Route::get('/user/voucher/{id}' , [
 	'as' => 'user.voucher.id',
 	'uses' => 'UserController@showVoucherID']);
+Route::get('/shop/usevoucher/{id}' , [
+	'as' => 'shop.usevoucher',
+	'uses' => 'ShopController@useVoucher']);
 
 Route::get('/shop/branch/edit','BranchController@edit');
 

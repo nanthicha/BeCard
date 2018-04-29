@@ -446,6 +446,10 @@ class ShopController extends Controller
                     'created_at' => Carbon::now(),
                     'use_card_id' => 0,
                 ]);
+                $newamount = $vouchers[0]->amount -1;
+                DB::table('vouchers')
+                        ->where('id',$vouchers[0]->id)
+                        ->update(['amount'=>$newamount]);
             }
         }else{
             if ($checkCardUser == "[]"){
@@ -477,6 +481,12 @@ class ShopController extends Controller
                     // Log
                     $log = new LogController;
                     $log->record(Auth::user()->username,'Get reward '.$vouchers[0]->name.' , voucher code is '.$voucher_code,'');
+
+                    // อัพเดทยอด
+                    $newamount = $vouchers[0]->amount -1;
+                    DB::table('vouchers')
+                        ->where('id',$vouchers[0]->id)
+                        ->update(['amount'=>$newamount]);
                 }
             }
         }
@@ -486,6 +496,28 @@ class ShopController extends Controller
         $voucher = DB::table('vouchers')->where('voucherFormat',$code)->first();
         $vouchers = DB::table('userVoucher')->where('voucher_id',$voucher->id)->get();
         return view('shops.vouchers',['vouchers'=>$vouchers]);
+    }
+
+    public function useVoucher($code){
+        if(Auth::user()->role !== "Cashier"){
+            return view('user.novoucher');
+        }else{
+            $voucher = DB::table('userVoucher')->where('voucher_code',$code)->get();
+            if ($voucher == "[]"){
+                return view('user.novoucher');
+            }else{
+                DB::table('userVoucher')
+                        ->where('voucher_code',$code)
+                        ->update(['updated_at'=>date('Y-m-d H:i:s'),
+                            'status'=>1,
+                            'cashier'=>Auth::user()->username,
+                            ]);
+                // Log
+                $log = new LogController;
+                $log->record(Auth::user()->username,'Give reward voucher code '.$code,'');
+            }
+        }
+        return view('user.yesCode');
     }
 
 
