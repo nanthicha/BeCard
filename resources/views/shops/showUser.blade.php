@@ -1,8 +1,12 @@
+<?php 
+$membercards = DB::table('membercards')->where('shop_id',$shop->id)->get(); 
+$qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=ffffff&amp;data=".Auth::user()->private_key;
+?>
 @extends('shops.layout')
 
 @section('content')
 
-
+<div id="tabcontent" style="display:block;">
 <input id="inPhone" type="hidden" value="{{ $shop->phone }}">
   <!-- Tab panes -->
 
@@ -126,8 +130,30 @@
                     
                            @if($count == 0)
                                <center><p>No Branchs<p></center>
+                          @elseif(count($branches) == 1)
+                          <div  style="margin:0 auto;width:55%">
+                              @foreach($branches as $index => $branch)
+                              
+                                <div class="card " style="padding:15px;display:block;margin-bottom:20px;">
+                                
+                                <div class="card-body">
+                                    <h5 class="card-title">Branch Name: {{ $branch->name }} </h5>
+                                    <hr>
+                                    <input type="hidden" id="{{$index}}-latlng" value="{{$branch->latlng}}">
+                                    <p class="card-text"><span ><span class="glyphicon glyphicon-earphone"></span> Phone: </span>&nbsp;  <span id="{{$index.'-ph'}}">{{$branch->phone}}</span>  </p>
+                                    <p class="card-text"><span class="glyphicon glyphicon-map-marker"></span> Location: &nbsp;<a  href="javascript:void(0)" onclick="return sh({{$index}});"> <span id="{{$index.'-address'}}"></span> &nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></p>
+                                    
+                                    <div class="map" id="{{$index}}-map" style="width:605px;"></div>
+                                    <input type="hidden" id="{{$index}}-sh" value="0">
+                                
+                                
+                                </div>
+                                </div>
+                                </div>
+                                @endforeach
+                          </div>
                            
-                           @endif
+                           @else
                             @foreach($branches as $index => $branch)
                               
                             <div class="col-md-6 ">
@@ -148,9 +174,40 @@
                             </div>
                             </div>
                         @endforeach
+                        @endif
                       </div>
 
+                 
+                 <div style="clear:both"></div>
+                 <br>
+                 <div style="width:80%;margin:0 auto;">
+                 <hr>
+                 
+                  <h3>Member Card Collection</h3>
+                  <br>
+                  <div style="width:80%;margin:0 auto;">
+                	@foreach ($membercards as $index => $card)
+                 
+                  <div class="col-md-6 " style="margin-top:20px;">
+                      <div id="{{$index}}" class="container_card" onClick="reply_click(this)" >
+                        <div class="card_home card{{$index}}">
+                          <div class="front" style="background: url({{asset('img/cards'.'/'.$card->imageBG)}} )top center;background-size: cover; z-index: 1">
+                          </div>
+                          <div class="back" style="background: linear-gradient(45deg, {{$card->colorHex1}} 50%, {{$card->colorHex2}} 100%) top center;background-size: cover; z-index: 1">
+                             <img src="{{$qrLink}}" height="150" width="150">
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                	@endforeach
+                  
+                  </div>
+                  
+                  </div>
+                  <div style="clear:both"></div>
+                  <br><br><br>
 
+      </div>
 
 
            
@@ -336,7 +393,13 @@
 
     }
       
-
+    function reply_click(elem)
+{
+    var id = $(elem).attr("id");
+    var el = '.card'+id;
+    $(el).toggleClass('flipped');
+}
+$("#slideshow > div:gt(0)").hide();
           
        
     </script>
@@ -389,15 +452,9 @@
     background-color:#fff;
     border-color:#dee2e6 #dee2e6 #fff
 }
-#tabcontent {
-  display: none; 
-  animation: fadeEffect 3.5s;
-}
 
 
-/* @keyframes fadeEffect {
-    from {opacity: 0;}
-    to {opacity: 1;}
-} */
+
+
 </style>
 @endsection

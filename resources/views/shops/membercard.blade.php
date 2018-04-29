@@ -37,8 +37,10 @@ $count_membercard = $membercard->count();
             <div class="panel panel-default">
 
                 <div class="panel-body">
+
                 <center><h1>Member Card of {{$shop->name}}</h1></center>
                 <hr>
+				<div style="width:75%;margin:0 auto;">
 				@if (count($errors) > 0)
 				    <div class="alert alert-danger">
 				        <strong>Whoops!</strong> There were some problems with your input.
@@ -61,7 +63,7 @@ $count_membercard = $membercard->count();
 	                <?php $membercards = DB::table('membercards')->where('username',Auth::user()->username)->get(); ?>
                 	@foreach ($membercards as $card)
 					<div class="row">
-					    <div class="col-lg-5">
+					    <div class="col-lg-6">
 					        <div id="1" class="container_card">
 					          <div class="card_home card1">
 					            <div class="front" style="background: url({{asset('img/cards'.'/'.$card->imageBG)}} )top center;background-size: cover; z-index: 1">
@@ -69,7 +71,7 @@ $count_membercard = $membercard->count();
 					          </div>
 					        </div>
 					    </div>
-					    <div class="col-lg-7">
+					    <div class="col-lg-5" style="margin-left:20px;">
 					        <h4><b>{{ $card->name }}</b></h4>
 					        <p>{{ $card->description }}</p>
 					        <p>Condition : <label class="label label-info">{{ $card->bahtperpoint }} Baht / 1 Point</label></p>
@@ -85,14 +87,16 @@ $count_membercard = $membercard->count();
                 	@endforeach
                 	@if ($shop->package == "gold")
                 		<p></p>
-                		<hr>
+                		
                 	    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#exampleModal">Create new member card</button>
+						<br>
 						
                 	@endif
 					
                 @endif
 				<br>
                 </div>
+				</div>
 				<!-- Modal -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				  <div class="modal-dialog" role="document">
