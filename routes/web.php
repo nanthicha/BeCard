@@ -210,6 +210,7 @@ Route::put('/shop/branch/update' , 'BranchController@update');
 Route::delete('/shop/branch/delete' , 'BranchController@destroy');
 Route::delete('/shop/cashier/delete' , 'CashierController@destroy');
 
+
 //-----------------------------
 
 //Cashier
@@ -225,7 +226,8 @@ Route::post('/cashier/add/store', [
 Route::get('/cashier/history', [
 	'as' => 'cashier.history',
 	'uses' => 'CashierController@history']);
-
+Route::get('/cashier/resetPassword' , 'CashierController@resetPwd');
+Route::post('/cashier/resetPassword' , 'CashierController@updatePwd');
 
 //API
 Route::post('/api/cashierStep1', [
@@ -234,3 +236,7 @@ Route::post('/api/cashierStep1', [
 Route::get('/api/image', [
 	'as' => 'api.image',
 	'uses' => 'ApiController@image']);
+
+// Route::get('/success' , function(){
+// 	return view('foundations.successAnimate');
+// });

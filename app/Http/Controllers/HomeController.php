@@ -27,7 +27,11 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::user()->role == "Cashier"){
-            return redirect(route('cashier.add'));
+            if( DB::table('cashiers')->where('username',Auth::user()->username)->first()->password == null){
+            return redirect(route('cashier.add'));}
+            else{
+                return redirect('/cashier/resetPassword');
+            }
         }
         $membercard = DB::table('membercards')->get();
         $shop_url = DB::table('shops')->get()->pluck('url','id');

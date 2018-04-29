@@ -144,9 +144,18 @@ class CashierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function updatePwd(Request $request)
     {
-        //
+       
+        $request->validate(['password' => 'required|string|min:6|confirmed']);
+        $cashier = DB::table('cashiers')->where('username', $request->usr)
+        ->update(['password' => null]);
+
+        DB::table('users')->where('username', $request->usr)
+        ->update(['password' => bcrypt($request->password)]);
+        
+
+        return view('foundations.successAnimate' );
     }
 
     /**
@@ -226,4 +235,11 @@ class CashierController extends Controller
                 ->get();
         return view('cashier.history',['history'=>$history]);
     }
+
+    public function resetPwd(){
+        $username = DB::table('cashiers')->where('username' , Auth::user()->username)->first()->username;
+        return view('cashier.resetPassword' ,['username' => $username]);
+    }
+
+    
 }
