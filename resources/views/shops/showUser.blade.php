@@ -275,13 +275,15 @@ $allmembercard = DB::table('membercards')
                 	@foreach ($membercards as $index => $card)
                  
                   <div class="col-md-6 " style="margin-top:20px;">
+<<<<<<< HEAD
                       <div id="{{$index}}" class="container_card">
+=======
+                      <div id="{{$index}}" class="container_card"  >
+>>>>>>> 48b5936b9105b187879f7f2369c93545f2ecf1d8
                         <div class="card_home card{{$index}}">
                           <div class="front" style="background: url({{asset('img/cards'.'/'.$card->imageBG)}} )top center;background-size: cover; z-index: 1">
                           </div>
-                          <div class="back" style="background: linear-gradient(45deg, {{$card->colorHex1}} 50%, {{$card->colorHex2}} 100%) top center;background-size: cover; z-index: 1">
-                             <img src="{{$qrLink}}" height="150" width="150">
-                          </div>
+                    
                         </div>
                       </div>
                   </div>
@@ -479,13 +481,8 @@ $allmembercard = DB::table('membercards')
 
     }
       
-    function reply_click(elem)
-{
-    var id = $(elem).attr("id");
-    var el = '.card'+id;
-    $(el).toggleClass('flipped');
-}
-$("#slideshow > div:gt(0)").hide();
+
+
           
        
     </script>
