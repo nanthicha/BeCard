@@ -132,6 +132,7 @@ class AdminController extends Controller
             'reception' => request()->reception,
             'voucherFormat' => request()->format,
             'created_at' => Carbon::now(),
+            'shop_id' => 5,
             'updated_at' => request()->end,
         ]);
 

@@ -44,7 +44,7 @@ Route::get('/dashboard', 'MyController@index');
 Route::get('/users', 'UserController@index');
 Route::get('/setting', 'UserController@setting');
 Route::get('/reward', ['as'=>'reward','uses'=>'UserController@reward']);
-
+Route::get('/voucher', ['as'=>'voucher','uses'=>'UserController@voucher']);
 
 // Image Upload & Update Profile Route -----------
 Route::get('image-upload', ['as' => 'image.upload', 'uses' => 'ImageUploadController@imageUpload']);
@@ -183,8 +183,19 @@ Route::get('/join/{key}' , [
 	'uses' => 'UserController@joinCard']);
 Route::get('/shop/reward' , [
 	'as' => 'shop.reward',
-	'uses' => 'ShopController@reward'
-]);
+	'uses' => 'ShopController@reward']);
+Route::get('/shop/reward/{code}/view' , [
+	'as' => 'shop.reward.view',
+	'uses' => 'ShopController@rewardView']);
+Route::post('/shop/reward/create' , [
+	'as' => 'shop.reward.create',
+	'uses' => 'ShopController@rewardCreate']);
+Route::get('/shop/reward/iwant/{code}' , [
+	'as' => 'shop.reward.iwant',
+	'uses' => 'ShopController@iwant']);
+Route::get('/user/voucher/{id}' , [
+	'as' => 'user.voucher.id',
+	'uses' => 'UserController@showVoucherID']);
 
 Route::get('/shop/branch/edit','BranchController@edit');
 

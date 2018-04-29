@@ -52,7 +52,7 @@ $now = date("Y-m-d H:i:s");
 					                @if ($bp < $reward->bePoint || $reward->updated_at < $now || $reward->amount < 1)
 					                <button class="btn btn-secondary float-right btn-sm disabled"><span class="fab fa-gg-circle"></span> {{ $reward->bePoint }}</button>
 					                @else
-					                <button class="btn btn-primary float-right btn-sm"><span class="fab fa-gg-circle"></span> {{ $reward->bePoint }}</button>
+					                <a href="{{route('shop.reward.iwant',['code'=>$reward->voucherFormat])}}"><button class="btn btn-primary float-right btn-sm"><span class="fab fa-gg-circle"></span> {{ $reward->bePoint }}</button></a>
 					                @endif
 					            </div>
 					        </div>

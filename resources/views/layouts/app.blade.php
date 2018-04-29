@@ -33,7 +33,7 @@
                 <button type="submit" class="btn btn-primary">Register</button></a>
             @else
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle nav__link" style="font-size: 25px;" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                    <a href="#" class="dropdown-toggle nav__link" style="font-size: 15px;" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
                         {{ Auth::user()->username }} <span class="caret"></span>
                     </a>
 
@@ -62,6 +62,7 @@
                         <hr>
                         <li><a href="/home">Dashboard</a></li>
                         <li><a href="{{ route('reward' )}}">Reward</a></li>
+                        <li><a href="{{ route('voucher') }}">Voucher</a></li>
                         <hr>
                         <li><a href="{{ route('affiliate') }}">Affiliate</a></li>
                         <li><a href="/setting">Profile Setting</a></li>

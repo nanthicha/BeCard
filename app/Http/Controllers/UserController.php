@@ -27,11 +27,15 @@ class UserController extends Controller
 
     public function reward(){
         $numberOfPaginate = 6;
-        $rewards = DB::table('vouchers')->where('vouchers.status','1')->orderBy('bePoint','desc')->join('shops', 'vouchers.shop_id', '=', 'shops.id')->select('vouchers.*','shops.name as shopname','shops.logo')->paginate($numberOfPaginate);
+        $rewards = DB::table('vouchers')->where('vouchers.shop_id','5')->where('vouchers.status','1')->orderBy('bePoint','desc')->join('shops', 'vouchers.shop_id', '=', 'shops.id')->select('vouchers.*','shops.name as shopname','shops.logo')->paginate($numberOfPaginate);
         $bepointlog = DB::table('bepoint_logs')->where('username',Auth::user()->username)->orderBy('id','desc')->get();
         return view('reward', ['users' => $rewards,'bepointlog'=>$bepointlog]);
     }
-
+    public function voucher(){
+        $numberOfPaginate = 15;
+        $vouchers = DB::table('userVoucher')->where('username',Auth::user()->username)->paginate($numberOfPaginate);
+        return view('vouchers', ['vouchers' => $vouchers]);
+    }
     public function affiliate(){
         $userName = Auth::user()->username;
         return view('affiliate', ['name' => $userName]);
@@ -95,6 +99,16 @@ class UserController extends Controller
             $log->recordBePoint(Auth::user()->username,"Register new card :".$card->name,10,0);
         }
         return view('user.cardyes',['cardname'=>$card->name]);
+    }
+
+    public function showVoucherID($id){
+        $voucher = DB::table('userVoucher')->where('voucher_code',$id)->first();
+        if ($voucher == ""){
+            return redirect('home');
+        }
+        $shop = DB::table('shops')->where('id',$voucher->shop_id)->first();
+        $vouchers = DB::table('vouchers')->where('id',$voucher->voucher_id)->first();
+        return view('user.voucher',['voucher'=>$voucher,'shop'=>$shop,'vouchers'=>$vouchers]);
     }
 
 }
