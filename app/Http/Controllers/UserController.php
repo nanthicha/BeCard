@@ -117,4 +117,11 @@ class UserController extends Controller
         return view('user.voucher',['voucher'=>$voucher,'shop'=>$shop,'vouchers'=>$vouchers]);
     }
 
+    public function verifyAccount($username){
+        DB::table('users')->where('username' , $username)->update([
+            'status' => 'verify'
+        ]);
+        return view('foundations.successVerify');
+    }
+
 }

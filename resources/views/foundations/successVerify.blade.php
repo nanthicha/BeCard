@@ -23,7 +23,7 @@
   </div>
   <div id='lower-side'>
     <p id='message'>
-      Password Reset Successfully.
+      Account Verify Successfully.
     </p>
     <a href="/home" id="contBtn">Continue</a>
   </div>

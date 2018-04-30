@@ -17,7 +17,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
 
-        'username','name', 'email', 'password','private_key','phone','role'
+        'username','name', 'email', 'password','private_key','phone','role','status'
 
     ];
 
@@ -30,6 +30,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    protected $sortable = ['username', 'name','email','role','bePoint','created_at'];
+    protected $sortable = ['username', 'name','email','role','bePoint','created_at','status'];
 
 }
