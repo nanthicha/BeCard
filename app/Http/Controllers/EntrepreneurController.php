@@ -44,13 +44,14 @@ class EntrepreneurController extends Controller
         // $mail = $email;
         // Mail::to($mail)->send(new Reminder);
         $data = [
-            'card' => $card,        
-            'email' => $email
-        ];
-        $sendMailStatus = Mail::send('mail.joinMembercard', ['data' => $data] , function ($message) use ($data) {
-        $message->from('eventhubth@gmail.com', 'BeCard');
-        $message->to($data['email'])->subject('BeCerd Verify Account');
-        });
+          'username' => $username,        
+          'email' => $email
+      ];
+      // dd($data);
+      $sendMailStatus = Mail::send('mail.verifyEmail', ['data' => $data] , function ($message) use ($data) {
+      $message->from('eventhubth@gmail.com', 'BeCard');
+      $message->to($data['email'])->subject('BeCerd Verify Account');
+      });
         // dd('mail send success');
 
     }
