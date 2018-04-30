@@ -261,11 +261,9 @@ Route::get('/api/image', [
 // 	return view('foundations.successAnimate');
 // });
 
-Route::get('test-mail','HomeController@testMail');
 
-Route::get('sun',function(){
-	return view('mail.reminder');
-});
+
+
 //Email
 Route::get('/verifyAccount/{username}' , 'UserController@verifyAccount');
 
