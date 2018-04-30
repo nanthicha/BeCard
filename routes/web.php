@@ -262,7 +262,9 @@ Route::get('/api/image', [
 // });
 
 
-
+Route::get('/allshop', [
+	'as' => 'all.shop',
+	'uses' => 'HomeController@allshop']);
 
 //Email
 Route::get('/verifyAccount/{username}' , 'UserController@verifyAccount');
