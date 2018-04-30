@@ -96,6 +96,7 @@ class UserController extends Controller
         if ($checkcard !== null or $allmembercard != "[]"){
             return view('user.cardalready');
         }else{
+           
             DB::table('user_cards')->insert(
                 ['username' => Auth::user()->username,
                 'card_id' => $card->id,
