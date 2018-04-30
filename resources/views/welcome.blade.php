@@ -24,20 +24,13 @@
               color:black;
               font-family: serif;
             }
-            .bnk {
-              background-image: url("img/cards/T3CsAELFaS_1524660429.png");
-              background-size:cover;
-
+            .bnk {background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
             }
 
 
-            .starbuck {
-              background-image: url("img/cards/6_1524574747.png");
-              background-size:cover;
+            .starbuck {background-image: url("http://127.0.0.1:8000/img/cards/6_1524574747.png");
             }
-            .kfc {
-              background-image: url("img/cards/8_1524662081.png");
-              background-size:cover;
+            .kfc {background-image: url("http://127.0.0.1:8000/img/cards/8_1524662081.png");
             }
 
 
@@ -145,7 +138,7 @@
               height: 540px;
               background-color: #333;
               border-radius: 21px;
-              background-image: url("img/cards/6_1524574747.png");
+              background-image: url("http://127.0.0.1:8000/img/cards/6_1524574747.png");
               -webkit-transform: rotate(30deg);
               transform: rotate(30deg);
             }
@@ -166,8 +159,7 @@
               right: auto;
               bottom: 0;
               left: 5%;
-              background-image: url("img/cards/T3CsAELFaS_1524660429.png");
-              background-size:cover;
+              background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
               background-color: #e5e5e5;
 
               }
@@ -211,6 +203,8 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
+                        <a href="#">Features</a>
+                        <a href="#" href="#">Pricing</a>
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
                     @endauth
@@ -220,9 +214,9 @@
         </div>
         <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style="background-image: url('http://www.softwareoffshore.com.au/wp-content/themes/Proma/images/bgs/04.jpg');">
           <div class="col-md-5 p-lg-5 mx-auto my-5">
-            <h1 class="display-4 font-weight-normal">BeCard</h1>
-            <p class="lead font-weight-normal">A new way of collecting points.We were born to change the traditional collection.And we will not stop developing.</p>
-            <a class="btn btn-outline-secondary" href="{{ route('login') }}">Get Started</a>
+            <h1 class="display-4 font-weight-normal">Punny headline</h1>
+            <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
+            <a class="btn btn-outline-secondary" href="#">Coming soon</a>
           </div>
           <div class="product-device d-none d-md-block"></div>
           <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
@@ -279,6 +273,7 @@
             <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
         </div>
+
 @extends('layout.footer')
 
 </body>
