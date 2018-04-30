@@ -75,7 +75,7 @@ class ShopController extends Controller
 
             request()->validate([
               'name' => 'required|string|max:255|unique:shops,name',
-              'email' => 'required|string|email|max:255|unique:users',
+              'email' => 'required|string|email|max:255',
               'phone' => 'required|numeric',
               'url' => 'required|unique:shops,url'
             ]);
