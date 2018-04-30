@@ -67,12 +67,12 @@ $count_shops = 0;
                         <form class="form-horizontal" method="POST" action="{{ route('shop.create.post') }}" enctype="multipart/form-data" >
                         <div class="row">
                             <div class="col-lg-4">
-                                <center><img src="{{ asset('img/shops/logo/default.jpg') }}" alt="" width="300px" class="img-responsive"></center>
+                                <center><img src="{{ asset('img/shops/logo/default.jpg') }}" id="blah" alt="" width="300px" class="img-thumbnail"></center>
                                 <div class="row">
                                 <div style="margin-top:15px;margin-left:7%;">
                                     <div class="col-lg-11">
                                         {{ csrf_field() }}
-                                        <input type="file" name="image" class="form-control" >
+                                        <input type="file" onchange="readURL(this);" name="image" class="form-control" >
                                         <input type="hidden" name="username" value="{{ Auth::user()->username }}"> 
                                     </div>
 
@@ -282,6 +282,18 @@ $count_shops = 0;
     //     event.preventDefault(); //prevent default if it is body
     // }
 // });
+function readURL(input) {
+
+if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+              };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 
 </script>
 
