@@ -54,9 +54,6 @@
                         @elseif (Auth::user()->role == "Entrepreneur" )
                         <hr>
                         <li><a href="{{ route('shop.index') }}">Shop</a></li>
-                        @elseif (Auth::user()->role == "User")
-                        <hr>
-                        <li><a href="{{ route('shop.register') }}">Create Enterpreneur</a></li>
                         @endif
 
                         <hr>

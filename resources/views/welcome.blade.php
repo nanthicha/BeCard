@@ -274,59 +274,6 @@
           </div>
         </div>
 
-
-        <div class="flex-center position-ref full-height">
-          <div class="container">
-            <div class="card-deck mb-3 text-center font-weight-bold">
-              <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                  <h4 class="my-0 font-weight-bold">1111</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">111 <small class="text-muted">111</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>111</li>
-                    <li>1111</li>
-                    <li>1111</li>
-                    <li>1111</li>
-                  </ul>
-                  <button type="button" class="btn btn-lg btn-block btn-primary font-weight-bold">1111</button>
-                </div>
-              </div>
-              <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                  <h4 class="my-0 font-weight-bold">2222</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">222 <small class="text-muted">222</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>2222</li>
-                    <li>22222</li>
-                    <li>222</li>
-                    <li>2222</li>
-                  </ul>
-                  <button type="button" class="btn btn-lg btn-block btn-primary font-weight-bold">Get started</button>
-                </div>
-              </div>
-              <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                  <h4 class="my-0 font-weight-bold">3333</h4>
-                </div>
-                <div class="card-body">
-                  <h1 class="card-title pricing-card-title">3333 <small class="text-muted">333</small></h1>
-                  <ul class="list-unstyled mt-3 mb-4">
-                    <li>333</li>
-                    <li>3333</li>
-                    <li>3333</li>
-                    <li>3333</li>
-                  </ul>
-                  <button type="button" class="btn btn-lg btn-block btn-primary font-weight-bold">3333</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
 @extends('layout.footer')
 
 </body>
