@@ -1,6 +1,3 @@
-<?php
-$qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=ffffff&amp;data=".Auth::user()->private_key;
-?>
 @extends('layouts.app')
 
 @section('css')
@@ -72,6 +69,16 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
     height: 250px;
     object-fit: cover;
 }
+a.list-group-item {
+    height:auto;
+    min-height:220px;
+}
+a.list-group-item.active small {
+    color:#fff;
+}
+.stars {
+    margin:20px auto 1px;    
+}
 </style>
 @endsection
 
@@ -104,62 +111,35 @@ $qrLink = "http://api.qrserver.com/v1/create-qr-code/?color=000000&amp;bgcolor=f
      <a href="/shop/show/bnk48"><img src="{{asset('img/promotions/bnk48.png')}}"></a>
    </div>
 </div>
-@if ($usermembercard->count() == 0)
 <center>
-    <b><p>You don't have any member cards.</p></b>
-    <a href="{{route('all.shop')}}"><small>Click to see all shop</small></a>
+    <b><p>All shop in BeCard</p></b>
     <hr>
 </center>
-@else
-<center>
-    <b><p>Your member cards.</p></b>
-    <hr>
-</center>
-<div class="floating btn btn-static-secondary btn-shadow" id="helperSwape">
-Click to swape <span class="fas fa-angle-double-right"></span>
-</div>
-@foreach ($usermembercard as $index => $card)
-    <?php $shop = DB::table('shops')->where('id',$card->shop_id)->first(); ?>
-    <div class="row">
-        <div class="col-lg-5">
-            <div id="{{$index}}" class="container_card" onClick="reply_click(this)">
-              <div class="card_home card{{$index}}">
-                <div class="front" style="background: url({{asset('img/cards'.'/'.$card->imageBG)}} )top center;background-size: cover; z-index: 1">
+<div class="list-group">
+@foreach ($shops as $index => $shop)
+          <a href="shop/show/{{$shop->url}}" class="list-group-item">
+                <div class="media col-md-3">
+                    <figure class="pull-left">
+                        <img class="media-object img-responsive"  src="{{asset('img/shops/logo/'.$shop->logo)}}" style="object-fit: cover;height: 200px;width:200px;">
+                    </figure>
                 </div>
-                <div class="back" style="background: url(img/cards/memberCover.png),linear-gradient(45deg, {{$card->colorHex1}} 50%, {{$card->colorHex2}} 100%) top center;background-size: cover; z-index: 1">
-                    <img src="{{$qrLink}}" height="150" width="150">
+                <div class="col-md-6">
+                    <b><h4 class="list-group-item-heading"> {{$shop->name}} </h4></b>
+                    <p class="list-group-item-text">{{$shop->description}}
+                    </p>
                 </div>
-              </div>
-            </div>
-        </div>
-        <div class="col-lg-7">
-            <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><h4><b>{{ $card->name }}</b></h4></a>
-            <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><img src="{{asset('img/shops/logo/'.$shop->logo)}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;"></a>
-            <p>{{ $card->description }}</p>
-            <p><label class="label label-success">{{ $shop->name }}</label> 
-                <label class="label label-primary">{{ $card->bahtperpoint }} Baht / 1 Point</label> 
-                <label class="label label-info">Registered at {{ \Carbon\Carbon::parse($card->created_at)->format('d M Y') }}</label>
-            </p>
-            <hr>
-            <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><small class="pull-right" style="position: relative;right: 50px;">Get Reward</small></a>
-            <h3><span class="label label-warning">You point : {{ $card->point }} Point</span></h3>
-
-
-            <br>
-        </div>
-    </div>
-    <hr>
+                <div class="col-md-3 text-center">
+                    <button type="button" class="btn btn-default btn-lg btn-primary"> See Now! </button>
+                </div>
+          </a>
 @endforeach
-<center>
-    <a href="{{route('all.shop')}}"><small>Click to see all shop</small></a>
-    <hr>
-</center>
-@endif
+</div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 
 

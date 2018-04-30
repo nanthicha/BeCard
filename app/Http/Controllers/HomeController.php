@@ -37,9 +37,18 @@ class HomeController extends Controller
         if(Auth::user()->status == "unverify"){
             return view('mail.reminder');
         }
+        $usermembercard = DB::table('user_cards')
+            ->where('user_cards.username',Auth::user()->username)
+            ->join('membercards', 'user_cards.card_id', '=', 'membercards.id')
+            ->select('membercards.*','user_cards.*')->get();
         $membercard = DB::table('membercards')->get();
         $shop_url = DB::table('shops')->get()->pluck('url','id');
-        return view('home',['membercard'=>$membercard , 'shop_url' => $shop_url]);
+        return view('home',['membercard'=>$membercard , 'shop_url' => $shop_url,'usermembercard'=>$usermembercard]);
+    }
+
+    public function allshop(){
+        $shops = DB::table('shops')->where('status','on')->get();
+        return view('allshop',['shops'=>$shops]);
     }
 
 
