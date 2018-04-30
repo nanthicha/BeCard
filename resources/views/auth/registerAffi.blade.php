@@ -8,6 +8,9 @@
                 <div class="panel-heading">Register</div>
 
                 <div class="panel-body">
+                <center><img src="{{asset('img/becard-login.png')}}" width="30%"></center>
+                  <p></p>
+                  <hr>
                     <form class="form-horizontal" method="POST" action="{{ route('registerAffi.regis') }}">
                         {{ csrf_field() }}
 

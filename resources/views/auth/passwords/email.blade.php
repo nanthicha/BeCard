@@ -13,7 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                    <center><img src="{{asset('img/becard-login.png')}}" width="30%"></center>
+                  <p></p>
+                  <hr>
                     <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
                         {{ csrf_field() }}
 
