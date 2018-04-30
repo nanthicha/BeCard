@@ -64,7 +64,6 @@ class ShopController extends Controller
         $username = request()->username;
         if(request()->image != null){
             request()->validate([
-
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:4096',
             ]);
             $type = request()->type;
@@ -74,6 +73,12 @@ class ShopController extends Controller
             $file->move($path, $imageName);
             }
 
+            request()->validate([
+              'name' => 'required|string|max:255|unique:shops,name',
+              'email' => 'required|string|email|max:255|unique:users',
+              'phone' => 'required|unique:users,phone|numeric',
+              'url' => 'required|active_url'
+            ]);
 
         Shop::create(
             ['username' => $username,
@@ -272,7 +277,7 @@ class ShopController extends Controller
     public function showName($url){
 
         $shop = DB::table('shops')->where('url',$url)->get()->first();
-        
+
         if($shop == null){
             return view('errors.pageNotF');
         }

@@ -14,7 +14,7 @@
                                     {{ csrf_field() }}
                                       <!-- <div class="col-lg-8"> -->
 
-                                    
+
                                     <table class="table table-hover">
                                     <tbody>
                                     <tr><center><h3>Create new Entrepreneur</h3></center></tr>
@@ -24,6 +24,11 @@
                                         <label class="col-md-4 control-label">Userename</label>
                                         <div class="col-md-6">
                                             <input id="name" type="text" class="form-control" name="username" placeholder="Enter Username"required>
+                                            @if ($errors->has('username'))
+                                                <span class="help-block">
+                                                    <strong class="text-danger">{{ $errors->first('username') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     </td></tr>
@@ -33,6 +38,11 @@
                                         <label class="col-md-4 control-label">Entrepreneur Name</label>
                                         <div class="col-md-6">
                                             <input id="name" type="text" class="form-control" name="name" placeholder="Enter name"required>
+                                            @if ($errors->has('name'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('name') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     </td></tr>
@@ -40,7 +50,6 @@
                                     <tr><td>
                                       <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                           <label for="password" class="col-md-4 control-label">Password</label>
-
                                           <div class="col-md-6">
                                               <input id="password" type="password" class="form-control" name="password" placeholder="Enter password"required>
 
@@ -67,7 +76,12 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Telephone</label>
                                         <div class="col-md-6">
-                                            <input id="telephone" type="phone" class="form-control" name="talephane" placeholder="Enter telephone"required>
+                                            <input id="phone" type="phone" class="form-control" name="phone" placeholder="Enter telephone"required>
+                                            @if ($errors->has('phone'))
+                                                <span class="help-block">
+                                                     <strong class="text-danger">{{ $errors->first('phone') }}</strong >
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     </td></tr>
