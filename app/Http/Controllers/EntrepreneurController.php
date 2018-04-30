@@ -14,6 +14,7 @@ class EntrepreneurController extends Controller
       }
 
       public function storeEntrepreneur(Request $request){
+        
         User::create([
             'username' => $request->username,
             'name' => $request->name,

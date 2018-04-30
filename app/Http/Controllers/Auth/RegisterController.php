@@ -51,10 +51,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'username' => 'required|unique:users',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'phone' => 'required|unique:users,phone',
+            'phone' => 'required|unique:users,phone|numeric',
         ]);
     }
 
@@ -132,4 +133,3 @@ class RegisterController extends Controller
         return view('home');
     }
 }
-
