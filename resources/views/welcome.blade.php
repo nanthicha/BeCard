@@ -24,13 +24,23 @@
               color:black;
               font-family: serif;
             }
-            .bnk {background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
-            }
+            .bnk {
+              background-image: url("img/cards/T3CsAELFaS_1524660429.png");
+              background-size:cover;
 
-
-            .starbuck {background-image: url("http://127.0.0.1:8000/img/cards/6_1524574747.png");
             }
-            .kfc {background-image: url("http://127.0.0.1:8000/img/cards/8_1524662081.png");
+            .loft {
+              background-image: url("img/cards/loft.png");
+              background-size:cover;
+
+            }
+            .starbuck {
+              background-image: url("img/cards/6_1524574747.png");
+              background-size:cover;
+            }
+            .kfc {
+              background-image: url("img/cards/8_1524662081.png");
+              background-size:cover;
             }
 
 
@@ -138,7 +148,7 @@
               height: 540px;
               background-color: #333;
               border-radius: 21px;
-              background-image: url("http://127.0.0.1:8000/img/cards/6_1524574747.png");
+              background-image: url("img/home1.png");
               -webkit-transform: rotate(30deg);
               transform: rotate(30deg);
             }
@@ -159,7 +169,8 @@
               right: auto;
               bottom: 0;
               left: 5%;
-              background-image: url("http://127.0.0.1:8000/img/cards/T3CsAELFaS_1524660429.png");
+              background-image: url("img/home2.png");
+              background-size:cover;
               background-color: #e5e5e5;
 
               }
@@ -203,8 +214,6 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="#">Features</a>
-                        <a href="#" href="#">Pricing</a>
                         <a href="{{ route('login') }}">Login</a>
                         <a href="{{ route('register') }}">Register</a>
                     @endauth
@@ -214,9 +223,9 @@
         </div>
         <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style="background-image: url('http://www.softwareoffshore.com.au/wp-content/themes/Proma/images/bgs/04.jpg');">
           <div class="col-md-5 p-lg-5 mx-auto my-5">
-            <h1 class="display-4 font-weight-normal">Punny headline</h1>
-            <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
-            <a class="btn btn-outline-secondary" href="#">Coming soon</a>
+            <h1 class="display-4 font-weight-normal">BeCard</h1>
+            <p class="lead font-weight-normal">A new way of collecting points.We were born to change the traditional collection.And we will not stop developing.</p>
+            <a class="btn btn-outline-secondary" href="{{ route('login') }}">Get Started</a>
           </div>
           <div class="product-device d-none d-md-block"></div>
           <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
@@ -225,16 +234,16 @@
         <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
           <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white rcorners overflow-hidden ">
             <div class="my-3 py-3">
-              <h2 class="display-5">Another headline</h2>
-              <p class="lead">And an even wittier subheading.</p>
+              <h2 class="display-5">BNK48 Official</h2>
+              <p class="lead">Our clients</p>
 
             </div>
             <div class="bg-light box-shadow mx-auto bnk" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
           <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center rcorners overflow-hidden">
             <div class="my-3 p-3">
-              <h2 class="display-5">Another headline</h2>
-              <p class="lead">And an even wittier subheading.</p>
+              <h2 class="display-5">Starbuck Thailand</h2>
+              <p class="lead">Our clients</p>
             </div>
             <div class="bg-light box-shadow mx-auto starbuck" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
@@ -243,37 +252,34 @@
         <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
           <div class="bg-danger mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center rcorners overflow-hidden">
             <div class="my-3 p-3">
-              <h2 class="display-5">Another headline</h2>
-              <p class="lead">And an even wittier subheading.</p>
+              <h2 class="display-5">LOFT Thailand</h2>
+              <p class="lead">Our clients</p>
             </div>
-            <div class="bg-light box-shadow mx-auto " style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+            <div class="bg-light box-shadow mx-auto loft" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
           <div class="bg-primary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white rcorners overflow-hidden">
             <div class="my-3 py-3">
-              <h2 class="display-5">Another headline</h2>
-              <p class="lead">And an even wittier subheading.</p>
+              <h2 class="display-5">KFC Thailand inc.</h2>
+              <p class="lead">Our clients</p>
             </div>
             <div class="bg-light box-shadow mx-auto kfc" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
         </div>
 
-        <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-          <div class="bg-warning mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center rcorners overflow-hidden">
-            <div class="my-3 p-3">
-              <h2 class="display-5">Another headline</h2>
-              <p class="lead">And an even wittier subheading.</p>
-            </div>
-            <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-          </div>
+        <hr>
+
           <div class="bg-secondary mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center rcorners overflow-hidden">
             <div class="my-3 py-3">
-              <h2 class="display-5">Another headline</h2>
-              <p class="lead">And an even wittier subheading.</p>
+              <img src="img/becard-login.png">
+              <h2 class="display-5">Join us as Entrepreneur</h2>
+              <p class="lead">If you are interested in becoming an entrepreneur with us. Please click the button below to register.</p>
+              <p><a href="shop/register"><button class="btn">Get started as Entrepreneur</button></a></p>
+              <p>.</p>
+              <p>Thank you customers trust service.</p>
+              <small>"Because every customer is our friend"</small>
             </div>
-            <div class="bg-white box-shadow mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
           </div>
         </div>
-
 @extends('layout.footer')
 
 </body>
