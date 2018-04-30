@@ -550,4 +550,21 @@ class ShopController extends Controller
 
         return redirect('shop/reward');
     }
+
+    public function previewShop(){
+        $shop = DB::table('shops')->where('username',Auth::user()->username)->get()->first();
+
+        if($shop == null){
+            return view('errors.pageNotF');
+        }
+        
+        // dd($shop);
+        $promotions = DB::table('promotions')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
+        $branches = DB::table('branches')->where([ ['shop_id',$shop->id], ['deleted_at', null] ])->get();
+        $rewards = DB::table('vouchers')->where([ ['shop_id',$shop->id], ['status', 1] ])->get();
+        $package = $shop->package;
+        $count = count($branches);
+        // dd(count($branches));
+        return view('shops.showUser' , ['shop' => $shop , 'url' => $shop->url , 'promotions' => $promotions , 'branches' => $branches , 'count' => $count , 'package' => $package, 'rewards' => $rewards] );
+    }
 }
