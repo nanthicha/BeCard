@@ -171,7 +171,7 @@
 
 @section('js')
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbR2fPnPAqOeegpN6ml_SNSMSc7wN613k&callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbR2fPnPAqOeegpN6ml_SNSMSc7wN613k">
     </script>
     <script>
       function initMap() {
@@ -240,7 +240,9 @@
 
         
       }
-      
+      $(document).ready(function() {
+        initMap();
+      });
 
           
        

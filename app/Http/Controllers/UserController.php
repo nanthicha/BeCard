@@ -7,6 +7,8 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Mail;
+use App\Mail\Reminder;
 
 class UserController extends Controller
 {
@@ -104,6 +106,7 @@ class UserController extends Controller
             $log->record(Auth::user()->username,'Register new card :'.$card->name,'');
             $log->recordBePoint(Auth::user()->username,"Register new card :".$card->name,10,0);
         }
+        $this->sendMail(Auth::user()->email,$card->name);
         return view('user.cardyes',['cardname'=>$card->name]);
     }
 
@@ -115,6 +118,28 @@ class UserController extends Controller
         $shop = DB::table('shops')->where('id',$voucher->shop_id)->first();
         $vouchers = DB::table('vouchers')->where('id',$voucher->voucher_id)->first();
         return view('user.voucher',['voucher'=>$voucher,'shop'=>$shop,'vouchers'=>$vouchers]);
+    }
+
+    public function verifyAccount($username){
+        DB::table('users')->where('username' , $username)->update([
+            'status' => 'verify'
+        ]);
+        return view('foundations.successVerify');
+    }
+
+    public function sendMail($email,$card){
+        // $mail = $email;
+        // Mail::to($mail)->send(new Reminder);
+        $data = [
+            'card' => $card,        
+            'email' => $email
+        ];
+        $sendMailStatus = Mail::send('mail.joinMembercard', ['data' => $data] , function ($message) use ($data) {
+        $message->from('eventhubth@gmail.com', 'BeCard');
+        $message->to($data->email)->subject('BeCerd Join Member Card');
+        });
+        // dd('mail send success');
+
     }
 
 }

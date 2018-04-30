@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LogController;
+use Mail;
+use App\Mail\Reminder;
 
 class RegisterController extends Controller
 {
@@ -68,6 +70,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $private = str_random(40);
+        $this->sendMail($data['email'] ,  $data['username']);    
         return User::create([
             'username' => $data['username'],
             'name' => $data['name'],
@@ -75,8 +78,10 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'role' => 'User',
             'private_key' => $private,
-            'phone' => $data['phone']
+            'phone' => $data['phone'],
+            'status' => 'unverify'
         ]);
+        
     }
 
     public function createAffi()
@@ -118,7 +123,8 @@ class RegisterController extends Controller
             'private_key' => $private,
             'remember_token' => $remember,
             'phone' => $phone,
-            'bePoint' => $newbp
+            'bePoint' => $newbp,
+            'status' => 'unverify'
         ]);
 
         // BePoint
@@ -130,6 +136,25 @@ class RegisterController extends Controller
             'msg' => $msg,
             'assigned_to' => $username]
         );
+
+        //mail
+        $this->sendMail($email,$username);
         return view('home');
     }
+
+    public function sendMail($email,$username){
+        // $mail = $email;
+        // Mail::to($mail)->send(new Reminder);
+        $data = [
+            'username' => $username,        
+            'email' => $email
+        ];
+        $sendMailStatus = Mail::send('mail.verifyEmail', ['data' => $data] , function ($message) use ($data) {
+        $message->from('eventhubth@gmail.com', 'BeCard');
+        $message->to($data->email)->subject('BeCerd Verify Account');
+        });
+        // dd('mail send success');
+
+    }
+
 }
