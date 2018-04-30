@@ -135,7 +135,7 @@ Click to swape <span class="fas fa-angle-double-right"></span>
         <div class="col-lg-7">
             <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><h4><b>{{ $card->name }}</b></h4></a>
             <a href="{{ '/shop/show/'.$shop_url[$card->shop_id] }}"><img src="{{asset('img/shops/logo/'.$shop->logo)}}" class="img-circle pull-right img-responsive ifMobileSoSmall" style="position: relative;right:10px;top: -40px;"></a>
-            <p>{{ $card->description }}</p>
+            <p style="width:80%">{{ $card->description }}</p>
             <p><label class="label label-success">{{ $shop->name }}</label> 
                 <label class="label label-primary">{{ $card->bahtperpoint }} Baht / 1 Point</label> 
                 <label class="label label-info">Registered at {{ \Carbon\Carbon::parse($card->created_at)->format('d M Y') }}</label>

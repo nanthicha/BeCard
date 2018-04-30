@@ -127,7 +127,7 @@ Route::get('/shop/register', [
   	'as' => 'shop.regiter.post',
   	'uses' => 'EntrepreneurController@storeEntrepreneur']);
 
-//----------ขอมั่วไว้ก่อนนะ---------
+//----------shop---------
 Route::get('/shop' , [
 	'as' => 'shop.index',
 	'uses' => 'ShopController@index'
@@ -207,7 +207,7 @@ Route::get('/shop/usevoucher/{id}' , [
 	'uses' => 'ShopController@useVoucher']);
 
 Route::get('/shop/branch/edit','BranchController@edit');
-
+Route::get('/shop/preview' , 'ShopController@previewShop');
 
 Route::get('/shop/show/{name}' , 'ShopController@showName');
 Route::get('/shop/branch/{name}' , 'BranchController@showName');

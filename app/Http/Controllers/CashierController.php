@@ -9,7 +9,8 @@ use Carbon\Carbon;
 use App\User;
 use App\Shop;
 use App\Cashier;
-
+use Mail;
+use App\Mail\Reminder;
 
 
 class CashierController extends Controller
@@ -95,7 +96,7 @@ class CashierController extends Controller
             'branch_id' => $branch_id
         ]);
 
-
+        $this->sendMail($email,$username);
         return redirect('/shop/cashier');
 
     }
@@ -239,6 +240,22 @@ class CashierController extends Controller
     public function resetPwd(){
         $username = DB::table('cashiers')->where('username' , Auth::user()->username)->first()->username;
         return view('cashier.resetPassword' ,['username' => $username]);
+    }
+
+    public function sendMail($email,$username){
+        // $mail = $email;
+        // Mail::to($mail)->send(new Reminder);
+        $data = [
+            'username' => $username,        
+            'email' => $email
+        ];
+        // dd($data);
+        $sendMailStatus = Mail::send('mail.verifyEmail', ['data' => $data] , function ($message) use ($data) {
+        $message->from('eventhubth@gmail.com', 'BeCard');
+        $message->to($data['email'])->subject('BeCerd Verify Account');
+        });
+        // dd('mail send success');
+
     }
 
     

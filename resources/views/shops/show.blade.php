@@ -115,6 +115,7 @@
                           <p class="card-text"><span class="glyphicon glyphicon-equalizer"></span> &nbsp;{{$shop->type}}</p>
                           <p class="card-text"><span class="glyphicon glyphicon-time"></span> <span class="label label-success" id="tell">Open</span> &nbsp;<span id="open"></span> - <span id="close"></span></p>
                           <p class="card-text"><span class="glyphicon glyphicon-map-marker"></span> &nbsp;<a href="#" data-toggle="modal" data-target="#squarespaceModal"><span id="ll"></span> &nbsp;<span class="glyphicon glyphicon-triangle-bottom"></span></a></p>
+                          <center><a href="/shop/preview" ><button class="btn btn-primary">Preview Shop</button></a></center>
                         </div>
                       </div>
                     </div>
@@ -129,6 +130,7 @@
                     </div> -->
                      
                 </div>
+                
                 
                 
 
