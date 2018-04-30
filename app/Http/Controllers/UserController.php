@@ -136,7 +136,7 @@ class UserController extends Controller
         ];
         $sendMailStatus = Mail::send('mail.joinMembercard', ['data' => $data] , function ($message) use ($data) {
         $message->from('eventhubth@gmail.com', 'BeCard');
-        $message->to($data->email)->subject('BeCerd Join Member Card');
+        $message->to($data['email'])->subject('BeCerd Join Member Card');
         });
         // dd('mail send success');
 

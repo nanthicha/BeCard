@@ -12,7 +12,7 @@ class Shop extends Model
 
    	protected $fillable = [
 
-       'username','name', 'description', 'logo', 'imgCover', 'time', 'type', 'latlng', 'package'
+       'username','name', 'description', 'logo', 'imgCover', 'time', 'type', 'latlng', 'package','url','phone','email' 
 
    	];
 

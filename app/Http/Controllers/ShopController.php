@@ -71,13 +71,13 @@ class ShopController extends Controller
             $imageName = $username."_".time().'.'.request()->image->getClientOriginalExtension();
             $path = public_path('img/shops/logo');
             $file->move($path, $imageName);
-            }
+        }
 
             request()->validate([
               'name' => 'required|string|max:255|unique:shops,name',
               'email' => 'required|string|email|max:255|unique:users',
-              'phone' => 'required|unique:users,phone|numeric',
-              'url' => 'required|active_url'
+              'phone' => 'required|numeric',
+              'url' => 'required|unique:shops,url'
             ]);
 
         Shop::create(

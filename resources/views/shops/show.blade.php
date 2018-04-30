@@ -170,9 +170,7 @@
 
 
 @section('js')
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbR2fPnPAqOeegpN6ml_SNSMSc7wN613k">
-    </script>
+
     <script>
       function initMap() {
         var input = document.getElementById('latlng').value;

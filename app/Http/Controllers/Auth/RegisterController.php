@@ -139,7 +139,7 @@ class RegisterController extends Controller
 
         //mail
         $this->sendMail($email,$username);
-        return view('home');
+        return view('/welcome');
     }
 
     public function sendMail($email,$username){
@@ -149,9 +149,10 @@ class RegisterController extends Controller
             'username' => $username,        
             'email' => $email
         ];
+        // dd($data);
         $sendMailStatus = Mail::send('mail.verifyEmail', ['data' => $data] , function ($message) use ($data) {
         $message->from('eventhubth@gmail.com', 'BeCard');
-        $message->to($data->email)->subject('BeCerd Verify Account');
+        $message->to($data['email'])->subject('BeCerd Verify Account');
         });
         // dd('mail send success');
 
