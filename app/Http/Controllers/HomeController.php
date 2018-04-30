@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Shop;
+use Mail;
+use App\Mail\Reminder;
 
 class HomeController extends Controller
 {
@@ -36,5 +38,12 @@ class HomeController extends Controller
         $membercard = DB::table('membercards')->get();
         $shop_url = DB::table('shops')->get()->pluck('url','id');
         return view('home',['membercard'=>$membercard , 'shop_url' => $shop_url]);
+    }
+
+    public function testMail(){
+        $mail = 'suphavich.c@gmail.com';
+        Mail::to($mail)->send(new Reminder);
+        dd('mail send success');
+
     }
 }

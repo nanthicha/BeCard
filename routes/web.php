@@ -260,3 +260,9 @@ Route::get('/api/image', [
 // Route::get('/success' , function(){
 // 	return view('foundations.successAnimate');
 // });
+
+Route::get('test-mail','HomeController@testMail');
+
+Route::get('sun',function(){
+	return view('mail.reminder');
+});
