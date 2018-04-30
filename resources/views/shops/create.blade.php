@@ -73,7 +73,7 @@ $count_shops = 0;
                                     <div class="col-lg-11">
                                         {{ csrf_field() }}
                                         <input type="file" onchange="readURL(this);" name="image" class="form-control" >
-                                        <input type="hidden" name="username" value="{{ Auth::user()->username }}"> 
+                                        <input type="hidden" name="username" value="{{ Auth::user()->username }}">
                                     </div>
 
                                 </div>
@@ -91,6 +91,11 @@ $count_shops = 0;
                                         <label class="col-md-4 control-label">Shop Name</label>
                                         <div class="col-md-6">
                                             <input id="name" type="text" class="form-control" name="name" placeholder="Enter name"required>
+                                            @if ($errors->has('name'))
+                                                <span class="help-block">
+                                                    <strong class="text-danger">{{ $errors->first('name') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     </td></tr>
@@ -108,6 +113,11 @@ $count_shops = 0;
                                         <label class="col-md-4 control-label">Shop Phone</label>
                                         <div class="col-md-6">
                                             <input  type="text" class="form-control" name="phone" placeholder="Enter Phone"required>
+                                            @if ($errors->has('phone'))
+                                                <span class="help-block">
+                                                    <strong class="text-danger">{{ $errors->first('phone') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     </td></tr>
@@ -117,6 +127,11 @@ $count_shops = 0;
                                         <label class="col-md-4 control-label">Shop E-mail</label>
                                         <div class="col-md-6">
                                             <input  type="email" class="form-control" name="email" placeholder="Enter E-mail"required>
+                                            @if ($errors->has('email'))
+                                                <span class="help-block">
+                                                    <strong class="text-danger">{{ $errors->first('email') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     </td></tr>
@@ -126,6 +141,11 @@ $count_shops = 0;
                                         <label class="col-md-4 control-label">Shop Url</label>
                                         <div class="col-md-6">
                                             <input  type="text" class="form-control" name="url" placeholder="Enter Url"required>
+                                            @if ($errors->has('url'))
+                                                <span class="help-block">
+                                                    <strong class="text-danger">{{ $errors->first('url') }}</strong>
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     </td></tr>
@@ -141,7 +161,7 @@ $count_shops = 0;
                                             @else
                                                 <input type="radio" name="package" value="{{ $key }}"> {{ $value }}<br>
                                             @endif
-                                        @endforeach   
+                                        @endforeach
                                         </select>
                                         </div>
                                     </div>
@@ -169,7 +189,7 @@ $count_shops = 0;
                                         <div class="col-md-6">
                                             <div id="time">
                                                 <div class="col-md-5">
-                                                    <input id="timepicker1" width="100%"  name="timeOpen" required> 
+                                                    <input id="timepicker1" width="100%"  name="timeOpen" required>
                                                 </div>
                                                 <div class="col-md-1">
                                                 <span><b>-</b></span>
@@ -257,7 +277,7 @@ $count_shops = 0;
       });
 
 
-        
+
       }
 
     $('#timepicker1').timepicker({

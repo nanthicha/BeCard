@@ -14,7 +14,15 @@ class EntrepreneurController extends Controller
       }
 
       public function storeEntrepreneur(Request $request){
-        
+
+        request()->validate([
+          'username' => 'required|unique:users,username',
+          'name' => 'required|string|max:255',
+          'email' => 'required|string|email|max:255|unique:users',
+          'password' => 'required|string|min:6|confirmed',
+          'phone' => 'required|unique:users,phone|numeric'
+        ]);
+
         User::create([
             'username' => $request->username,
             'name' => $request->name,
@@ -23,7 +31,7 @@ class EntrepreneurController extends Controller
             'role' => 'Entrepreneur',
             'private_key' => str_random(40),
             'remember_token' => str_random(40),
-            'phone' => $request->telephone,
+            'phone' => $request->phone,
             'bePoint' => '0'
         ]);
 
