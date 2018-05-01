@@ -139,7 +139,8 @@ class RegisterController extends Controller
 
         //mail
         $this->sendMail($email,$username);
-        return view('/');
+
+        return redirect('/');
     }
 
     public function sendMail($email,$username){

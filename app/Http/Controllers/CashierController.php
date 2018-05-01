@@ -15,10 +15,13 @@ use App\Mail\Reminder;
 
 class CashierController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('cashier');
-    // }
+    public function __construct()
+    {
+        $this->middleware('cashier');
+    }
+    
+    
+    
     public function toAdd()
     {
         if (Auth::user()->role != "Cashier"){

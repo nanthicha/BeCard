@@ -193,7 +193,7 @@ input, label {
             <input id="price" name="price" type="text" class="form-control" placeholder="Price"  />
           </div>
           <div class="form-group">
-            <label class="control-label">Referance</label>
+            <label class="control-label">Reference</label>
             <input id="referance" name="referance" type="text" class="form-control" placeholder="Referance"  />
           </div>
           <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>

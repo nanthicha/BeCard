@@ -11,7 +11,7 @@ use Carbon\Carbon;
       <a class="nav-link" href="{{ route('shop.show') }}">Shop</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link "   href="{{ route('shop.branch') }}">Branchs</a>
+      <a class="nav-link "   href="{{ route('shop.branch') }}">Branches</a>
     </li>
     <li class="nav-item">
       <a class="nav-link active"   href="{{ route('shop.cashier') }}">Cashiers</a>

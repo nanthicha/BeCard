@@ -108,6 +108,7 @@ class UserController extends Controller
             $log->recordBePoint(Auth::user()->username,"Register new card :".$card->name,10,0);
         }
         $this->sendMail(Auth::user()->email,$card->name);
+        
         return view('user.cardyes',['cardname'=>$card->name]);
     }
 
