@@ -9,13 +9,16 @@
       <a class="nav-link" href="/shop/show">Shop</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link "   href="/shop/branch">Branchs</a>
+      <a class="nav-link "   href="/shop/branch">Branches</a>
     </li>
     <li class="nav-item">
       <a class="nav-link"   href="/shop/cashier/">Cashiers</a>
     </li>
     <li class="nav-item active">
       <a class="nav-link" href="/shop/membercard/">Member Card</a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link "   href="{{ route('shop.reward') }}">Reward</a>
     </li>
     <li class="nav-item pull-right">
       <a class="nav-link"   href="#">Setting</a>
