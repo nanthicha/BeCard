@@ -35,9 +35,9 @@ $private = $getUser->private_key;
 					            <button type="button" class="close" data-dismiss="alert">×</button>
 					                <strong>{{ $message }}</strong>
 					        </div>
-					        <center><img src="img/users/{{ Session::get('image') }}" alt="" width="300px" class="img-responsive"></center>
+					        <center><img src="img/users/{{ Session::get('image') }}" alt="" id="blah" width="300px" class="img-responsive"></center>
 					        @else
-					        <center><img src="img/users/{{ $getImage }}" alt="" width="300px" class="img-responsive"></center>
+					        <center><img src="img/users/{{ $getImage }}" alt="" width="300px" id="blah" class="img-responsive"></center>
 							@endif
 					        @if (count($errors) > 0)
 					            <div class="alert alert-danger">
@@ -53,7 +53,7 @@ $private = $getUser->private_key;
 					        {!! Form::open(array('route' => 'image.upload.post','files'=>true)) !!}
 					        <div class="row">
 					        	<div class="col-lg-8">
-					        		{!! Form::file('image', array('class' => 'form-control')) !!}
+					        		{!! Form::file('image', array('class' => 'form-control', 'onchange' => "readURL(this,'cover')" )) !!}
 					        		{!! Form::hidden('username', $name) !!}
 					        		{!! Form::hidden('type', 'user') !!}
 					        	</div>
@@ -123,3 +123,19 @@ $private = $getUser->private_key;
 </div>
 
 @endsection
+
+@section('js')
+<script>
+function readURL(input) {
+
+if (input.files && input.files[0]) {
+	var reader = new FileReader();
+
+	reader.onload = function (e) {
+			$('#blah').attr('src', e.target.result);
+			  };
+
+	reader.readAsDataURL(input.files[0]);
+  }
+}
+</script>

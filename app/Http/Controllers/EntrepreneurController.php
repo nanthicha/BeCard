@@ -40,7 +40,7 @@ class EntrepreneurController extends Controller
         return redirect('/');
       }
 
-      public function sendMail($email,$card){
+      public function sendMail($email,$username){
         // $mail = $email;
         // Mail::to($mail)->send(new Reminder);
         $data = [
